@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Mario Bramy</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="panel-container">
+        <header>
+            <h1>Panel Admina</h1>
+            <button id="logoutButton">Wyloguj</button>
+        </header>
+        <main>
+            <section class="upload-section">
+                <h2>Dodaj nowe zdjęcie</h2>
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label for="photoFile">Wybierz zdjęcie:</label>
+                        <input type="file" id="photoFile" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="photoAlt">Opis zdjęcia (alt text):</label>
+                        <input type="text" id="photoAlt" required>
+                    </div>
+                    <button type="submit">Dodaj zdjęcie</button>
+                </form>
+                <p><strong>Uwaga:</strong> Ta funkcja jest demonstracyjna. Wgrane zdjęcia nie zostaną zapisane na serwerze.</p>
+            </section>
+            <section class="gallery-preview">
+                <h2>Podgląd Galerii</h2>
+                <div id="gallery-container" class="gallery-grid">
+                    <!-- Gallery items will be loaded here by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
