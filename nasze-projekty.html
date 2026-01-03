@@ -12,18 +12,23 @@
         <div class="container mx-auto px-4 lg:px-8">
             <div class="flex items-center justify-between h-28">
                 <a href="index.html" class="flex-shrink-0 transition-transform hover:scale-105 duration-300">
-                    <img src="assets/logo.jpg" alt="Mario Bramy-Automatyka" class="h-28 py-2" data-logo>
+                    <img src="assets/logo.png" alt="Mario Bramy-Automatyka" class="h-28 py-2" data-logo>
                 </a>
                 <nav class="hidden lg:flex items-center space-x-8">
                     <a href="o-nas.html" class="text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">O nas</a>
                     <a href="oferta.html" class="text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">Oferta</a>
                     <a href="nasze-projekty.html" class="text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">Nasze Projekty</a>
                     <a href="opinie.html" class="text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">Opinie klientów</a>
+                    <a href="sklep.html" class="text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">Sklep</a>
                     <a href="kontakt.html" class="bg-[var(--primary-color)] text-[var(--primary-button-text-color)] px-6 py-3 rounded hover:bg-[var(--primary-button-hover-bg-color)] transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105">
                         Kontakt
                     </a>
                 </nav>
+                <button id="hamburger-button" class="lg:hidden text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 z-50">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
             </div>
+            <nav id="mobile-menu" class="hidden lg:hidden fixed inset-0 top-28 bg-[var(--dark-background-color)] bg-opacity-98 backdrop-blur-lg"></nav>
         </div>
     </header>
 
@@ -68,7 +73,7 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 <div class=space-y-6>
                     <a href="index.html" class=inline-block>
-                        <img src="assets/logo.jpg" alt="Mario Bramy-Automatyka" class=h-16 data-logo>
+                        <img src="assets/logo.png" alt="Mario Bramy-Automatyka" class=h-16 data-logo>
                     </a>
                     <p class="text-[var(--gray-text-color)] leading-relaxed">
                         Profesjonalna automatyka bramowa, montaż, serwis i modernizacja.
@@ -81,6 +86,9 @@
                         <li><a href="o-nas.html" class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300">O nas</a></li>
                         <li><a href="oferta.html" class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300">Oferta</a></li>
                         <li><a href="nasze-projekty.html" class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300">Nasze Projekty</a></li>
+                        <li><a href="sklep.html" class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300">Sklep</a></li>
+                        <li><a href="opinie.html" class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300">Opinie klientów</a></li>
+                        <li><a href="kontakt.html" class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300">Kontakt</a></li>
                     </ul>
                 </div>
                 <div>
@@ -112,6 +120,8 @@
         </div>
     </footer>
 
-    <script src="assets/gallery.js"></script>
-</body>
-</html>
+                <script src="assets/gallery.js"></script>
+
+                <script src="assets/mobile_menu.js"></script>
+
+              </body></html>
