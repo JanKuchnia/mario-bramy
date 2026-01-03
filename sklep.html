@@ -5,52 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sklep - Mario Bramy</title>
     <link rel="stylesheet" href="assets/base.css" />
-    <link rel="stylesheet" href="assets/fontawesome.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="assets/style.css" />
     <style>
-        /* Shop Modal Styles */
-        #shopModal {
-            display: none; /* Hidden by default */
-        }
+      .line-clamp-2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+      }
 
-        .line-clamp-2 {
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-        }
+      .line-clamp-none {
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+      }
 
-        #shopModal > div {
-            max-height: 90vh;
+      /* Simple Fade In Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+      }
 
-        .form-group label {
-            font-weight: 600;
-            color: var(--dark-text-color);
+      @keyframes shimmer {
+        100% {
+          transform: translateX(100%);
         }
-
-        .form-group select,
-        .form-group input[type="number"] {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--light-border-color);
-            border-radius: var(--button-rounded-radius);
-            background-color: #fff;
-            color: var(--dark-text-color);
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group select:focus,
-        .form-group input[type="number"]:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(184, 23, 38, 0.1);
-        }
-
-        .form-group input[type="checkbox"] {
-            transform: scale(1.2); /* Make checkbox slightly larger */
-            accent-color: var(--primary-color); /* Style checkbox with primary color */
-        }
+      }
+      .animate-shimmer {
+        animation: shimmer 1.5s infinite;
+      }
     </style>
   </head>
   <body class="bg-white">
@@ -93,9 +89,7 @@
               class="text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
               >Opinie klientów</a
             >
-            <a
-              href="sklep.html"
-              class="text-[var(--primary-color)] font-medium"
+            <a href="sklep.html" class="text-[var(--primary-color)] font-medium"
               >Sklep</a
             >
             <a
@@ -105,31 +99,43 @@
               Kontakt
             </a>
           </nav>
-          <button id="hamburger-button" class="lg:hidden text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 z-50">
-              <i class="fa-solid fa-bars text-2xl"></i>
+          <button
+            id="hamburger-button"
+            class="lg:hidden text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 z-50"
+          >
+            <i class="fa-solid fa-bars text-2xl"></i>
           </button>
         </div>
-        <nav id="mobile-menu" class="hidden lg:hidden fixed inset-0 top-28 bg-[var(--dark-background-color)] bg-opacity-98 backdrop-blur-lg"></nav>
+        <nav
+          id="mobile-menu"
+          class="hidden lg:hidden fixed inset-0 top-28 bg-[var(--dark-background-color)] bg-opacity-98 backdrop-blur-lg"
+        ></nav>
       </div>
     </header>
 
     <main>
-        <section class="code-section py-20 lg:py-32 bg-white">
-            <div class="container mx-auto px-4 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--dark-text-color)] font-[var(--font-family-heading)] mb-6">
-                        Nasz Sklep i Konfigurator
-                    </h1>
-                    <p class="text-lg text-[var(--gray-text-color)]">
-                        Wybierz produkt, skonfiguruj go według potrzeb i uzyskaj szacunkową wycenę.
-                    </p>
-                </div>
+      <section class="code-section py-20 lg:py-32 bg-white">
+        <div class="container mx-auto px-4 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h1
+              class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--dark-text-color)] font-[var(--font-family-heading)] mb-6"
+            >
+              Nasz Sklep i Konfigurator
+            </h1>
+            <p class="text-lg text-[var(--gray-text-color)]">
+              Wybierz produkt, skonfiguruj go według potrzeb i uzyskaj
+              szacunkową wycenę.
+            </p>
+          </div>
 
-                <div id="shop-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                    <!-- Products will be loaded here by JavaScript -->
-                </div>
-            </div>
-        </section>
+          <div
+            id="shop-grid"
+            class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          >
+            <!-- Products will be loaded here by JavaScript -->
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer
@@ -237,7 +243,7 @@
                   <span>Nasze Projekty</span>
                 </a>
               </li>
-               <li>
+              <li>
                 <a
                   href="sklep.html"
                   class="text-[var(--primary-color)] inline-flex items-center gap-2 group"
@@ -450,21 +456,8 @@
         </div>
       </div>
     </footer>
-    
-    <!-- Product Configurator Modal -->
-    <div id="shopModal" class="fixed inset-0 bg-black bg-opacity-75 items-center justify-center z-[1000] p-4">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl overflow-y-auto relative p-6">
-            <button id="closeShopModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
-            <div id="modal-body-content" class="py-8">
-                <!-- Configurator content will be loaded here by JavaScript -->
-            </div>
-        </div>
-    </div>
 
     <script src="assets/shop.js"></script>
     <script src="assets/mobile_menu.js"></script>
   </body>
 </html>
-
-
-

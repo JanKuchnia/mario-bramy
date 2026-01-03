@@ -109,133 +109,134 @@ const products = [
     }
 ];
 
+// Determine if we should show 'Konfiguruj' or 'Zwiń'
+let activeProductId = null;
+let currentConfigs = {}; // Store config for each product: { productId: { optionKey: value } }
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize default configs
+    products.forEach(p => {
+        currentConfigs[p.id] = {};
+        Object.keys(p.options).forEach(key => {
+            const opt = p.options[key];
+            if (opt.type === 'select') currentConfigs[p.id][key] = opt.choices[0].value;
+            if (opt.type === 'checkbox') currentConfigs[p.id][key] = false;
+        });
+    });
     renderShop();
-    setupModal();
 });
 
 function renderShop() {
     const grid = document.getElementById('shop-grid');
     if (!grid) return;
 
-    grid.innerHTML = products.map(product => `
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-            <div class="h-64 overflow-hidden relative">
+    grid.innerHTML = products.map(product => {
+        const isExpanded = activeProductId === product.id;
+        const currentPrice = calculatePrice(product);
+
+        return `
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
+            <div class="h-64 overflow-hidden relative flex-shrink-0">
                 <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="absolute bottom-4 right-4 bg-[var(--primary-color)] text-white px-3 py-1 rounded-full text-sm font-bold">
+                <div class="absolute bottom-4 right-4 bg-[var(--primary-color)] text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
                     od ${product.basePrice} PLN
                 </div>
             </div>
-            <div class="p-6">
+            
+            <div class="p-6 flex flex-col flex-grow">
                 <div class="text-xs text-[var(--primary-color)] font-bold uppercase tracking-wider mb-2">${product.category}</div>
                 <h3 class="text-xl font-bold text-[var(--dark-text-color)] mb-3">${product.name}</h3>
-                <p class="text-[var(--gray-text-color)] text-sm mb-6 line-clamp-2">${product.description}</p>
-                <button onclick="openConfigurator(${product.id})" class="w-full py-3 bg-transparent border-2 border-[var(--primary-color)] text-[var(--primary-color)] rounded-lg font-bold hover:bg-[var(--primary-color)] hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-sliders"></i> Konfiguruj
-                </button>
+                <p class="text-[var(--gray-text-color)] text-sm mb-6 line-clamp-2 transition-all duration-300 ${isExpanded ? 'line-clamp-none' : ''}">
+                    ${product.description}
+                </p>
+
+                <!-- Configuration Section (Hidden by default) -->
+                <div id="config-${product.id}" class="${isExpanded ? 'block' : 'hidden'} mt-4 space-y-4 border-t pt-4 border-gray-100 animate-fade-in">
+                    ${renderOptions(product)}
+                    
+                    <div class="border-t pt-4 mt-4">
+                         <div class="flex justify-between items-center text-lg font-bold text-[var(--dark-text-color)] mb-4">
+                            <span>Suma:</span>
+                            <span class="text-[var(--primary-color)] text-xl">${currentPrice} PLN</span>
+                        </div>
+                        <a href="kontakt.html?product=${encodeURIComponent(product.name)}&price=${currentPrice}" class="group relative flex items-center justify-center w-full py-4 bg-[var(--primary-color)] text-white text-center rounded-lg font-bold overflow-hidden shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                            <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></span>
+                            <span class="relative flex items-center gap-2">
+                                <i class="fa-solid fa-envelope"></i>
+                                Skontaktuj się z nami
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-8">
+                    <button onclick="toggleConfigurator(${product.id})" class="w-full py-3 bg-white border-2 border-[var(--primary-color)] text-[var(--primary-color)] rounded-lg font-bold hover:bg-[var(--primary-color)] hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                        ${isExpanded 
+                            ? '<i class="fa-solid fa-chevron-up"></i> Zwiń' 
+                            : '<i class="fa-solid fa-sliders"></i> Konfiguruj'}
+                    </button>
+                </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 }
 
-let currentProduct = null;
-let currentConfig = {};
 
-window.openConfigurator = function(productId) {
-    currentProduct = products.find(p => p.id === productId);
-    if (!currentProduct) return;
+function renderOptions(product) {
+    let html = '';
+    const config = currentConfigs[product.id];
 
-    // Reset config
-    currentConfig = {};
-    Object.keys(currentProduct.options).forEach(key => {
-        const opt = currentProduct.options[key];
-        if (opt.type === 'select') currentConfig[key] = opt.choices[0].value;
-        if (opt.type === 'checkbox') currentConfig[key] = false;
-    });
-
-    renderModalContent();
-    document.getElementById('shopModal').style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-}
-
-function renderModalContent() {
-    const container = document.getElementById('modal-body-content');
-    
-    let html = `
-        <div class="grid md:grid-cols-2 gap-8">
-            <div>
-                <img src="${currentProduct.image}" class="w-full h-64 md:h-full object-cover rounded-lg shadow-md" alt="${currentProduct.name}">
-            </div>
-            <div class="space-y-6">
-                <div>
-                    <h2 class="text-2xl font-bold text-[var(--dark-text-color)] mb-2">${currentProduct.name}</h2>
-                    <p class="text-[var(--gray-text-color)]">${currentProduct.description}</p>
-                </div>
-                
-                <div class="space-y-4 bg-gray-50 p-4 rounded-lg">
-    `;
-
-    // Generate Options
-    Object.keys(currentProduct.options).forEach(key => {
-        const option = currentProduct.options[key];
-        html += `<div class="form-group">`;
+    Object.keys(product.options).forEach(key => {
+        const option = product.options[key];
+        html += `<div class="form-group text-left">`;
         
         if (option.type === 'select') {
             html += `<label class="block text-sm font-bold text-[var(--dark-text-color)] mb-2">${option.label}</label>`;
-            html += `<select onchange="updateConfig('${key}', this.value)" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-[var(--primary-color)]">`;
+            html += `<select onchange="updateConfig(${product.id}, '${key}', this.value)" class="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-[var(--primary-color)] bg-gray-50">`;
             option.choices.forEach(choice => {
-                const selected = currentConfig[key] === choice.value ? 'selected' : '';
+                const selected = config[key] == choice.value ? 'selected' : '';
                 const priceInfo = choice.priceMod > 0 ? ` (+${choice.priceMod} PLN)` : '';
                 html += `<option value="${choice.value}" ${selected}>${choice.label}${priceInfo}</option>`;
             });
             html += `</select>`;
         } else if (option.type === 'checkbox') {
-            const checked = currentConfig[key] ? 'checked' : '';
+            const checked = config[key] ? 'checked' : '';
             html += `
-                <label class="flex items-center gap-3 cursor-pointer p-3 border border-gray-300 rounded-md hover:bg-white transition-colors">
-                    <input type="checkbox" onchange="updateConfig('${key}', this.checked)" ${checked} class="w-5 h-5 text-[var(--primary-color)]">
-                    <span class="text-sm font-bold text-[var(--dark-text-color)]">${option.label} (+${option.price} PLN)</span>
+                <label class="flex items-center gap-3 cursor-pointer p-2 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors">
+                    <input type="checkbox" onchange="updateConfig(${product.id}, '${key}', this.checked)" ${checked} class="w-4 h-4 text-[var(--primary-color)] rounded border-gray-300 focus:ring-[var(--primary-color)]">
+                    <span class="text-sm font-semibold text-[var(--dark-text-color)]">${option.label} (+${option.price} PLN)</span>
                 </label>
             `;
         }
         html += `</div>`;
     });
-
-    const totalPrice = calculatePrice();
-
-    html += `
-                </div>
-                
-                <div class="border-t pt-4 flex flex-col gap-4">
-                    <div class="flex justify-between items-center text-xl font-bold text-[var(--dark-text-color)]">
-                        <span>Szacowany koszt:</span>
-                        <span class="text-[var(--primary-color)]">${totalPrice} PLN</span>
-                    </div>
-                    <a href="kontakt.html?product=${encodeURIComponent(currentProduct.name)}&price=${totalPrice}" class="w-full py-4 bg-[var(--primary-color)] text-white text-center rounded-lg font-bold hover:bg-[var(--accent-color)] transition-all shadow-lg hover:shadow-xl">
-                        Zapytaj o ofertę
-                    </a>
-                </div>
-            </div>
-        </div>
-    `;
-
-    container.innerHTML = html;
+    return html;
 }
 
-window.updateConfig = function(key, value) {
-    currentConfig[key] = value;
-    renderModalContent(); // Re-render to update price
+window.toggleConfigurator = function(productId) {
+    if (activeProductId === productId) {
+        activeProductId = null; // Collapse if already open
+    } else {
+        activeProductId = productId; // Expand new one
+    }
+    renderShop(); // Re-render to update UI
 }
 
-function calculatePrice() {
-    let total = currentProduct.basePrice;
+window.updateConfig = function(productId, key, value) {
+    currentConfigs[productId][key] = value;
+    renderShop(); // Re-render to update price and state
+}
+
+function calculatePrice(product) {
+    let total = product.basePrice;
+    const config = currentConfigs[product.id];
     
-    Object.keys(currentProduct.options).forEach(key => {
-        const option = currentProduct.options[key];
-        const userValue = currentConfig[key];
+    Object.keys(product.options).forEach(key => {
+        const option = product.options[key];
+        const userValue = config[key];
 
         if (option.type === 'select') {
-            const choice = option.choices.find(c => c.value == userValue); // weak equality for number/string matching
+            const choice = option.choices.find(c => c.value == userValue);
             if (choice) total += choice.priceMod;
         } else if (option.type === 'checkbox') {
             if (userValue) total += option.price;
@@ -243,23 +244,4 @@ function calculatePrice() {
     });
 
     return total;
-}
-
-function setupModal() {
-    const modal = document.getElementById('shopModal');
-    const closeBtn = document.getElementById('closeShopModal');
-    
-    if (closeBtn) {
-        closeBtn.onclick = () => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        };
-    }
-
-    window.onclick = (event) => {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    }
 }

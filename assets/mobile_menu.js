@@ -13,15 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     if (hamburgerButton && mobileMenu && globalHeader) {
-        // Create a dedicated close button for the mobile menu
-        const closeButton = document.createElement('button');
-        closeButton.id = 'mobile-menu-close-button';
-        closeButton.className = 'absolute top-4 right-4 text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 z-50 p-2';
-        closeButton.innerHTML = '<i class="fa-solid fa-times text-2xl"></i>';
-
         // Create a container for the links inside the mobile menu
         const navContainer = document.createElement('nav');
-        // Adjusted padding-top to account for the header and close button
         navContainer.className = 'flex flex-col items-center justify-center h-full space-y-4 pt-16 pb-8'; 
 
         menuItems.forEach(item => {
@@ -37,13 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
             a.addEventListener('click', () => {
                 mobileMenu.classList.remove('flex');
                 mobileMenu.classList.add('hidden');
+                document.body.classList.remove('mobile-menu-open');
                 hamburgerButton.innerHTML = '<i class="fa-solid fa-bars text-2xl"></i>';
             });
             navContainer.appendChild(a);
         });
         
-        // Append close button and nav container to mobile menu
-        mobileMenu.appendChild(closeButton);
+        // Append nav container to mobile menu
         mobileMenu.appendChild(navContainer);
 
         const toggleMobileMenu = () => {
@@ -51,17 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isHidden) {
                 mobileMenu.classList.remove('hidden');
                 mobileMenu.classList.add('flex');
-                // The dedicated close button will now handle closing
+                document.body.classList.add('mobile-menu-open');
             } else {
                 mobileMenu.classList.add('hidden');
                 mobileMenu.classList.remove('flex');
+                document.body.classList.remove('mobile-menu-open');
             }
-            // Toggle hamburger icon if it's still needed, but dedicated close button is better
+            // Toggle hamburger icon
             hamburgerButton.innerHTML = isHidden ? '<i class="fa-solid fa-times text-2xl"></i>' : '<i class="fa-solid fa-bars text-2xl"></i>';
         };
 
         hamburgerButton.addEventListener('click', toggleMobileMenu);
-        closeButton.addEventListener('click', toggleMobileMenu); // Close menu when close button clicked
 
         // Set initial icon based on menu state
         if (mobileMenu.classList.contains('hidden')) {
