@@ -17,6 +17,16 @@ const products = [
                     { label: "5.0m", value: 5.0, priceMod: 1600 }
                 ]
             },
+            height: {
+                label: "Wysokość (m)",
+                type: "select",
+                choices: [
+                    { label: "1.5m", value: 1.5, priceMod: 0 },
+                    { label: "1.7m", value: 1.7, priceMod: 300 },
+                    { label: "1.9m", value: 1.9, priceMod: 600 },
+                    { label: "2.1m", value: 2.1, priceMod: 900 }
+                ]
+            },
             color: {
                 label: "Kolor (RAL)",
                 type: "select",
@@ -55,6 +65,15 @@ const products = [
                     { label: "4.0m", value: 4.0, priceMod: 800 }
                 ]
             },
+            height: {
+                label: "Wysokość (m)",
+                type: "select",
+                choices: [
+                    { label: "1.5m", value: 1.5, priceMod: 0 },
+                    { label: "1.7m", value: 1.7, priceMod: 250 },
+                    { label: "1.9m", value: 1.9, priceMod: 500 }
+                ]
+            },
             automation: {
                 label: "Automatyka",
                 type: "select",
@@ -65,48 +84,7 @@ const products = [
                 ]
             }
         }
-    },
-    {
-        id: 3,
-        name: "Wideodomofon Smart",
-        category: "akcesoria",
-        basePrice: 800,
-        image: "assets/img_97.webp",
-        description: "Wideodomofon z obsługą przez aplikację mobilną i czytnikiem linii papilarnych.",
-        options: {
-            screenSize: {
-                label: "Wielkość ekranu",
-                type: "select",
-                choices: [
-                    { label: "7 cali", value: 7, priceMod: 0 },
-                    { label: "10 cali", value: 10, priceMod: 300 }
-                ]
-            },
-            installation: {
-                label: "Usługa montażu",
-                type: "checkbox",
-                price: 400
-            }
-        }
-    },
-    {
-        id: 4,
-        name: "Zamek Biometryczny",
-        category: "akcesoria",
-        basePrice: 1200,
-        image: "assets/img_96.avif",
-        description: "Zamek otwierany na odcisk palca, kod PIN lub aplikację.",
-        options: {
-            color: {
-                label: "Wariant",
-                type: "select",
-                choices: [
-                    { label: "Srebrny", value: "silver", priceMod: 0 },
-                    { label: "Czarny Mat", value: "black", priceMod: 100 }
-                ]
-            }
-        }
-    }
+
 ];
 
 // Determine if we should show 'Konfiguruj' or 'Zwiń'
