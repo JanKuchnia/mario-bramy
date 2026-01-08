@@ -247,3 +247,7 @@ body.mobile-menu-open {
 .fab {
     font-family: "Font Awesome 6 Brands";
 }
+
+.text-yellow-400 {
+    color: #FFD700; /* Golden yellow for stars */
+}
