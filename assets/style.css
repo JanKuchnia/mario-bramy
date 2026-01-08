@@ -243,3 +243,7 @@ body.mobile-menu-open {
         display: none !important;
     }
 }
+
+.fab {
+    font-family: "Font Awesome 6 Brands";
+}
