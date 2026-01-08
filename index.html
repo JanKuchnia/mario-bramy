@@ -82,14 +82,12 @@
         class="code-section relative min-h-screen flex items-center overflow-hidden bg-[var(--dark-background-color)]"
         id="s6lx8b"
       >
-        <div class="absolute inset-0 z-0">
-          <img
-            src="assets/img_94.avif"
-            alt="Automatic sliding front gate at modern villa."
-            class="w-full h-full object-cover"
-            data-media='{"id":"2154699684","src":"iStock","type":"image"}'
-          />
-          <div
+        <div class="slideshow-container absolute inset-0 z-0">
+          <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/444/FFF?text=Brama+Aluminiowa+1');"></div>
+          <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/555/FFF?text=Nowoczesne+Ogrodzenie');"></div>
+          <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/666/FFF?text=Realizacja+u+Klienta');"></div>
+        </div>
+        <div
             class="absolute inset-0 bg-gradient-to-r from-black via-black to-transparent"
             style="
               background: linear-gradient(
@@ -99,8 +97,7 @@
                 rgba(0, 0, 0, 0.6) 100%
               );
             "
-          ></div>
-        </div>
+        ></div>
 
         <div
           class="absolute top-20 right-10 w-32 h-32 bg-[var(--primary-color)] rounded-full opacity-10 blur-3xl animate-float"
@@ -889,5 +886,32 @@
       </div>
     </footer>
     <script src="assets/mobile_menu.js"></script>
+    <script>
+      // Simple Slideshow
+      let slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("slide");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.opacity = "0";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.opacity = "1";
+        setTimeout(showSlides, 5000); // Change image every 5 seconds
+      }
+
+      // Phone number hover
+      const phoneButton = document.querySelector('.phone-button');
+      const callText = phoneButton.querySelector('.call-text');
+      phoneButton.addEventListener('mouseenter', () => {
+        callText.textContent = '+48 123 456 789';
+      });
+      phoneButton.addEventListener('mouseleave', () => {
+        callText.textContent = 'Zadzwoń Teraz';
+      });
+    </script>
   </body>
 </html>
