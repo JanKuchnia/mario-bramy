@@ -943,13 +943,17 @@
       }
 
       // Phone number hover
-      const phoneButton = document.querySelector('.phone-button');
-      const callText = phoneButton.querySelector('.call-text');
-      phoneButton.addEventListener('mouseenter', () => {
-        callText.textContent = '+48 123 456 789';
-      });
-      phoneButton.addEventListener('mouseleave', () => {
-        callText.textContent = 'Zadzwoń Teraz';
+      const phoneButtons = document.querySelectorAll('.phone-button');
+      phoneButtons.forEach(phoneButton => {
+        const callText = phoneButton.querySelector('.call-text');
+        phoneButton.addEventListener('mouseenter', () => {
+          callText.classList.add('phone-text-transition');
+          callText.textContent = '123 456 789';
+        });
+        phoneButton.addEventListener('mouseleave', () => {
+          callText.classList.remove('phone-text-transition');
+          callText.textContent = 'Zadzwoń Teraz';
+        });
       });
     </script>
   </body>

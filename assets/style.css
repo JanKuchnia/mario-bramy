@@ -285,3 +285,15 @@ body.mobile-menu-open {
 .text-yellow-400 {
     color: #FFD700; /* Golden yellow for stars */
 }
+
+/* Phone Number Hover Animation */
+.phone-text-transition {
+    animation: phoneTextFade 0.3s ease-in-out forwards;
+}
+
+@keyframes phoneTextFade {
+    0% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0; transform: translateY(-5px); }
+    51% { opacity: 0; transform: translateY(5px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
