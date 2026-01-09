@@ -80,8 +80,8 @@
         id="s6lx8b"
       >
         <div class="slideshow-container absolute inset-0 z-0">
-          <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/444/FFF?text=Brama+Aluminiowa+1');"></div>
-          <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/555/FFF?text=Nowoczesne+Ogrodzenie');"></div>
+          <div class="slide" style="background-image: url('zdj1.jpeg');"></div>
+          <div class="slide" style="background-image: url('zdj2.jpeg');"></div>
           <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/666/FFF?text=Realizacja+u+Klienta');"></div>
         </div>
         <div
@@ -163,7 +163,8 @@
                   class="phone-button px-8 py-4 bg-transparent border-2 border-[var(--light-border-color)] text-[var(--light-text-color)] rounded-lg font-bold text-lg hover:bg-[var(--light-text-color)] hover:text-[var(--dark-text-color)] transition-all duration-300 flex items-center gap-3"
                 >
                   <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
-                  <span class="call-text">Zadzwoń Teraz</span>
+                  <span class="default-text">Zadzwoń Teraz</span>
+                  <span class="hover-text">123 456 789</span>
                 </a>
               </div>
 
@@ -557,7 +558,8 @@
                     class="phone-button px-8 py-4 bg-transparent border-2 border-[var(--light-border-color)] text-[var(--light-text-color)] rounded-lg font-bold text-lg hover:bg-[var(--light-text-color)] hover:text-[var(--dark-text-color)] transition-all duration-300 inline-flex items-center gap-3"
                   >
                     <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                    <span class="call-text">+48 123 456 789</span>
+                    <span class="default-text">+48 123 456 789</span>
+                    <span class="hover-text">Zadzwoń Teraz</span>
                   </a>
                 </div>
               </div>
@@ -941,20 +943,6 @@
         slides[slideIndex-1].style.opacity = "1";
         setTimeout(showSlides, 5000); // Change image every 5 seconds
       }
-
-      // Phone number hover
-      const phoneButtons = document.querySelectorAll('.phone-button');
-      phoneButtons.forEach(phoneButton => {
-        const callText = phoneButton.querySelector('.call-text');
-        phoneButton.addEventListener('mouseenter', () => {
-          callText.classList.add('phone-text-transition');
-          callText.textContent = '123 456 789';
-        });
-        phoneButton.addEventListener('mouseleave', () => {
-          callText.classList.remove('phone-text-transition');
-          callText.textContent = 'Zadzwoń Teraz';
-        });
-      });
     </script>
   </body>
 </html>

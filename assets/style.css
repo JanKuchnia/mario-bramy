@@ -286,13 +286,42 @@ body.mobile-menu-open {
     color: #FFD700; /* Golden yellow for stars */
 }
 
-/* Phone Number Hover Animation */
-.phone-text-transition {
-    /* No animation needed here, handled by immediate text change and then default transition or direct hover state */
+/* Phone Button Rework */
+.phone-button {
+    position: relative;
+    min-width: 180px; /* Estimate width for "+48 123 456 789" */
+    text-align: center;
+    overflow: hidden; /* Hide text that's out of bounds during animation */
+    /* Other button styles remain from existing utility classes */
 }
 
-.phone-button .call-text {
-    display: inline-block;
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for property changes */
+.phone-button .default-text,
+.phone-button .hover-text {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center text */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
 }
+
+.phone-button .hover-text {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, 50%); /* Start slightly below center */
+}
+
+.phone-button:hover .default-text {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -150%); /* Slide up and out */
+}
+
+.phone-button:hover .hover-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%); /* Slide to center */
+}
+
 
