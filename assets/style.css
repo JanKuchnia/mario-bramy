@@ -289,7 +289,7 @@ body.mobile-menu-open {
 /* Phone Button Rework */
 .phone-button {
     position: relative;
-    min-width: 180px; /* Estimate width for "+48 123 456 789" */
+    min-width: 220px; /* Increased to accommodate icon and text */
     text-align: center;
     overflow: hidden; /* Hide text that's out of bounds during animation */
     /* Other button styles remain from existing utility classes */
