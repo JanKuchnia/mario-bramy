@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nasze Projekty - Mario Bramy</title>
+    <meta name="description" content="Galeria realizacji nowoczesnych bram i ogrodzeń aluminiowych. Zobacz nasze projekty wykonane dla klientów w Małopolsce i całej Polsce." />
+    <meta name="keywords" content="projekty, realizacje, galeria, brama przesuwna, brama dwuskrzydłowa, ogrodzenie aluminiowe, barierki, przęsła, Mario Bramy" />
     <link rel="icon" type="image/png" href="assets/logo.jpg" />
     <link rel="stylesheet" href="assets/base.css" />
     <link
@@ -19,9 +21,12 @@
                 <a href="index.html" class="flex-shrink-0 transition-transform hover:scale-105 duration-300">
                     <img src="assets/logo.png" alt="Mario Bramy-Automatyka" class="h-28 py-2" data-logo>
                 </a>
-                <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="o-nas.html" class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">O nas</a>
-                    <a href="oferta.html" class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">Oferta</a>
+                          <nav class="hidden lg:flex items-center space-x-8">
+                            <a
+                              href="oferta.html"
+                              class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
+                              >Oferta</a
+                            >
                     <a href="nasze-projekty.html" class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">Nasze Projekty</a>
                     <a href="opinie.html" class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">Opinie klientów</a>
                     <a href="sklep.html" class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium">Sklep</a>
@@ -44,36 +49,33 @@
             <h1
               class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--dark-text-color)] font-[var(--font-family-heading)] mb-6"
             >
-              Nasze Projekty
+              Nasze Realizacje
             </h1>
             <p class="text-lg text-[var(--gray-text-color)]">
-              Przeglądaj galerię naszych ostatnich realizacji i zobacz jakość
-              naszej pracy.
+              Zobacz wybrane projekty, które zrealizowaliśmy dla naszych klientów.
             </p>
           </div>
 
-          <div class="gallery-grid">
-            <div class="gallery-item">
-              <img
-                src="assets/img_95.avif"
-                alt="A modern, sleek automated gate operator"
-              />
-            </div>
-            <div class="gallery-item">
-              <img
-                src="assets/img_96.avif"
-                alt="Finger pressing modern digital door lock"
-              />
-            </div>
-            <div class="gallery-item">
-              <img src="assets/img_97.webp" alt="Intercom in apartment" />
-            </div>
-            <div class="gallery-item">
-              <img
-                src="assets/img_98.avif"
-                alt="A motorized sliding gate made of black metal"
-              />
-            </div>
+          <!-- Tab buttons -->
+          <div class="flex justify-center mb-12 space-x-2 sm:space-x-4">
+            <button class="gallery-tab-button active" data-category="bramy-przesuwne">Bramy Przesuwne</button>
+            <button class="gallery-tab-button" data-category="bramy-dwuskrzydlowe">Bramy Dwuskrzydłowe</button>
+            <button class="gallery-tab-button" data-category="barierki">Barierki</button>
+            <button class="gallery-tab-button" data-category="przesla">Przęsła</button>
+          </div>
+
+          <!-- Gallery panels -->
+          <div id="gallery-bramy-przesuwne" class="gallery-grid tab-panel active">
+            <!-- Images will be injected here -->
+          </div>
+          <div id="gallery-bramy-dwuskrzydlowe" class="gallery-grid tab-panel" style="display: none;">
+            <!-- Images will be injected here -->
+          </div>
+          <div id="gallery-barierki" class="gallery-grid tab-panel" style="display: none;">
+            <!-- Images will be injected here -->
+          </div>
+          <div id="gallery-przesla" class="gallery-grid tab-panel" style="display: none;">
+            <!-- Images will be injected here -->
           </div>
         </div>
       </section>
@@ -82,7 +84,7 @@
     <!-- Modal -->
     <div id="galleryModal" class="modal">
       <span class="modal-close">&times;</span>
-      <img class="modal-content" id="modalImage" />
+      <img class="modal-content" id="modalImage" alt="Powiększone zdjęcie realizacji">
     </div>
 
     <footer

@@ -25,6 +25,40 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
+/* Gallery Tabs */
+.gallery-tab-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-text-color);
+    background-color: transparent;
+    border: 2px solid var(--light-border-color);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-tab-button:hover {
+    background-color: var(--light-background-color);
+    color: var(--dark-text-color);
+}
+
+.gallery-tab-button.active {
+    background-color: var(--primary-color);
+    color: var(--primary-button-text-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(184, 23, 38, 0.2);
+}
+
+.tab-panel {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 /* Modal Styles */
 .modal {
     display: none;
