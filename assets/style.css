@@ -288,12 +288,11 @@ body.mobile-menu-open {
 
 /* Phone Number Hover Animation */
 .phone-text-transition {
-    animation: phoneTextFade 0.3s ease-in-out forwards;
+    /* No animation needed here, handled by immediate text change and then default transition or direct hover state */
 }
 
-@keyframes phoneTextFade {
-    0% { opacity: 1; transform: translateY(0); }
-    50% { opacity: 0; transform: translateY(-5px); }
-    51% { opacity: 0; transform: translateY(5px); }
-    100% { opacity: 1; transform: translateY(0); }
+.phone-button .call-text {
+    display: inline-block;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for property changes */
 }
+
