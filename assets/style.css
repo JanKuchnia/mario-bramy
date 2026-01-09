@@ -308,8 +308,8 @@ body.mobile-menu-open {
 .phone-button .hover-text {
     position: absolute; /* Position absolutely within .text-container */
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center text horizontally and vertically */
+    left: 45%; /* Shift text slightly to the left */
+    transform: translate(-50%, -50%); /* Center horizontally and vertically relative to new 'left' */
     transition: opacity 0.3s ease, transform 0.3s ease;
     white-space: nowrap; /* Prevent text wrapping */
     width: 100%; /* Important for absolute centering to behave correctly */
