@@ -286,15 +286,10 @@ body.mobile-menu-open {
     color: #FFD700; /* Golden yellow for stars */
 }
 
-/* Equal Width Button */
-.btn-equal-width {
-    flex: 1 1 0%; /* Allows buttons in a flex container to grow and shrink equally */
-}
-
 /* Phone Button Rework */
 .phone-button {
     position: relative;
-    /* Remove min-width, flex: 1 1 0% will handle width when paired with btn-equal-width */
+    min-width: 170px; /* Adjusted min-width for a smaller horizontal appearance */
     /* Remove text-align: center; as flexbox will manage alignment */
     overflow: hidden; /* Hide text that's out of bounds during animation */
     /* The Tailwind classes 'flex items-center gap-3' are already present in HTML */
@@ -302,11 +297,11 @@ body.mobile-menu-open {
 
 .phone-button .text-container {
     position: relative; /* Essential for absolute positioning of its children */
-    flex-grow: 1; /* Take up available space within the phone-button flex container */
+    /* Removed flex-grow: 1; */ /* No longer needed as button width is set by min-width */
+    /* Removed height: 100%; */ /* Its height will now be determined by its content */
     display: flex;
     justify-content: center; /* Center the text horizontally within the text-container */
     align-items: center; /* Center the text vertically within the text-container */
-    height: 100%; /* Ensure it fills parent height for vertical centering */
 }
 
 .phone-button .default-text,
