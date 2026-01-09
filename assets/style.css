@@ -295,6 +295,8 @@ body.mobile-menu-open {
     /* Override Tailwind px-8 to shift content left */
     padding-left: 1.5rem; /* 24px */
     padding-right: 2.5rem; /* 40px */
+    padding-top: 1rem; /* Keep py-4 top padding */
+    padding-bottom: 1.25rem; /* Increased bottom padding */
     /* The Tailwind classes 'flex items-center gap-3' are already present in HTML */
 }
 
