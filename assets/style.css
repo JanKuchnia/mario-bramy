@@ -296,7 +296,7 @@ body.mobile-menu-open {
     padding-left: 1.5rem; /* 24px */
     padding-right: 2.5rem; /* 40px */
     padding-top: 1rem; /* Keep py-4 top padding */
-    padding-bottom: 1.25rem; /* Increased bottom padding */
+    padding-bottom: 1rem; /* Reverted to match "Bezpłatna Wycena" button's py-4 */
     /* The Tailwind classes 'flex items-center gap-3' are already present in HTML */
 }
 
