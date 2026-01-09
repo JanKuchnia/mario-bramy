@@ -318,6 +318,8 @@ body.mobile-menu-open {
     transition: opacity 0.3s ease, transform 0.3s ease;
     white-space: nowrap; /* Prevent text wrapping */
     width: 100%; /* Important for absolute centering to behave correctly */
+    font-size: 1.125rem; /* Explicitly set font size to match text-lg (18px) */
+    line-height: 1.75rem; /* Explicitly set line height to match text-lg (28px) */
 }
 
 .phone-button .default-text {
