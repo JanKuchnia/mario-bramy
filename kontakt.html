@@ -89,123 +89,70 @@
             </p>
           </div>
 
-          <div class="contact-grid">
-            <div class="contact-info">
+          <div class="flex justify-center">
+            <div class="contact-info bg-[var(--light-background-color)] p-8 rounded-2xl shadow-lg max-w-2xl w-full">
               <h3
-                class="text-2xl font-bold text-[var(--dark-text-color)] mb-6 font-[var(--font-family-heading)]"
+                class="text-3xl font-bold text-[var(--dark-text-color)] mb-8 font-[var(--font-family-heading)] text-center"
               >
                 Dane Kontaktowe
               </h3>
-              <ul class="space-y-6">
-                <li class="flex items-start gap-4">
+              <ul class="space-y-8">
+                <li class="flex items-center gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300">
                   <div
-                    class="w-12 h-12 bg-[var(--light-background-color)] rounded-lg flex items-center justify-center flex-shrink-0"
+                    class="w-16 h-16 bg-[var(--primary-color)] bg-opacity-10 rounded-full flex items-center justify-center flex-shrink-0"
                   >
                     <i
-                      class="fa-solid fa-location-dot text-[var(--primary-color)] text-xl"
+                      class="fa-solid fa-location-dot text-[var(--primary-color)] text-2xl"
                     ></i>
                   </div>
                   <div>
-                    <h4 class="text-[var(--dark-text-color)] font-bold">
+                    <h4 class="text-xl text-[var(--dark-text-color)] font-bold mb-1">
                       Adres
                     </h4>
-                    <p class="text-[var(--gray-text-color)]">
+                    <p class="text-lg text-[var(--gray-text-color)]">
                       Wiśniowa 782<br />32-412 Wiśniowa
                     </p>
                   </div>
                 </li>
-                <li class="flex items-start gap-4">
+                <li class="flex items-center gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300">
                   <div
-                    class="w-12 h-12 bg-[var(--light-background-color)] rounded-lg flex items-center justify-center flex-shrink-0"
+                    class="w-16 h-16 bg-[var(--primary-color)] bg-opacity-10 rounded-full flex items-center justify-center flex-shrink-0"
                   >
                     <i
-                      class="fa-solid fa-phone text-[var(--primary-color)] text-xl"
+                      class="fa-solid fa-phone text-[var(--primary-color)] text-2xl"
                     ></i>
                   </div>
                   <div>
-                    <h4 class="text-[var(--dark-text-color)] font-bold">
+                    <h4 class="text-xl text-[var(--dark-text-color)] font-bold mb-1">
                       Telefon
                     </h4>
                     <a
                       href="tel:+48668197170"
-                      class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300"
+                      class="text-lg text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 block"
                       >+48 668 197 170</a
                     >
                   </div>
                 </li>
-                <li class="flex items-start gap-4">
+                <li class="flex items-center gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300">
                   <div
-                    class="w-12 h-12 bg-[var(--light-background-color)] rounded-lg flex items-center justify-center flex-shrink-0"
+                    class="w-16 h-16 bg-[var(--primary-color)] bg-opacity-10 rounded-full flex items-center justify-center flex-shrink-0"
                   >
                     <i
-                      class="fa-solid fa-envelope text-[var(--primary-color)] text-xl"
+                      class="fa-solid fa-envelope text-[var(--primary-color)] text-2xl"
                     ></i>
                   </div>
                   <div>
-                    <h4 class="text-[var(--dark-text-color)] font-bold">
+                    <h4 class="text-xl text-[var(--dark-text-color)] font-bold mb-1">
                       Email
                     </h4>
                     <a
                       href="mailto:mario.bramy@gmail.com"
-                      class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300"
+                      class="text-lg text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 block"
                       >mario.bramy@gmail.com</a
                     >
                   </div>
                 </li>
               </ul>
-            </div>
-
-            <div class="contact-form">
-              <h3
-                class="text-2xl font-bold text-[var(--dark-text-color)] mb-6 font-[var(--font-family-heading)]"
-              >
-                Napisz do nas
-              </h3>
-              <!-- To make this form work, you need to replace the action URL with your own endpoint from a service like Formspree.io -->
-              <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <div class="form-group">
-                  <label for="name">Imię i Nazwisko</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    class="form-control"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="email">Adres Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="form-control"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="subject">Temat</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    class="form-control"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="message">Wiadomość</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    class="form-control"
-                    required
-                  ></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                  Wyślij Wiadomość
-                </button>
-              </form>
             </div>
           </div>
         </div>
