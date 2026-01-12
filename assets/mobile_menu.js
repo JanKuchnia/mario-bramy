@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const menuItems = [
         { href: 'o-nas.html', text: 'O nas' },
-        { href: 'oferta.html', text: 'Oferta' },
         { href: 'nasze-projekty.html', text: 'Nasze Projekty' },
         { href: 'sklep.html', text: 'Sklep' },
         { href: 'opinie.html', text: 'Opinie klientów' },
