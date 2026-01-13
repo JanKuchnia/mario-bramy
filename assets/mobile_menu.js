@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const globalHeader = document.getElementById('global-header');
 
     const menuItems = [
-        { href: 'o-nas.html', text: 'O nas' },
         { href: 'nasze-projekty.html', text: 'Nasze Projekty' },
         { href: 'sklep.html', text: 'Sklep' },
         { href: 'opinie.html', text: 'Opinie klientów' },
-        { href: 'kontakt.html', text: 'Kontakt', isButton: true }
+        { href: 'kontakt.html', text: 'Kontakt', isButton: true },
+        { href: 'https://www.facebook.com/p/MARIO-bramy-automatyka-61581453314458/', text: 'Facebook', isIcon: true, icon: 'fa-brands fa-facebook-f' }
     ];
 
     if (hamburgerButton && mobileMenu && globalHeader) {
@@ -19,9 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
         menuItems.forEach(item => {
             const a = document.createElement('a');
             a.href = item.href;
-            a.textContent = item.text;
+            if (item.isIcon) {
+                a.innerHTML = `<i class="${item.icon}"></i>`;
+                a.setAttribute('aria-label', item.text);
+            } else {
+                a.textContent = item.text;
+            }
+            
             if (item.isButton) {
                 a.className = 'bg-[var(--primary-color)] text-[var(--primary-button-text-color)] px-6 py-3 rounded hover:bg-[var(--primary-button-hover-bg-color)] transition-all duration-300 font-semibold shadow-lg text-center w-full max-w-xs text-xl';
+            } else if (item.isIcon) {
+                a.className = 'text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 text-3xl py-4';
             } else {
                 a.className = 'text-[var(--light-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium text-2xl py-2 text-center w-full max-w-xs';
             }
