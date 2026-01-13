@@ -1,24 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Data for portfolio galleries
     const portfolioData = {
-        'bramy-przesuwne': [
-            { src: 'https://via.placeholder.com/600x400/eeeeee/aaaaaa?text=Brama+Przesuwna+1', alt: 'Brama przesuwna aluminiowa 1' },
-            { src: 'https://via.placeholder.com/600x400/eeeeee/aaaaaa?text=Brama+Przesuwna+2', alt: 'Brama przesuwna aluminiowa 2' },
-            { src: 'https://via.placeholder.com/600x400/eeeeee/aaaaaa?text=Brama+Przesuwna+3', alt: 'Brama przesuwna aluminiowa 3' },
+        'bramy-przesuwne-aluminiowe': [
+            { src: 'assets/portfolio/bramy-przesuwne-aluminiowe/1.jpg', alt: 'Brama przesuwna aluminiowa 1' },
+            { src: 'assets/portfolio/bramy-przesuwne-aluminiowe/2.jpg', alt: 'Brama przesuwna aluminiowa 2' },
+            { src: 'assets/portfolio/bramy-przesuwne-aluminiowe/3.jpg', alt: 'Brama przesuwna aluminiowa 3' },
         ],
         'bramy-dwuskrzydlowe': [
-            { src: 'https://via.placeholder.com/600x400/dddddd/999999?text=Brama+Dwuskrzydłowa+1', alt: 'Brama dwuskrzydłowa aluminiowa 1' },
-            { src: 'https://via.placeholder.com/600x400/dddddd/999999?text=Brama+Dwuskrzydłowa+2', alt: 'Brama dwuskrzydłowa aluminiowa 2' },
+            { src: 'assets/portfolio/bramy-dwuskrzydlowe/1.jpg', alt: 'Brama dwuskrzydłowa aluminiowa 1' },
+            { src: 'assets/portfolio/bramy-dwuskrzydlowe/2.jpg', alt: 'Brama dwuskrzydłowa aluminiowa 2' },
+            { src: 'assets/portfolio/bramy-dwuskrzydlowe/3.jpg', alt: 'Brama dwuskrzydłowa aluminiowa 3' },
+            { src: 'assets/portfolio/bramy-dwuskrzydlowe/4.jpg', alt: 'Brama dwuskrzydłowa aluminiowa 4' },
         ],
         'barierki': [
-            { src: 'https://via.placeholder.com/600x400/cccccc/888888?text=Barierka+1', alt: 'Barierka aluminiowa 1' },
-            { src: 'https://via.placeholder.com/600x400/cccccc/888888?text=Barierka+2', alt: 'Barierka aluminiowa 2' },
-            { src: 'https://via.placeholder.com/600x400/cccccc/888888?text=Barierka+3', alt: 'Barierka aluminiowa 3' },
+            { src: 'assets/portfolio/barierki/1.jpg', alt: 'Barierka aluminiowa 1' },
+            { src: 'assets/portfolio/barierki/2.jpg', alt: 'Barierka aluminiowa 2' },
+            { src: 'assets/portfolio/barierki/3.jpg', alt: 'Barierka aluminiowa 3' },
+            { src: 'assets/portfolio/barierki/4.jpg', alt: 'Barierka aluminiowa 4' },
+            { src: 'assets/portfolio/barierki/5.jpg', alt: 'Barierka aluminiowa 5' },
         ],
-        'przesla': [
-            { src: 'https://via.placeholder.com/600x400/bbbbbb/777777?text=Przęsło+1', alt: 'Przęsło ogrodzeniowe aluminiowe 1' },
+        'przesla-ogrodzeniowe-aluminiowe': [
+            { src: 'assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.jpg', alt: 'Przęsło ogrodzeniowe aluminiowe 1' },
+            { src: 'assets/portfolio/przesla-ogrodzeniowe-aluminiowe/2.jpg', alt: 'Przęsło ogrodzeniowe aluminiowe 2' },
         ]
     };
+
+    // Combine all categories into an 'all' category for the "Wszystko" tab
+    portfolioData.all = Object.keys(portfolioData).reduce((acc, category) => {
+        return acc.concat(portfolioData[category]);
+    }, []);
 
     const modal = document.getElementById('galleryModal');
     if (!modal) return; // Exit if not on the gallery page
@@ -26,20 +36,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.gallery-tab-button');
     const tabPanels = document.querySelectorAll('.tab-panel');
 
-    // --- RENDER GALLERIES ---
-    function renderGalleries() {
-        Object.keys(portfolioData).forEach(category => {
-            const container = document.getElementById(`gallery-${category}`);
-            if (container) {
-                const images = portfolioData[category];
-                container.innerHTML = images.map(img => `
-                    <div class="gallery-item">
-                        <img src="${img.src}" alt="${img.alt}" />
-                    </div>
-                `).join('');
-            }
-        });
+    // --- RENDER IMAGES FOR A SPECIFIC CATEGORY ---
+    function renderCategoryImages(category) {
+        const container = document.getElementById(`gallery-${category}`);
+        if (container) {
+            const images = portfolioData[category];
+            container.innerHTML = images.map(img => `
+                <div class="gallery-item">
+                    <img src="${img.src}" alt="${img.alt}" />
+                </div>
+            `).join('');
+        }
     }
+
+    // --- INITIAL RENDER GALLERIES ---
+    function renderGalleries() {
+        // Initial render for all categories (placeholder, won't be used after dynamic loading)
+        // This function will be refactored to only render the active category initially
+    }
+
+    // --- INITIALIZE ---
+    // Find the initially active category
+    const initialActiveButton = document.querySelector('.gallery-tab-button.active');
+    const initialCategory = initialActiveButton ? initialActiveButton.dataset.category : 'all'; // Default to 'all'
+
+    // Render only the initially active category
+    renderCategoryImages(initialCategory);
+
+    // Set initial display state for panels
+    tabPanels.forEach(panel => {
+        if (panel.id === `gallery-${initialCategory}`) {
+            panel.style.display = 'grid';
+        } else {
+            panel.style.display = 'none';
+        }
+    });
 
     // --- TAB LOGIC ---
     tabButtons.forEach(button => {
@@ -50,12 +81,21 @@ document.addEventListener('DOMContentLoaded', function() {
             tabButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
+            // Render images for the selected category
+            renderCategoryImages(category);
+
             // Show/hide panels
             tabPanels.forEach(panel => {
-                if (panel.id === `gallery-${category}`) {
+                if (category === 'all') {
+                    // Display all panels if 'all' category is selected
                     panel.style.display = 'grid';
                 } else {
-                    panel.style.display = 'none';
+                    // Otherwise, display only the panel corresponding to the selected category
+                    if (panel.id === `gallery-${category}`) {
+                        panel.style.display = 'grid';
+                    } else {
+                        panel.style.display = 'none';
+                    }
                 }
             });
         });
