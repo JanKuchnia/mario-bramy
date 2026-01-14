@@ -9,49 +9,50 @@
 </head>
 <body>
     <div class="panel-container">
-        <header>
+        <header class="panel-header">
             <div class="brand">
-                <img src="../assets/logo.png" alt="Logo" style="height: 50px;">
-                <h1 style="display: inline-block; margin-left: 15px; vertical-align: middle;">System Realizacji</h1>
+                <img src="../assets/logo.png" alt="Logo" class="brand-logo">
+                <h1 class="brand-title">System Realizacji</h1>
             </div>
-            <button id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i> Wyloguj</button>
+            <button id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i> <span>Wyloguj się</span></button>
         </header>
 
         <main>
             <section class="upload-section">
                 <h2>Zarządzanie Projektami</h2>
-                <div class="upload-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                    <!-- Upload Form -->
+                <div class="upload-container">
                     <div class="upload-card">
-                        <form id="uploadForm">
-                            <div class="form-group">
-                                <label for="category">Kategoria Projektu</label>
-                                <select id="category" required>
-                                    <option value="bramy-przesuwne-aluminiowe">Bramy Przesuwne</option>
-                                    <option value="bramy-dwuskrzydlowe">Bramy Dwuskrzydłowe</option>
-                                    <option value="barierki">Barierki</option>
-                                    <option value="przesla-ogrodzeniowe-aluminiowe">Przęsła Ogrodzeniowe</option>
-                                </select>
+                        <form id="uploadForm" class="admin-form">
+                            <div class="form-inputs">
+                                <div class="form-group">
+                                    <label for="category">Kategoria Projektu</label>
+                                    <select id="category" required>
+                                        <option value="bramy-przesuwne-aluminiowe">Bramy Przesuwne</option>
+                                        <option value="bramy-dwuskrzydlowe">Bramy Dwuskrzydłowe</option>
+                                        <option value="barierki">Barierki</option>
+                                        <option value="przesla-ogrodzeniowe-aluminiowe">Przęsła Ogrodzeniowe</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="photoFile">Zdjęcie</label>
+                                    <input type="file" id="photoFile" accept="image/*" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="photoAlt">Opis (Alt text)</label>
+                                    <input type="text" id="photoAlt" placeholder="np. Nowoczesna brama przesuwna..." required>
+                                </div>
+                                <div class="filename-preview">
+                                    Docelowa nazwa: <span id="targetFilename">--</span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="photoFile">Zdjęcie</label>
-                                <input type="file" id="photoFile" accept="image/*" required>
+                            
+                            <div class="preview-card" id="previewCard">
+                                <p id="previewText">Podgląd zdjęcia</p>
+                                <img id="imagePreview" class="image-preview" src="#" alt="Preview">
                             </div>
-                            <div class="form-group">
-                                <label for="photoAlt">Opis (Alt text)</label>
-                                <input type="text" id="photoAlt" placeholder="np. Nowoczesna brama przesuwna w kolorze antracytowym" required>
-                            </div>
-                            <div class="filename-preview" style="margin-bottom: 1.5rem; color: #888; font-size: 0.9rem;">
-                                Docelowa nazwa: <span id="targetFilename" style="color: var(--primary-color); font-weight: bold;">--</span>
-                            </div>
-                            <button type="submit" id="submitBtn">Dodaj do Realizacji</button>
+                            <span ></span>
+                            <button style="margin-top: 3rem;" type="submit" id="submitBtn">Dodaj do Realizacji</button>
                         </form>
-                    </div>
-
-                    <!-- Live Preview -->
-                    <div class="preview-card" id="previewCard">
-                        <p id="previewText">Podgląd zdjęcia</p>
-                        <img id="imagePreview" class="image-preview" src="#" alt="Preview">
                     </div>
                 </div>
             </section>
