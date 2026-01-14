@@ -3,35 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Mario Bramy</title>
+    <title>Panel Admina - Mario Bramy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
     <div class="panel-container">
         <header>
-            <h1>Panel Admina</h1>
-            <button id="logoutButton">Wyloguj</button>
+            <div class="brand">
+                <img src="../assets/logo.png" alt="Logo" style="height: 50px;">
+                <h1 style="display: inline-block; margin-left: 15px; vertical-align: middle;">System Realizacji</h1>
+            </div>
+            <button id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i> Wyloguj</button>
         </header>
+
         <main>
             <section class="upload-section">
-                <h2>Dodaj nowe zdjęcie</h2>
-                <form id="uploadForm">
-                    <div class="form-group">
-                        <label for="photoFile">Wybierz zdjęcie:</label>
-                        <input type="file" id="photoFile" accept="image/*" required>
+                <h2>Zarządzanie Projektami</h2>
+                <div class="upload-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <!-- Upload Form -->
+                    <div class="upload-card">
+                        <form id="uploadForm">
+                            <div class="form-group">
+                                <label for="category">Kategoria Projektu</label>
+                                <select id="category" required>
+                                    <option value="bramy-przesuwne-aluminiowe">Bramy Przesuwne</option>
+                                    <option value="bramy-dwuskrzydlowe">Bramy Dwuskrzydłowe</option>
+                                    <option value="barierki">Barierki</option>
+                                    <option value="przesla-ogrodzeniowe-aluminiowe">Przęsła Ogrodzeniowe</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="photoFile">Zdjęcie</label>
+                                <input type="file" id="photoFile" accept="image/*" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="photoAlt">Opis (Alt text)</label>
+                                <input type="text" id="photoAlt" placeholder="np. Nowoczesna brama przesuwna w kolorze antracytowym" required>
+                            </div>
+                            <div class="filename-preview" style="margin-bottom: 1.5rem; color: #888; font-size: 0.9rem;">
+                                Docelowa nazwa: <span id="targetFilename" style="color: var(--primary-color); font-weight: bold;">--</span>
+                            </div>
+                            <button type="submit" id="submitBtn">Dodaj do Realizacji</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="photoAlt">Opis zdjęcia (alt text):</label>
-                        <input type="text" id="photoAlt" required>
+
+                    <!-- Live Preview -->
+                    <div class="preview-card" id="previewCard">
+                        <p id="previewText">Podgląd zdjęcia</p>
+                        <img id="imagePreview" class="image-preview" src="#" alt="Preview">
                     </div>
-                    <button type="submit">Dodaj zdjęcie</button>
-                </form>
-                <p><strong>Uwaga:</strong> Ta funkcja jest demonstracyjna. Wgrane zdjęcia nie zostaną zapisane na serwerze.</p>
+                </div>
             </section>
+
             <section class="gallery-preview">
-                <h2>Podgląd Galerii</h2>
+                <h2 style="margin-top: 4rem;">Twoje Realizacje</h2>
                 <div id="gallery-container" class="gallery-grid">
-                    <!-- Gallery items will be loaded here by JavaScript -->
+                    <!-- Loaded dynamically -->
                 </div>
             </section>
         </main>
