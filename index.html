@@ -19,6 +19,19 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
     <link rel="stylesheet" href="assets/style.css" />
+    <style>
+      /* Hero Section Responsive Height */
+      .hero-section-custom {
+        height: 60vh;
+        min-height: 60vh;
+      }
+      @media (min-width: 1024px) {
+        .hero-section-custom {
+          height: 100vh;
+          min-height: 100vh;
+        }
+      }
+    </style>
   </head>
   <body class="bg-white">
     <header
@@ -86,7 +99,8 @@
     </header>
     <main>
       <section
-        class="code-section relative min-h-screen flex items-center overflow-hidden bg-[var(--dark-background-color)]"
+        <section
+        class="code-section hero-section-custom relative flex items-center overflow-hidden bg-[var(--dark-background-color)]"
         id="s6lx8b"
       >
         <div class="slideshow-container absolute inset-0 z-0">
