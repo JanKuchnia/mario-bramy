@@ -1507,6 +1507,15 @@ body.mobile-menu-open {
 .h-38 {
   height: 9.5rem;
 } /* 152px */
+.h-20 {
+  height: 5rem;
+} /* 80px */
+.h-24 {
+  height: 6rem;
+} /* 96px */
+.h-32 {
+  height: 8rem;
+} /* 128px */
 .h-40 {
   height: 10rem;
 } /* 160px */

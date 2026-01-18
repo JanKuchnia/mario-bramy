@@ -58,7 +58,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- INITIALIZE ---
     // Find the initially active category
     const initialActiveButton = document.querySelector('.gallery-tab-button.active');
-    const initialCategory = initialActiveButton ? initialActiveButton.dataset.category : 'all'; // Default to 'all'
+    
+    // Check for query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    
+    let initialCategory = 'all'; // Default
+    
+    if (categoryParam && portfolioData[categoryParam]) {
+        initialCategory = categoryParam;
+        
+        // Update active button state
+        if (initialActiveButton) {
+             initialActiveButton.classList.remove('active');
+        }
+        const newActiveButton = document.querySelector(`.gallery-tab-button[data-category="${categoryParam}"]`);
+        if (newActiveButton) {
+            newActiveButton.classList.add('active');
+        }
+    } else if (initialActiveButton) {
+        initialCategory = initialActiveButton.dataset.category;
+    }
 
     // Render only the initially active category
     renderCategoryImages(initialCategory);
