@@ -234,22 +234,24 @@
 
     <footer
       id="global-footer"
-      class="code-section bg-[var(--dark-background-color)] text-[var(--light-text-color)] border-t border-[var(--dark-border-color)]"
+      class="code-section mt-20 bg-[var(--dark-background-color)] text-[var(--light-text-color)] border-t border-[var(--dark-border-color)]"
     >
       <div class="container mx-auto px-4 lg:px-8 py-16">
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
           <div class="space-y-6">
-            <a href="index.html" class="inline-block">
-              <img
-                src="assets/logo.png"
-                alt="Mario Bramy-Automatyka"
-                class="h-16"
-                data-logo
-              />
-            </a>
+            <div class="inline-block bg-white p-4 rounded-xl shadow-md">
+              <a href="index.html" class="inline-block">
+                <img
+                  src="assets/logo.png"
+                  alt="Mario Bramy-Automatyka"
+                  class="h-24"
+                  data-logo
+                />
+              </a>
+            </div>
             <p class="text-[var(--gray-text-color)] leading-relaxed">
-              Profesjonalna automatyka bramowa, montaż, serwis i modernizacja.
-              Od 15 lat dbamy o bezpieczeństwo i wygodę naszych klientów.
+              Nowoczesne bramy i ogrodzenia aluminiowe. Produkcja,
+              montaż i serwis.
             </p>
             <div class="flex gap-4">
               <a
@@ -281,18 +283,6 @@
                     aria-hidden="true"
                   ></i>
                   <span>Strona główna</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="o-nas.html"
-                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
-                >
-                  <i
-                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
-                    aria-hidden="true"
-                  ></i>
-                  <span>O nas</span>
                 </a>
               </li>
               <li>
@@ -362,7 +352,7 @@
             <h4
               class="text-[var(--light-text-color)] font-bold text-lg mb-6 font-[var(--font-family-heading)]"
             >
-              Nasze Usługi
+              Nasze Projekty
             </h4>
             <ul class="space-y-3">
               <li>
@@ -374,7 +364,7 @@
                     class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
                     aria-hidden="true"
                   ></i>
-                  <span>Napędy do bram</span>
+                  <span>Bramy aluminiowe</span>
                 </a>
               </li>
               <li>
@@ -386,7 +376,7 @@
                     class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
                     aria-hidden="true"
                   ></i>
-                  <span>Serwis i naprawa</span>
+                  <span>Ogrodzenia aluminiowe</span>
                 </a>
               </li>
               <li>
@@ -398,7 +388,7 @@
                     class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
                     aria-hidden="true"
                   ></i>
-                  <span>Smart systemy</span>
+                  <span>Furtki i balustrady</span>
                 </a>
               </li>
               <li>
@@ -410,31 +400,7 @@
                     class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
                     aria-hidden="true"
                   ></i>
-                  <span>Systemy bezpieczeństwa</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="index.html#oferta"
-                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
-                >
-                  <i
-                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
-                    aria-hidden="true"
-                  ></i>
-                  <span>Modernizacja</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="index.html#oferta"
-                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
-                >
-                  <i
-                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
-                    aria-hidden="true"
-                  ></i>
-                  <span>Obsługa firm</span>
+                  <span>Automatyka do bram</span>
                 </a>
               </li>
             </ul>
@@ -446,8 +412,8 @@
             >
               Kontakt
             </h4>
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3">
+            <ul class="space-y-6">
+              <li class="flex items-start gap-4">
                 <div
                   class="w-10 h-10 bg-[var(--primary-color)] bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0"
                 >
@@ -470,7 +436,7 @@
                   </div>
                 </div>
               </li>
-              <li class="flex items-start gap-3">
+              <li class="flex items-start gap-4">
                 <div
                   class="w-10 h-10 bg-[var(--primary-color)] bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0"
                 >
@@ -480,7 +446,9 @@
                   ></i>
                 </div>
                 <div>
-                  <div class="text-[var(--gray-text-color)] text-sm">
+                  <div
+                    class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1"
+                  >
                     Telefon
                   </div>
                   <a
@@ -500,7 +468,11 @@
                   ></i>
                 </div>
                 <div>
-                  <div class="text-[var(--gray-text-color)] text-sm">Email</div>
+                  <div
+                    class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1"
+                  >
+                    Email
+                  </div>
                   <a
                     href="mailto:mario.bramy@gmail.com"
                     class="text-[var(--light-text-color)] font-medium hover:text-[var(--primary-color)] transition-colors duration-300"

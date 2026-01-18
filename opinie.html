@@ -153,21 +153,24 @@
     </main>
     <footer
       id="global-footer"
-      class="code-section bg-[var(--dark-background-color)] text-[var(--light-text-color)] border-t border-[var(--dark-border-color)] mt-8"
+      class="code-section mt-20 bg-[var(--dark-background-color)] text-[var(--light-text-color)] border-t border-[var(--dark-border-color)]"
     >
       <div class="container mx-auto px-4 lg:px-8 py-16">
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
           <div class="space-y-6">
-            <a href="index.html" class="inline-block">
-              <img
-                src="assets/logo.png"
-                alt="Mario Bramy-Automatyka"
-                class="h-16"
-                data-logo
-              />
-            </a>
+            <div class="inline-block bg-white p-4 rounded-xl shadow-md">
+              <a href="index.html" class="inline-block">
+                <img
+                  src="assets/logo.png"
+                  alt="Mario Bramy-Automatyka"
+                  class="h-24"
+                  data-logo
+                />
+              </a>
+            </div>
             <p class="text-[var(--gray-text-color)] leading-relaxed">
-              Nowoczesne bramy i ogrodzenia aluminiowe. Projekt, produkcja, montaż i serwis.
+              Nowoczesne bramy i ogrodzenia aluminiowe. Produkcja,
+              montaż i serwis.
             </p>
             <div class="flex gap-4">
               <a
@@ -199,18 +202,6 @@
                     aria-hidden="true"
                   ></i>
                   <span>Strona główna</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="o-nas.html"
-                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
-                >
-                  <i
-                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
-                    aria-hidden="true"
-                  ></i>
-                  <span>O nas</span>
                 </a>
               </li>
               <li>
@@ -280,7 +271,7 @@
             <h4
               class="text-[var(--light-text-color)] font-bold text-lg mb-6 font-[var(--font-family-heading)]"
             >
-              Nasze Produkty
+              Nasze Projekty
             </h4>
             <ul class="space-y-3">
               <li>
@@ -351,8 +342,14 @@
                   ></i>
                 </div>
                 <div>
-                  <div class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1">Adres</div>
-                  <div class="text-[var(--light-text-color)] font-medium leading-relaxed">
+                  <div
+                    class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1"
+                  >
+                    Adres
+                  </div>
+                  <div
+                    class="text-[var(--light-text-color)] font-medium leading-relaxed"
+                  >
                     Wiśniowa 782<br />
                     32-412 Wiśniowa
                   </div>
@@ -368,7 +365,9 @@
                   ></i>
                 </div>
                 <div>
-                  <div class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1">
+                  <div
+                    class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1"
+                  >
                     Telefon
                   </div>
                   <a
@@ -388,7 +387,11 @@
                   ></i>
                 </div>
                 <div>
-                  <div class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1">Email</div>
+                  <div
+                    class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1"
+                  >
+                    Email
+                  </div>
                   <a
                     href="mailto:mario.bramy@gmail.com"
                     class="text-[var(--light-text-color)] font-medium hover:text-[var(--primary-color)] transition-colors duration-300"
