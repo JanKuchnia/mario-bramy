@@ -431,8 +431,32 @@ img {
 .w-32 {
   width: 8rem;
 }
+.w-34 {
+  width: 8.5rem;
+}
+.w-36 {
+  width: 9rem;
+}
+.w-38 {
+  width: 9.5rem;
+}
+.w-40 {
+  width: 10rem;
+}
+.w-42 {
+  width: 10.5rem;
+}
+.w-44 {
+  width: 11rem;
+}
+.w-46 {
+  width: 11.5rem;
+}
 .w-48 {
   width: 12rem;
+}
+.w-50 {
+  width: 12.5rem;
 }
 .w-96 {
   width: 24rem;
