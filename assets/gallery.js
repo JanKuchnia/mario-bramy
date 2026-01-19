@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { src: 'assets/portfolio/barierki/4.jpg', alt: 'Barierka aluminiowa 4' },
             { src: 'assets/portfolio/barierki/5.jpg', alt: 'Barierka aluminiowa 5' },
         ],
+        'automatyka': [],
         'przesla-ogrodzeniowe-aluminiowe': [
             { src: 'assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.jpg', alt: 'Przęsło ogrodzeniowe aluminiowe 1' },
             { src: 'assets/portfolio/przesla-ogrodzeniowe-aluminiowe/2.jpg', alt: 'Przęsło ogrodzeniowe aluminiowe 2' },
