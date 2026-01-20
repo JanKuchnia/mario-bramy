@@ -163,29 +163,75 @@
               </p>
             </div>
 
-            <div
-              class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center justify-center px-4 sm:px-0"
-            >
-              <a
-                href="nasze-projekty.html?category=bramy-przesuwne-aluminiowe"
-                class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105"
+            <!-- Hero Buttons Wrapper -->
+            <div id="hero-buttons-wrapper">
+              <!-- Main Menu -->
+              <div
+                id="hero-main-menu"
+                class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center justify-center px-4 sm:px-0 transition-all duration-300 transform"
               >
-                <span class="sm:hidden">Bramy Przesuwne</span>
-                <span class="hidden sm:inline">Bramy<br> Przesuwne</span>
-              </a>
-              <a
-                href="nasze-projekty.html?category=bramy-dwuskrzydlowe"
-                class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105"
+                <!-- Bramy wjazdowe i przęsła (Trigger) -->
+                <button
+                  onclick="toggleHeroMenu('sub')"
+                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3 group"
+                >
+                  <i class="fa-solid fa-layer-group text-lg sm:text-2xl group-hover:rotate-6 transition-transform"></i>
+                  <span class="sm:hidden">Bramy i Przęsła</span>
+                  <span class="hidden sm:inline">Bramy Wjazdowe<br>i Przęsła</span>
+                </button>
+
+                <!-- Automatyka -->
+                <a
+                  href="nasze-projekty.html?category=automatyka"
+                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3 group"
+                >
+                  <i class="fa-solid fa-gears text-lg sm:text-2xl group-hover:rotate-180 transition-transform duration-700"></i>
+                  <span>Automatyka</span>
+                </a>
+
+                <!-- Balustrady -->
+                <a
+                  href="nasze-projekty.html?category=balustrady"
+                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3 group"
+                >
+                  <i class="fa-solid fa-stairs text-lg sm:text-2xl group-hover:-translate-y-1 transition-transform"></i>
+                  <span>Balustrady</span>
+                </a>
+              </div>
+
+              <!-- Sub Menu (Hidden by default) -->
+              <div
+                id="hero-sub-menu"
+                class="hidden opacity-0 translate-y-4 flex flex-col sm:flex-row gap-2 sm:gap-4 items-center justify-center px-4 sm:px-0 transition-all duration-300 transform"
               >
-                Bramy Dwuskrzydłowe
-              </a>
-              <a
-                href="nasze-projekty.html?category=przesla-ogrodzeniowe-aluminiowe"
-                class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105"
-              >
-                <span class="sm:hidden">Przęsła i Ogrodzenia</span>
-                <span class="hidden sm:inline">Przęsła <br>i Ogrodzenia</span>
-              </a>
+                <!-- Wróć (Back) -->
+                <button
+                  onclick="toggleHeroMenu('main')"
+                  class="w-full sm:w-auto h-auto sm:h-16 min-w-[120px] py-3 px-4 sm:p-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-white/20 transition-all duration-300 shadow-xl flex items-center justify-center gap-2 group"
+                >
+                  <i class="fa-solid fa-chevron-left group-hover:-translate-x-1 transition-transform"></i>
+                  <span>Wróć</span>
+                </button>
+
+                <!-- Bramy Wjazdowe -->
+                <a
+                  href="nasze-projekty.html?category=bramy-przesuwne-aluminiowe"
+                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3"
+                >
+                  <i class="fa-solid fa-dungeon text-lg sm:text-2xl"></i>
+                  <span class="sm:hidden">Bramy Wjazdowe</span>
+                  <span class="hidden sm:inline">Bramy<br>Wjazdowe</span>
+                </a>
+
+                <!-- Przęsła -->
+                <a
+                  href="nasze-projekty.html?category=przesla-ogrodzeniowe-aluminiowe"
+                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3"
+                >
+                  <i class="fa-solid fa-bars text-lg sm:text-2xl"></i>
+                  <span>Przęsła</span>
+                </a>
+              </div>
             </div>
             <div
               class="flex flex-row gap-3 sm:gap-6 items-center justify-center flex-wrap"
@@ -1095,6 +1141,34 @@
     </footer>
     <script src="assets/mobile_menu.js"></script>
     <script>
+      function toggleHeroMenu(target) {
+        const mainMenu = document.getElementById("hero-main-menu");
+        const subMenu = document.getElementById("hero-sub-menu");
+
+        if (target === "sub") {
+          // Hide Main, Show Sub
+          mainMenu.classList.add("opacity-0", "-translate-y-4", "pointer-events-none");
+          setTimeout(() => {
+            mainMenu.classList.add("hidden");
+            subMenu.classList.remove("hidden");
+            // Small delay to allow display:block to apply before fade-in
+            setTimeout(() => {
+              subMenu.classList.remove("opacity-0", "translate-y-4");
+            }, 50);
+          }, 300);
+        } else {
+          // Hide Sub, Show Main
+          subMenu.classList.add("opacity-0", "translate-y-4");
+          setTimeout(() => {
+            subMenu.classList.add("hidden");
+            mainMenu.classList.remove("hidden", "pointer-events-none");
+            setTimeout(() => {
+              mainMenu.classList.remove("opacity-0", "-translate-y-4");
+            }, 50);
+          }, 300);
+        }
+      }
+
       // Simple Slideshow
       let slideIndex = 0;
       showSlides();
