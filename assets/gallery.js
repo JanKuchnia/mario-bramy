@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
             { src: 'assets/portfolio/bramy-dwuskrzydlowe/3.jpg', alt: 'Brama dwuskrzydłowa aluminiowa 3' },
             { src: 'assets/portfolio/bramy-dwuskrzydlowe/4.jpg', alt: 'Brama dwuskrzydłowa aluminiowa 4' },
         ],
-        'barierki': [
-            { src: 'assets/portfolio/barierki/1.jpg', alt: 'Barierka aluminiowa 1' },
-            { src: 'assets/portfolio/barierki/2.jpg', alt: 'Barierka aluminiowa 2' },
-            { src: 'assets/portfolio/barierki/3.jpg', alt: 'Barierka aluminiowa 3' },
-            { src: 'assets/portfolio/barierki/4.jpg', alt: 'Barierka aluminiowa 4' },
-            { src: 'assets/portfolio/barierki/5.jpg', alt: 'Barierka aluminiowa 5' },
+        'balustrady': [
+            { src: 'assets/portfolio/barierki/1.jpg', alt: 'Balustrada aluminiowa 1' },
+            { src: 'assets/portfolio/barierki/2.jpg', alt: 'Balustrada aluminiowa 2' },
+            { src: 'assets/portfolio/barierki/3.jpg', alt: 'Balustrada aluminiowa 3' },
+            { src: 'assets/portfolio/barierki/4.jpg', alt: 'Balustrada aluminiowa 4' },
+            { src: 'assets/portfolio/barierki/5.jpg', alt: 'Balustrada aluminiowa 5' },
         ],
         'automatyka': [],
         'przesla-ogrodzeniowe-aluminiowe': [
