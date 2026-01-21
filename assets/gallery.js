@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { src: 'assets/portfolio/barierki/5.jpg', alt: 'Balustrada aluminiowa 5' },
         ],
         'automatyka': [],
+        'bramy-garazowe': [],
         'przesla-ogrodzeniowe-aluminiowe': [
             { src: 'assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.jpg', alt: 'Przęsło ogrodzeniowe aluminiowe 1' },
             { src: 'assets/portfolio/przesla-ogrodzeniowe-aluminiowe/2.jpg', alt: 'Przęsło ogrodzeniowe aluminiowe 2' },
