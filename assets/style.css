@@ -1200,6 +1200,7 @@ img {
   inset: 0;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   transition: opacity 1s ease-in-out;
 }
 
@@ -1511,65 +1512,7 @@ body.mobile-menu-open {
 /* Phone Button Rework */
 .phone-button {
   position: relative;
-  min-width: 200px; /* Adjusted min-width to be longer */
-  /* Remove text-align: center; as flexbox will manage alignment */
-  overflow: hidden; /* Hide text that's out of bounds during animation */
-  /* Override Tailwind px-8 to shift content left */
-  padding-left: 1.5rem; /* 24px */
-  padding-right: 2.5rem; /* 40px */
-  padding-top: 1rem; /* Keep py-4 top padding */
-  padding-bottom: 1rem; /* Reverted to match "Bezpłatna Wycena" button's py-4 */
-  /* The Tailwind classes 'flex items-center gap-3' are already present in HTML */
-}
-
-.phone-button .text-container {
-  position: relative; /* Essential for absolute positioning of its children */
-  /* Removed flex-grow: 1; */ /* No longer needed as button width is set by min-width */
-  /* Removed height: 100%; */ /* Its height will now be determined by its content */
-  display: flex;
-  justify-content: center; /* Center the text horizontally within the text-container */
-  align-items: center; /* Center the text vertically within the text-container */
-}
-
-.phone-button .default-text,
-.phone-button .hover-text {
-  position: absolute; /* Position absolutely within .text-container */
-  top: 50%;
-  left: 50%; /* Reverted to 50% for true centering within text-container */
-  transform: translate(
-    -50%,
-    -50%
-  ); /* Center horizontally and vertically relative to new 'left' */
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-  white-space: nowrap; /* Prevent text wrapping */
-  width: 100%; /* Important for absolute centering to behave correctly */
-  font-size: 1.125rem; /* Explicitly set font size to match text-lg (18px) */
-  line-height: 1.75rem; /* Explicitly set line height to match text-lg (28px) */
-}
-
-.phone-button .default-text {
-  opacity: 1;
-  visibility: visible;
-}
-
-.phone-button .hover-text {
-  opacity: 0;
-  visibility: hidden;
-  transform: translate(-50%, 50%); /* Start slightly below center */
-}
-
-.phone-button:hover .default-text {
-  opacity: 0;
-  visibility: hidden;
-  transform: translate(-50%, -150%); /* Slide up and out */
-}
-
-.phone-button:hover .hover-text {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, -50%); /* Slide to center */
+  overflow: hidden; 
 }
 
 /* Extended Height Classes */
@@ -1609,3 +1552,32 @@ body.mobile-menu-open {
 .h-50 {
   height: 12.5rem;
 } /* 200px */
+/* Phone Button Styles */
+.phone-button .text-container {
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.phone-button .default-text,
+.phone-button .hover-text {
+  grid-area: 1 / 1;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.phone-button .hover-text {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.phone-button:hover .default-text {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.phone-button:hover .hover-text {
+  opacity: 1;
+  transform: translateY(0);
+}

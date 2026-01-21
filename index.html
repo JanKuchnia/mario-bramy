@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
@@ -22,13 +22,16 @@
     <style>
       /* Hero Section Responsive Height */
       .hero-section-custom {
-        height: 60vh;
-        min-height: 60vh;
+        height: auto;
+        min-height: 550px; /* Reduced from 100vh to show wider image crop on mobile */
+        padding-bottom: 4rem;
+        padding-top: 3rem;
       }
       @media (min-width: 1024px) {
         .hero-section-custom {
           height: 100vh;
           min-height: 100vh;
+          padding-bottom: 0;
         }
       }
     </style>
@@ -99,37 +102,40 @@
     </header>
     <main>
       <section
-        <section
         class="code-section hero-section-custom relative flex items-center overflow-hidden bg-[var(--dark-background-color)]"
         id="s6lx8b"
       >
-        <div class="slideshow-container absolute inset-0 z-0 after:content-[''] after:absolute after:inset-0 after:bg-black/40 after:z-[1]">
+        <div
+          class="slideshow-container absolute inset-0 z-0 after:content-[''] after:absolute after:inset-0 after:bg-black/40 after:z-[1]"
+        >
           <div
             class="slide"
             style="
-              background-image: url('assets/portfolio/bramy-przesuwne-aluminiowe/2.jpg');
+              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/2.jpg&quot;);
             "
           ></div>
           <div
             class="slide"
             style="
-              background-image: url('assets/portfolio/bramy-dwuskrzydlowe/4.jpg');
+              background-image: url(&quot;assets/portfolio/bramy-dwuskrzydlowe/4.jpg&quot;);
             "
           ></div>
           <div
             class="slide"
             style="
-              background-image: url('assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.jpg');
+              background-image: url(&quot;assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.jpg&quot;);
             "
           ></div>
           <div
             class="slide"
-            style="background-image: url('assets/portfolio/barierki/1.jpg')"
+            style="
+              background-image: url(&quot;assets/portfolio/barierki/1.jpg&quot;);
+            "
           ></div>
           <div
             class="slide"
             style="
-              background-image: url('assets/portfolio/bramy-przesuwne-aluminiowe/4.jpeg');
+              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/4.jpeg&quot;);
             "
           ></div>
         </div>
@@ -143,58 +149,107 @@
           style="animation: float 10s ease-in-out infinite 2s"
         ></div>
 
-        <div class="container mx-auto px-4 lg:px-8 relative z-10 pt-20 sm:pt-0">
-          <div class="max-w-4xl mx-auto text-center space-y-8">
-            <div class="space-y-4">
-              <h1
-                class="text-4xl sm:text-5xl lg:text-7xl font-bold font-[var(--font-family-heading)] leading-tight"
-                                  style="
+        <div class="container mx-auto px-4 lg:px-8 relative z-10 pt-4 sm:pt-0">
+          <div class="grid lg:grid-cols-2 gap-2 lg:gap-12 items-center">
+            <!-- Left Column: Content & CTA -->
+            <div class="space-y-4 text-center lg:text-left order-1 lg:-mt-20">
+              <div class="space-y-4">
+                <h1
+                  class="text-3xl sm:text-5xl lg:text-7xl font-bold font-[var(--font-family-heading)] leading-tight"
+                  style="
                     color: #cf1928;
                     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
                   "
-              >Nowoczesne Bramy <br>i Ogrodzenia Aluminiowe
-              </h1>
-              <p
-                class="text-xl lg:text-2xl text-white leading-relaxed"
-                style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)"
+                >
+                  Nowoczesne Bramy <br />i Ogrodzenia Aluminiowe
+                </h1>
+                <p
+                  class="text-lg lg:text-2xl text-white leading-relaxed"
+                  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)"
+                >
+                  Projekt, produkcja i montaż nowoczesnych bram i ogrodzeń
+                  aluminiowych.
+                </p>
+              </div>
+
+              <div
+                class="flex flex-row gap-4 sm:gap-6 items-center justify-center lg:justify-start flex-wrap w-full"
               >
-                Projekt, produkcja i montaż nowoczesnych bram i ogrodzeń
-                aluminiowych.
-              </p>
+                <a
+                  href="wkrotce.html"
+                  class="group relative w-full sm:w-80 px-6 py-3 sm:py-4 bg-[var(--primary-color)] text-[var(--primary-button-text-color)] rounded-lg font-bold text-base sm:text-lg shadow-xl hover:shadow-[var(--primary-color)] hover:scale-105 transition-all duration-300 overflow-hidden flex items-center justify-center gap-2"
+                >
+                  <span class="relative z-10">Szybka Wycena</span>
+                  <i
+                    class="fa-solid fa-arrow-right relative z-10 group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <div
+                    class="absolute inset-0 bg-[var(--primary-button-hover-bg-color)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                  ></div>
+                </a>
+                <a
+                  href="tel:+48668197170"
+                  class="phone-button group w-full sm:w-80 py-3 sm:py-4 px-6 bg-white border-2 border-white text-[var(--dark-text-color)] rounded-lg font-bold text-base sm:text-lg hover:bg-[var(--light-background-color)] transition-all duration-300 flex items-center justify-center gap-2 shadow-xl"
+                >
+                  <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
+                  <div class="text-container">
+                    <span class="default-text">Zadzwoń Teraz</span>
+                    <span class="hover-text">668 197 170</span>
+                  </div>
+                </a>
+              </div>
             </div>
 
-            <!-- Hero Buttons Wrapper -->
-            <div id="hero-buttons-wrapper">
+            <!-- Right Column: Hero Buttons -->
+            <div
+              id="hero-buttons-wrapper"
+              class="w-full flex flex-col items-center lg:items-end order-2"
+            >
               <!-- Main Menu -->
               <div
                 id="hero-main-menu"
-                class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center justify-center px-4 sm:px-0 transition-all duration-300 transform"
+                class="flex flex-col gap-3 w-full items-center lg:items-end transition-all duration-300 transform"
               >
                 <!-- Bramy wjazdowe i przęsła (Trigger) -->
                 <button
                   onclick="toggleHeroMenu('sub')"
-                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3 group"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
-                  <img src="ikony/brama_podwojna.png" alt="Bramy" class="w-8 h-8 sm:w-6 sm:h-6 object-contain group-hover:rotate-6 transition-transform">
+                  <img
+                    src="ikony/brama_podwojna.png"
+                    alt="Bramy"
+                    class="w-8 h-8 object-contain group-hover:rotate-6 transition-transform"
+                  />
                   <span class="sm:hidden">Bramy i Przęsła</span>
-                  <span class="hidden sm:inline">Bramy Wjazdowe<br>i Przęsła</span>
+                  <span class="hidden sm:inline"
+                    >Bramy Wjazdowe<br />i Przęsła</span
+                  >
                 </button>
 
                 <!-- Automatyka -->
                 <a
                   href="nasze-projekty.html?category=automatyka"
-                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3 group"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
-                  <img src="ikony/automatyka.png" alt="Automatyka" class="w-8 h-8 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform">
+                  <img
+                    src="ikony/automatyka.png"
+                    alt="Automatyka"
+                    class="w-8 h-8 object-contain group-hover:scale-110 transition-transform"
+                  />
                   <span>Automatyka</span>
                 </a>
 
                 <!-- Balustrady -->
                 <a
                   href="nasze-projekty.html?category=balustrady"
-                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3 group"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
-                  <img src="ikony/balustrada.png" alt="Balustrady" class="w-4 h-4 sm:w-6 sm:h-6 object-contain group-hover:-translate-y-1 transition-transform">
+                  <img
+                    src="ikony/balustrada.png"
+                    alt="Balustrady"
+                    class="w-8 h-8 object-contain group-hover:-translate-y-1 transition-transform"
+                  />
                   <span>Balustrady</span>
                 </a>
               </div>
@@ -202,70 +257,54 @@
               <!-- Sub Menu (Hidden by default) -->
               <div
                 id="hero-sub-menu"
-                class="hidden opacity-0 translate-y-4 flex flex-col sm:flex-row gap-2 sm:gap-4 items-center justify-center px-4 sm:px-0 transition-all duration-300 transform"
+                class="hidden opacity-0 translate-y-4 flex flex-col gap-3 w-full items-center lg:items-end transition-all duration-300 transform"
               >
                 <!-- Wróć (Back) -->
                 <button
                   onclick="toggleHeroMenu('main')"
-                  class="w-full sm:w-auto h-auto sm:h-16 min-w-[120px] py-3 px-4 sm:p-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-white/20 transition-all duration-300 shadow-xl flex items-center justify-center gap-2 group"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-white/20 transition-all duration-300 shadow-xl flex items-center justify-center gap-4 group"
                 >
-                  <i class="fa-solid fa-chevron-left group-hover:-translate-x-1 transition-transform"></i>
+                  <i
+                    class="fa-solid fa-chevron-left group-hover:-translate-x-1 transition-transform"
+                  ></i>
                   <span>Wróć</span>
                 </button>
 
                 <!-- Bramy Wjazdowe -->
                 <a
                   href="nasze-projekty.html?category=bramy-przesuwne-aluminiowe"
-                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4"
                 >
-                  <img src="ikony/brama_podwojna.png" alt="Bramy" class="w-8 h-8 sm:w-6 sm:h-6 object-contain">
+                  <img
+                    src="ikony/brama_podwojna.png"
+                    alt="Bramy"
+                    class="w-8 h-8 object-contain"
+                  />
                   <span class="sm:hidden">Bramy Wjazdowe</span>
-                  <span class="hidden sm:inline">Bramy<br>Wjazdowe</span>
+                  <span class="hidden sm:inline">Bramy<br />Wjazdowe</span>
                 </a>
 
                 <!-- Przęsła -->
                 <a
                   href="nasze-projekty.html?category=przesla-ogrodzeniowe-aluminiowe"
-                  class="w-full sm:w-46 h-auto sm:h-16 max-w-[280px] sm:max-w-sm py-3 px-4 sm:p-5 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-sm sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-3"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-md border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4"
                 >
-                  <img src="ikony/balustrada.png" alt="Balustrady" class="w-8 h-8 sm:w-6 sm:h-6 object-contain group-hover:-translate-y-1 transition-transform" style="filter: brightness(0) invert(1);">
+                  <img
+                    src="ikony/balustrada.png"
+                    alt="Balustrady"
+                    class="w-8 h-8 object-contain group-hover:-translate-y-1 transition-transform"
+                    style="filter: brightness(0) invert(1)"
+                  />
                   <span>Przęsła</span>
                 </a>
               </div>
-            </div>
-            <div
-              class="flex flex-row gap-3 sm:gap-6 items-center justify-center flex-wrap w-full max-w-4xl mx-auto"
-            >
-              <a
-                href=""
-                class="group relative w-80  sm:w-80 px-6 py-4 sm:px-8 sm:py-4 bg-[var(--primary-color)] text-[var(--primary-button-text-color)] rounded-lg font-bold text-base sm:text-lg shadow-xl hover:shadow-[var(--primary-color)] hover:scale-105 transition-all duration-300 overflow-hidden flex items-center gap-2"
-              >
-                <span class="relative z-10">Szybka Wycena</span>
-                <i
-                  class="fa-solid fa-arrow-right relative z-10 group-hover:translate-x-1 transition-transform duration-300"
-                  aria-hidden="true"
-                ></i>
-                <div
-                  class="absolute inset-0 bg-[var(--primary-button-hover-bg-color)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                ></div>
-              </a>
-              <a
-                href="tel:+48668197170"
-                class="phone-button w-80 py-4 sm:px-8 sm:py-4 bg-white border-2 border-white text-[var(--dark-text-color)] rounded-lg font-bold text-base sm:text-lg hover:bg-[var(--light-background-color)] hover:text-[var(--dark-text-color)] transition-all duration-300 flex items-center gap-2 shadow-xl"
-              >
-                <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
-                <div class="text-container">
-                  <span class="default-text">Zadzwoń Teraz</span>
-                  <span class="hover-text">668 197 170</span>
-                </div>
-              </a>
             </div>
           </div>
         </div>
 
         <div class="absolute bottom-0 left-0 right-0">
           <svg
-            class="w-full h-24 fill-white"
+            class="w-full h-12 lg:h-24 fill-white"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
           >
@@ -314,13 +353,18 @@
                 <div
                   class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
                 >
-                  <img src="ikony/brama_podwojna.png" alt="Bramy" class="w-10 h-10 object-contain" style="filter: brightness(0) invert(1);">
+                  <img
+                    src="ikony/brama_podwojna.png"
+                    alt="Bramy"
+                    class="w-10 h-10 object-contain"
+                    style="filter: brightness(0) invert(1)"
+                  />
                 </div>
               </div>
               <h3
                 class="text-2xl font-bold text-[var(--dark-text-color)] mb-4 font-[var(--font-family-heading)]"
               >
-                Bramy 
+                Bramy
               </h3>
               <p class="text-[var(--gray-text-color)] mb-6 leading-relaxed">
                 Produkujemy bramy aluminiowe przesuwne i dwuskrzydłowe na
@@ -373,7 +417,12 @@
                 <div
                   class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
                 >
-                  <img src="ikony/balustrada.png" alt="Przęsła" class="w-10 h-10 object-contain" style="filter: brightness(0) invert(1);">
+                  <img
+                    src="ikony/balustrada.png"
+                    alt="Przęsła"
+                    class="w-10 h-10 object-contain"
+                    style="filter: brightness(0) invert(1)"
+                  />
                 </div>
               </div>
               <h3
@@ -432,7 +481,12 @@
                 <div
                   class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
                 >
-                  <img src="ikony/balustrada.png" alt="Balustrady" class="w-10 h-10 object-contain" style="filter: brightness(0) invert(1);">
+                  <img
+                    src="ikony/balustrada.png"
+                    alt="Balustrady"
+                    class="w-10 h-10 object-contain"
+                    style="filter: brightness(0) invert(1)"
+                  />
                 </div>
               </div>
               <h3
@@ -490,7 +544,12 @@
                 <div
                   class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
                 >
-                  <img src="ikony/automatyka.png" alt="Automatyka" class="w-10 h-10 object-contain" style="filter: brightness(0) invert(1);">
+                  <img
+                    src="ikony/automatyka.png"
+                    alt="Automatyka"
+                    class="w-10 h-10 object-contain"
+                    style="filter: brightness(0) invert(1)"
+                  />
                 </div>
               </div>
               <h3
@@ -614,40 +673,39 @@
                 <h2
                   class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--dark-text-color)] font-[var(--font-family-heading)] leading-tight"
                 >
-                  Jakość, Doświadczenie <br>i Innowacyjność<br />
+                  Jakość, Doświadczenie <br />i Innowacyjność<br />
                   <span class="text-[var(--primary-color)]"
                     >W Produkcji:
-              <ul class="space-y-3 mt-6 text-3xl">
-                <li
-                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
-                >
-                  <i
-                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
-                    aria-hidden="true"
-                  ></i>
-                  <span class="text-sm">Bram Aluminiowych</span>
-                </li>
-                <li
-                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
-                >
-                  <i
-                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
-                    aria-hidden="true"
-                  ></i>
-                  <span class="text-sm">Ogrodzeń Aluminiowych</span>
-                </li>
-                <li
-                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
-                >
-                  <i
-                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
-                    aria-hidden="true"
-                  ></i>
-                  <span class="text-sm">Balustrad Aluminiowych</span>
-                </li>
-              </ul>
-                    </span
-                  >
+                    <ul class="space-y-3 mt-6 text-3xl">
+                      <li
+                        class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                      >
+                        <i
+                          class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                          aria-hidden="true"
+                        ></i>
+                        <span class="text-sm">Bram Aluminiowych</span>
+                      </li>
+                      <li
+                        class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                      >
+                        <i
+                          class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                          aria-hidden="true"
+                        ></i>
+                        <span class="text-sm">Ogrodzeń Aluminiowych</span>
+                      </li>
+                      <li
+                        class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                      >
+                        <i
+                          class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                          aria-hidden="true"
+                        ></i>
+                        <span class="text-sm">Balustrad Aluminiowych</span>
+                      </li>
+                    </ul>
+                  </span>
                 </h2>
                 <p
                   class="text-lg text-[var(--gray-text-color)] leading-relaxed"
@@ -720,8 +778,8 @@
                     Kontakt
                   </h3>
                   <p class="text-[var(--gray-text-color)] leading-relaxed">
-                    Zadzwoń lub wyślij maila. Opowiesz nam o swoim pomyśle
-                    i potrzebach.
+                    Zadzwoń lub wyślij maila. Opowiesz nam o swoim pomyśle i
+                    potrzebach.
                   </p>
                 </div>
               </div>
@@ -775,8 +833,7 @@
                     Produkcja i Montaż
                   </h3>
                   <p class="text-[var(--gray-text-color)] leading-relaxed">
-                    Wyprodukujemy Twoją bramę i umówimy
-                    termin montażu.
+                    Wyprodukujemy Twoją bramę i umówimy termin montażu.
                   </p>
                 </div>
               </div>
@@ -803,8 +860,8 @@
                     Gotowe!
                   </h3>
                   <p class="text-[var(--gray-text-color)] leading-relaxed">
-                    Ciesz się nowoczesną, stylową i trwałą bramą aluminiową przez
-                    długie lata.
+                    Ciesz się nowoczesną, stylową i trwałą bramą aluminiową
+                    przez długie lata.
                   </p>
                 </div>
               </div>
@@ -854,8 +911,8 @@
               </a>
             </div>
             <p class="text-[var(--gray-text-color)] leading-relaxed">
-              Nowoczesne bramy i ogrodzenia aluminiowe. Produkcja,
-              montaż i serwis.
+              Nowoczesne bramy i ogrodzenia aluminiowe. Produkcja, montaż i
+              serwis.
             </p>
             <div class="flex gap-4">
               <a
@@ -1135,7 +1192,11 @@
 
         if (target === "sub") {
           // Hide Main, Show Sub
-          mainMenu.classList.add("opacity-0", "-translate-y-4", "pointer-events-none");
+          mainMenu.classList.add(
+            "opacity-0",
+            "-translate-y-4",
+            "pointer-events-none",
+          );
           setTimeout(() => {
             mainMenu.classList.add("hidden");
             subMenu.classList.remove("hidden");
