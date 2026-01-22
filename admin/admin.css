@@ -9,6 +9,10 @@
     --font-body: "Work Sans", sans-serif;
 }
 
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: var(--font-body);
     background-color: var(--dark-bg);
@@ -598,7 +602,7 @@ button:hover {
 .option-block {
     background: #f8fafc;
     border: 1px solid var(--border-color);
-    padding: 1rem;
+    padding: 1.5rem 1rem 1rem 1rem; /* Top padding for absolute close button */
     border-radius: 12px;
     margin-bottom: 1rem;
     position: relative;
@@ -606,10 +610,71 @@ button:hover {
 
 .option-header {
     display: grid;
-    grid-template-columns: 1.5fr 2fr 1.5fr auto; /* More space for Title (middle) */
-    gap: 1.5rem;
-    align-items: end; /* Align to bottom so labels line up if inputs differ slightly */
-    margin-bottom: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: end;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.option-header > div {
+    min-width: 0; /* Prevents children from pushing the grid apart */
+}
+
+/* Reorder elements: Type & Field Type first, Title below */
+.option-header > div:nth-child(1) { /* Rodzaj Opcji */
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.option-header > div:nth-child(3) { /* Typ Pola */
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.option-header > div:nth-child(2) { /* Tytuł Wyświetlany */
+    grid-column: 1 / -1; /* Full width */
+    grid-row: 2;
+}
+
+/* Option Block Inputs Visibility */
+.option-header input, .option-header select {
+    background: white;
+    border: 1px solid #cbd5e1;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.opt-label {
+    font-weight: 700;
+    border-color: #94a3b8; /* Slightly darker border for the main title */
+}
+
+/* Enhanced Remove Block Button */
+.option-block .remove-block-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: white;
+    color: #ef4444;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid #fee2e2;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.option-block .remove-block-btn:hover {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+    transform: scale(1.1);
 }
 
 /* Ensure inputs inside header don't overflow */
@@ -620,25 +685,65 @@ button:hover {
 
 .choices-container {
     background: white;
-    padding: 0.5rem;
-    border-radius: 8px;
+    padding: 1rem;
+    border-radius: 12px;
     border: 1px solid var(--border-color);
 }
 
 .choice-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto; /* Equal width for inputs */
-    gap: 0.75rem; /* Increased gap */
-    align-items: center;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px dashed var(--border-color);
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f1f5f9;
 }
 
-/* Add labels above inputs for clarity if screen permits, or just rely on placeholders */
+.choice-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.choice-input-group label {
+    display: block;
+    font-size: 0.65rem;
+    color: #94a3b8;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap; /* Prevent label wrapping */
+}
+
 .choice-row input {
-    width: 100%; /* Ensure they fill their cell */
-    min-width: 0; /* Prevent overflow */
+    padding: 0.65rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+/* Row 1: Name for Client */
+.choice-row > div:nth-child(3) { /* Nazwa dla klienta */
+    grid-column: 1 / span 2;
+    grid-row: 1;
+}
+
+/* Row 2: Value and Price */
+.choice-row > div:nth-child(1) { /* Wartość systemowa */
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.choice-row > div:nth-child(2) { /* Cena */
+    grid-column: 2;
+    grid-row: 2;
+}
+
+/* Button position adjustment */
+.choice-row > button {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    align-self: center;
 }
 
 .add-option-btn {

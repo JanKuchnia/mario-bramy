@@ -260,15 +260,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let choicesHTML = '';
         if (data.type === 'select' && data.choices) {
-            // Add Header Row for clarity
-            choicesHTML += `
-                <div class="choice-row header-row" style="font-weight:bold; font-size:0.8rem; border-bottom:2px solid #eee;">
-                    <span>Nazwa (dla klienta)</span>
-                    <span>Wartość (system)</span>
-                    <span>Cena (PLN)</span>
-                    <span></span>
-                </div>
-            `;
             data.choices.forEach(choice => {
                 choicesHTML += createChoiceRowHTML(choice.label, choice.value, choice.priceMod);
             });
@@ -288,17 +279,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         div.innerHTML = `
+            <button type="button" class="remove-block-btn" onclick="this.closest('.option-block').remove()" title="Usuń całą opcję">
+                <i class="fa-solid fa-times"></i>
+            </button>
             <div class="option-header">
-                <div style="flex-grow:1">
+                <div>
                     <label class="text-xs">Rodzaj Opcji</label>
                     <select class="opt-key">
                         ${keyOptions}
                         <option value="custom">Inne...</option>
                     </select>
-                </div>
-                <div style="flex-grow:2">
-                    <label class="text-xs">Tytuł Wyświetlany</label>
-                    <input type="text" class="opt-label" value="${data.label}" placeholder="np. Wybierz Kolor">
                 </div>
                 <div>
                     <label class="text-xs">Typ Pola</label>
@@ -307,13 +297,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         <option value="checkbox" ${data.type === 'checkbox' ? 'selected' : ''}>Pole Wyboru (Tak/Nie)</option>
                     </select>
                 </div>
-                <button type="button" class="remove-btn" onclick="this.closest('.option-block').remove()">
-                    <i class="fa-solid fa-times"></i>
-                </button>
+                <div>
+                    <label class="text-xs">Tytuł Wyświetlany</label>
+                    <input type="text" class="opt-label" value="${data.label}" placeholder="np. Wybierz Kolor">
+                </div>
             </div>
             
             <div class="choices-wrapper ${data.type === 'checkbox' ? 'hidden' : ''}">
-                <label class="text-xs font-bold mb-2 block">Warianty:</label>
+                <label class="text-xs font-bold mb-2 block">Warianty (Wybory):</label>
                 <div class="choices-container">
                     ${choicesHTML}
                 </div>
@@ -331,10 +322,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function createChoiceRowHTML(label, value, price) {
         return `
             <div class="choice-row">
-                <input type="text" placeholder="Nazwa" value="${label}" class="choice-label">
-                <input type="text" placeholder="Wartość" value="${value}" class="choice-value">
-                <input type="number" placeholder="Cena" value="${price}" class="choice-price">
-                <button type="button" class="remove-btn" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></button>
+                <div class="choice-input-group">
+                    <label>Wartość systemowa</label>
+                    <input type="text" placeholder="np. 4.0" value="${value}" class="choice-value">
+                </div>
+                <div class="choice-input-group">
+                    <label>Cena +/- (PLN)</label>
+                    <input type="number" placeholder="np. 500" value="${price}" class="choice-price">
+                </div>
+                <div class="choice-input-group">
+                    <label>Nazwa dla klienta</label>
+                    <input type="text" placeholder="np. Szerokość 4m" value="${label}" class="choice-label">
+                </div>
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove()" title="Usuń ten wariant"><i class="fa-solid fa-trash"></i></button>
             </div>
         `;
     }
