@@ -244,38 +244,67 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    const OPTION_KEYS = {
+        'width': 'Szerokość',
+        'height': 'Wysokość',
+        'color': 'Kolor',
+        'automation': 'Automatyka',
+        'montaz': 'Montaż',
+        'akcesoria': 'Akcesoria'
+    };
+
     function createOptionHTML(key, data) {
         const div = document.createElement('div');
         div.className = 'option-block';
-        div.dataset.key = key; // Store original key if editing
+        div.dataset.key = key;
 
         let choicesHTML = '';
         if (data.type === 'select' && data.choices) {
+            // Add Header Row for clarity
+            choicesHTML += `
+                <div class="choice-row header-row" style="font-weight:bold; font-size:0.8rem; border-bottom:2px solid #eee;">
+                    <span>Nazwa (dla klienta)</span>
+                    <span>Wartość (system)</span>
+                    <span>Cena (PLN)</span>
+                    <span></span>
+                </div>
+            `;
             data.choices.forEach(choice => {
                 choicesHTML += createChoiceRowHTML(choice.label, choice.value, choice.priceMod);
             });
         } else if (data.type === 'checkbox') {
-             // For checkboxes, we just treat the 'price' field as a single 'priceMod' choice for simplicity in UI,
-             // but visually distinct. Actually, let's stick to the Select structure but allow Type change.
-             // If checkbox, we might just use one row for the price.
              choicesHTML = createChoiceRowHTML(data.label, 'true', data.price || 0); 
+        }
+
+        // Generate Select Options for Keys
+        let keyOptions = '';
+        Object.entries(OPTION_KEYS).forEach(([k, label]) => {
+            const selected = k === key ? 'selected' : '';
+            keyOptions += `<option value="${k}" ${selected}>${label} (${k})</option>`;
+        });
+        // Add custom option if key is not in list
+        if (!OPTION_KEYS[key] && key.indexOf('new_option') === -1) {
+             keyOptions += `<option value="${key}" selected>${key} (Niestandardowe)</option>`;
         }
 
         div.innerHTML = `
             <div class="option-header">
                 <div style="flex-grow:1">
-                    <label class="text-xs">ID Opcji (np. width)</label>
-                    <input type="text" class="opt-key" value="${key}" placeholder="id_opcji">
+                    <label class="text-xs">Rodzaj Opcji</label>
+                    <select class="opt-key">
+                        ${keyOptions}
+                        <option value="custom">Inne...</option>
+                    </select>
                 </div>
                 <div style="flex-grow:2">
-                    <label class="text-xs">Etykieta (np. Szerokość)</label>
-                    <input type="text" class="opt-label" value="${data.label}" placeholder="Nazwa wyświetlana">
+                    <label class="text-xs">Tytuł Wyświetlany</label>
+                    <input type="text" class="opt-label" value="${data.label}" placeholder="np. Wybierz Kolor">
                 </div>
                 <div>
-                    <label class="text-xs">Typ</label>
+                    <label class="text-xs">Typ Pola</label>
                     <select class="opt-type" onchange="toggleChoicesUI(this)">
-                        <option value="select" ${data.type === 'select' ? 'selected' : ''}>Lista (Select)</option>
-                        <option value="checkbox" ${data.type === 'checkbox' ? 'selected' : ''}>Pojedyncza (Checkbox)</option>
+                        <option value="select" ${data.type === 'select' ? 'selected' : ''}>Lista Rozwijana</option>
+                        <option value="checkbox" ${data.type === 'checkbox' ? 'selected' : ''}>Pole Wyboru (Tak/Nie)</option>
                     </select>
                 </div>
                 <button type="button" class="remove-btn" onclick="this.closest('.option-block').remove()">
@@ -284,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             
             <div class="choices-wrapper ${data.type === 'checkbox' ? 'hidden' : ''}">
-                <label class="text-xs font-bold">Warianty / Wybory:</label>
+                <label class="text-xs font-bold mb-2 block">Warianty:</label>
                 <div class="choices-container">
                     ${choicesHTML}
                 </div>
@@ -302,9 +331,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function createChoiceRowHTML(label, value, price) {
         return `
             <div class="choice-row">
-                <input type="text" placeholder="Nazwa (np. 4m)" value="${label}" class="choice-label">
+                <input type="text" placeholder="Nazwa" value="${label}" class="choice-label">
                 <input type="text" placeholder="Wartość" value="${value}" class="choice-value">
-                <input type="number" placeholder="Cena +/-" value="${price}" class="choice-price">
+                <input type="number" placeholder="Cena" value="${price}" class="choice-price">
                 <button type="button" class="remove-btn" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></button>
             </div>
         `;
@@ -335,6 +364,27 @@ document.addEventListener('DOMContentLoaded', function() {
             choicesWrapper.classList.add('hidden');
             checkboxWrapper.classList.remove('hidden');
         }
+    }
+
+    // Product Image File Handler
+    const prodImageFile = document.getElementById('prod-image-file');
+    const prodImageInput = document.getElementById('prod-image');
+    const prodImagePreview = document.getElementById('prod-image-preview');
+
+    if (prodImageFile) {
+        prodImageFile.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    prodImagePreview.src = e.target.result;
+                    prodImagePreview.style.display = 'block';
+                    // We set the base64 string to the input, mimicking a 'url' save for this static demo
+                    prodImageInput.value = e.target.result; 
+                }
+                reader.readAsDataURL(file);
+            }
+        });
     }
 
     // Save Product

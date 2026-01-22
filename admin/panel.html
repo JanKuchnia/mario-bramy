@@ -156,8 +156,10 @@
                   <input type="number" id="prod-price" required />
                 </div>
                 <div class="form-group">
-                  <label>Zdjęcie (URL)</label>
-                  <input type="text" id="prod-image" placeholder="assets/..." />
+                  <label>Zdjęcie Produktu</label>
+                  <input type="file" id="prod-image-file" accept="image/*" class="mb-2" />
+                  <input type="text" id="prod-image" placeholder="Lub wklej URL zdjęcia..." style="font-size: 0.8rem; color: #666;" />
+                  <img id="prod-image-preview" src="" alt="Podgląd" style="display:none; max-width: 100%; height: 150px; object-fit: cover; margin-top: 10px; border-radius: 8px; border: 1px dashed #ccc;" />
                 </div>
                 <div class="form-group">
                   <label>Opis</label>
