@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const menuItems = [
         { href: 'nasze-projekty.html', text: 'Nasze Projekty' },
-        { href: '', text: 'Sklep' },
+        { href: 'wkrotce.html', text: 'Sklep' },
         { href: 'opinie.html', text: 'Opinie klientów' },
         { href: 'kontakt.html', text: 'Kontakt', isButton: true },
         { href: 'https://www.facebook.com/p/MARIO-bramy-automatyka-61581453314458/', text: 'Facebook', isIcon: true, icon: 'fa-brands fa-facebook-f' }

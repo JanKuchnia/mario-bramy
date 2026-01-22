@@ -45,9 +45,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const images = portfolioData[category];
             container.innerHTML = images.map(img => `
                 <div class="gallery-item">
-                    <img src="${img.src}" alt="${img.alt}" />
+                    <img src="${img.src}" alt="${img.alt}" loading="lazy" />
                 </div>
             `).join('');
+
+            // Add 'tall' class to portrait images after they load
+            const imgElements = container.querySelectorAll('img');
+            imgElements.forEach(img => {
+                img.onload = function() {
+                    if (this.naturalHeight > this.naturalWidth) {
+                        this.parentElement.classList.add('tall');
+                    }
+                }
+            });
         }
     }
 

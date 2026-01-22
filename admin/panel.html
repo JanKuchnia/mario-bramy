@@ -9,6 +9,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
     <link rel="stylesheet" href="admin.css" />
+    <script src="../assets/shop.js"></script>
   </head>
   <body>
     <div class="panel-container">
@@ -23,75 +24,175 @@
         </button>
       </header>
 
+      <nav class="admin-nav">
+        <button class="nav-btn active" onclick="switchView('gallery')">
+          <i class="fa-solid fa-images"></i> Realizacje
+        </button>
+        <button class="nav-btn" onclick="switchView('shop')">
+          <i class="fa-solid fa-store"></i> Sklep
+        </button>
+      </nav>
+
       <main>
-        <section class="upload-section">
-          <h2>Zarządzanie Projektami</h2>
-          <div class="upload-container">
-            <div class="upload-card">
-              <form id="uploadForm" class="admin-form">
-                <div class="form-inputs">
-                  <div class="form-group">
-                    <label for="category">Kategoria Projektu</label>
-                    <select id="category" required>
-                      <option value="bramy-przesuwne-aluminiowe">
-                        Bramy Przesuwne
-                      </option>
-                      <option value="bramy-dwuskrzydlowe">
-                        Bramy Dwuskrzydłowe
-                      </option>
-                      <option value="barierki">Balustrady</option>
-                      <option value="przesla-ogrodzeniowe-aluminiowe">
-                        Przęsła Ogrodzeniowe
-                      </option>
-                    </select>
+        <!-- GALLERY VIEW -->
+        <div id="view-gallery" class="admin-view">
+          <section class="upload-section">
+            <h2>Zarządzanie Projektami</h2>
+            <div class="upload-container">
+              <div class="upload-card">
+                <form id="uploadForm" class="admin-form">
+                  <div class="form-inputs">
+                    <div class="form-group">
+                      <label for="category">Kategoria Projektu</label>
+                      <select id="category" required>
+                        <option value="bramy-przesuwne-aluminiowe">
+                          Bramy Przesuwne
+                        </option>
+                        <option value="bramy-dwuskrzydlowe">
+                          Bramy Dwuskrzydłowe
+                        </option>
+                        <option value="barierki">Balustrady</option>
+                        <option value="przesla-ogrodzeniowe-aluminiowe">
+                          Przęsła Ogrodzeniowe
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="photoFile">Zdjęcie</label>
+                      <input
+                        type="file"
+                        id="photoFile"
+                        accept="image/*"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="photoAlt">Opis (Alt text)</label>
+                      <input
+                        type="text"
+                        id="photoAlt"
+                        placeholder="np. Nowoczesna brama przesuwna..."
+                        required
+                      />
+                    </div>
+                    <div class="filename-preview">
+                      Docelowa nazwa: <span id="targetFilename">--</span>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="photoFile">Zdjęcie</label>
-                    <input
-                      type="file"
-                      id="photoFile"
-                      accept="image/*"
-                      required
+
+                  <div class="preview-card" id="previewCard">
+                    <p id="previewText">Podgląd zdjęcia</p>
+                    <img
+                      id="imagePreview"
+                      class="image-preview"
+                      src="#"
+                      alt="Preview"
                     />
                   </div>
-                  <div class="form-group">
-                    <label for="photoAlt">Opis (Alt text)</label>
-                    <input
-                      type="text"
-                      id="photoAlt"
-                      placeholder="np. Nowoczesna brama przesuwna..."
-                      required
-                    />
-                  </div>
-                  <div class="filename-preview">
-                    Docelowa nazwa: <span id="targetFilename">--</span>
-                  </div>
+                  <span></span>
+                  <button style="margin-top: 3rem" type="submit" id="submitBtn">
+                    Dodaj do Realizacji
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <section class="gallery-preview">
+            <h2 style="margin-top: 4rem">Twoje Realizacje</h2>
+            <div id="gallery-container" class="gallery-grid">
+              <!-- Loaded dynamically -->
+            </div>
+          </section>
+        </div>
+
+        <!-- SHOP VIEW -->
+        <div id="view-shop" class="admin-view" style="display: none">
+          <section class="shop-management">
+            <div class="flex justify-between items-center mb-6">
+              <h2>Zarządzanie Produktami</h2>
+              <button onclick="openProductEditor()" class="add-btn">
+                <i class="fa-solid fa-plus"></i> Dodaj Produkt
+              </button>
+            </div>
+
+            <div id="products-list" class="products-grid">
+              <!-- Rendered by JS -->
+            </div>
+
+            <div class="mt-8 text-right">
+              <button onclick="applyShopChanges()" class="export-btn">
+                <i class="fa-solid fa-check"></i> Zaaplikuj Zmiany
+              </button>
+            </div>
+          </section>
+
+          <!-- Product Editor (Overlay/Modal style inline) -->
+          <div id="product-editor" class="editor-overlay hidden">
+            <div class="editor-card">
+              <div class="editor-header">
+                <h3 id="editor-title">Edytuj Produkt</h3>
+                <button onclick="closeProductEditor()" class="close-editor">
+                  <i class="fa-solid fa-times"></i>
+                </button>
+              </div>
+              <form id="productForm" class="admin-form">
+                <input type="hidden" id="prod-id" />
+                <div class="form-group">
+                  <label>Nazwa Produktu</label>
+                  <input type="text" id="prod-name" required />
+                </div>
+                <div class="form-group">
+                  <label>Kategoria</label>
+                  <select id="prod-category">
+                    <option value="bramy">Bramy</option>
+                    <option value="ogrodzenia">Ogrodzenia</option>
+                    <option value="balustrady">Balustrady</option>
+                    <option value="automatyka">Automatyka</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Cena Bazowa (PLN)</label>
+                  <input type="number" id="prod-price" required />
+                </div>
+                <div class="form-group">
+                  <label>Zdjęcie (URL)</label>
+                  <input type="text" id="prod-image" placeholder="assets/..." />
+                </div>
+                <div class="form-group">
+                  <label>Opis</label>
+                  <textarea id="prod-desc" rows="3"></textarea>
                 </div>
 
-                <div class="preview-card" id="previewCard">
-                  <p id="previewText">Podgląd zdjęcia</p>
-                  <img
-                    id="imagePreview"
-                    class="image-preview"
-                    src="#"
-                    alt="Preview"
-                  />
+                <!-- Options Editor Section -->
+                <div class="form-group">
+                  <label class="mb-2">Opcje i Konfiguracja (Wpływ na cenę)</label>
+                  <div id="options-wrapper" class="space-y-4">
+                    <!-- Dynamic options will be rendered here -->
+                  </div>
+                  <button
+                    type="button"
+                    onclick="addNewOptionUI()"
+                    class="add-option-btn mt-3"
+                  >
+                    <i class="fa-solid fa-list-check"></i> Dodaj Nową Opcję
+                  </button>
                 </div>
-                <span></span>
-                <button style="margin-top: 3rem" type="submit" id="submitBtn">
-                  Dodaj do Realizacji
-                </button>
+
+                <div class="form-actions">
+                  <button type="submit" class="save-btn">Zapisz</button>
+                  <button
+                    type="button"
+                    onclick="closeProductEditor()"
+                    class="cancel-btn"
+                  >
+                    Anuluj
+                  </button>
+                </div>
               </form>
             </div>
           </div>
-        </section>
-
-        <section class="gallery-preview">
-          <h2 style="margin-top: 4rem">Twoje Realizacje</h2>
-          <div id="gallery-container" class="gallery-grid">
-            <!-- Loaded dynamically -->
-          </div>
-        </section>
+        </div>
       </main>
     </div>
     <script src="admin.js"></script>
