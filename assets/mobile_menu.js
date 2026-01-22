@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const globalHeader = document.getElementById('global-header');
 
     const menuItems = [
-        { href: 'nasze-projekty.html', text: 'Nasze Projekty' },
+        { href: 'nasze-projekty.html', text: 'Przykładowe Realizacje' },
         { href: 'wkrotce.html', text: 'Sklep' },
         { href: 'opinie.html', text: 'Opinie klientów' },
         { href: 'kontakt.html', text: 'Kontakt', isButton: true },
