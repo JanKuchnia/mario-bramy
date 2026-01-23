@@ -267,11 +267,12 @@ include 'includes/header.php';
           </div>
         </div>
 
-        <div class="absolute -bottom-[1px] left-0 right-0">
+        <div class="absolute bottom-0 left-0 right-0 leading-[0]">
           <svg
             class="w-full h-12 lg:h-24 fill-white block"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
+            style="transform: translateY(1px);"
           >
             <path d="M0,0 Q300,80 600,40 T1200,0 L1200,120 L0,120 Z"></path>
           </svg>
