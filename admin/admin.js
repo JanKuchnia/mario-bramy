@@ -1,36 +1,59 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // --- Authentication ---
-    const correctPassword = "password123"; 
+    // --- Authentication (Server-side verification) ---
     const loginForm = document.getElementById('loginForm');
     const panelContainer = document.querySelector('.panel-container');
 
     if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
+        loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            const password = document.getElementById('password').value;
+            const username = document.getElementById('username')?.value || '';
+            const password = document.getElementById('password')?.value || '';
             const errorMessage = document.getElementById('error-message');
-            if (password === correctPassword) {
-                sessionStorage.setItem('isAdminAuthenticated', 'true');
-                window.location.href = 'panel.html';
-            } else {
-                errorMessage.textContent = "Nieprawidłowe hasło.";
+            
+            try {
+                const response = await fetch('/admin/login.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    window.location.href = 'panel.html';
+                } else {
+                    errorMessage.textContent = data.message || "Nieprawidłowe hasło.";
+                }
+            } catch (error) {
+                errorMessage.textContent = "Błąd łączności";
+                console.error('Login error:', error);
             }
         });
     }
 
-    // --- Panel Logic ---
-    if (panelContainer && sessionStorage.getItem('isAdminAuthenticated') !== 'true') {
-        window.location.href = 'index.html';
+    // --- Panel Logic (Server-side validation) ---
+    if (panelContainer) {
+        // Panel is protected by require_login() on server
+        // Client-side sessionStorage is not security control
+        initializePanelFeatures();
     }
-
+    
     const logoutButton = document.getElementById('logoutButton');
     if (logoutButton) {
-        logoutButton.addEventListener('click', function() {
-            sessionStorage.removeItem('isAdminAuthenticated');
-            window.location.href = 'index.html';
+        logoutButton.addEventListener('click', async function() {
+            try {
+                await fetch('/admin/logout.php', { method: 'POST' });
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = 'index.html';
+            }
         });
     }
+    
+    function initializePanelFeatures() {
 
     // --- Gallery Management ---
     const uploadForm = document.getElementById('uploadForm');
@@ -91,16 +114,35 @@ document.addEventListener('DOMContentLoaded', function() {
         photos.forEach((photo, index) => {
             const item = document.createElement('div');
             item.className = 'gallery-item';
-            item.innerHTML = `
-                <div class="delete-btn" onclick="deletePhoto(${index})" title="Usuń zdjęcie">
-                    <i class="fa-solid fa-trash-can"></i>
-                </div>
-                <img src="${photo.src}" alt="${photo.name}">
-                <div class="item-info">
-                    <span class="text-xs text-gray-400">${photo.cat}</span><br>
-                    <span class="filename-badge">${photo.name}</span>
-                </div>
-            `;
+            
+            // Create elements safely without innerHTML
+            const deleteBtn = document.createElement('div');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.title = 'Usuń zdjęcie';
+            deleteBtn.setAttribute('onclick', `deletePhoto(${index})`);
+            deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+            
+            const img = document.createElement('img');
+            img.src = photo.src;
+            img.alt = photo.name;
+            
+            const info = document.createElement('div');
+            info.className = 'item-info';
+            const catSpan = document.createElement('span');
+            catSpan.className = 'text-xs text-gray-400';
+            catSpan.textContent = photo.cat;
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'filename-badge';
+            nameSpan.textContent = photo.name;
+            
+            info.appendChild(catSpan);
+            info.appendChild(document.createElement('br'));
+            info.appendChild(nameSpan);
+            
+            item.appendChild(deleteBtn);
+            item.appendChild(img);
+            item.appendChild(info);
+            
             galleryContainer.appendChild(item);
         });
     }
@@ -177,24 +219,53 @@ document.addEventListener('DOMContentLoaded', function() {
         shopProducts.forEach(p => {
             const card = document.createElement('div');
             card.className = 'product-card';
-            card.innerHTML = `
-                <div class="product-image">
-                    <img src="../${p.image}" alt="${p.name}">
-                </div>
-                <div class="product-info">
-                    <span class="product-cat">${p.category}</span>
-                    <h3 class="product-title">${p.name}</h3>
-                    <div class="product-price">${p.basePrice} PLN</div>
-                </div>
-                <div class="product-actions">
-                    <button class="action-btn edit-btn" onclick="openProductEditor(${p.id})">
-                        <i class="fa-solid fa-pen"></i> Edytuj
-                    </button>
-                    <button class="action-btn delete-product-btn" onclick="deleteShopProduct(${p.id})">
-                        <i class="fa-solid fa-trash"></i> Usuń
-                    </button>
-                </div>
-            `;
+            
+            // Safely create image
+            const imgDiv = document.createElement('div');
+            imgDiv.className = 'product-image';
+            const img = document.createElement('img');
+            img.src = '../' + p.image;
+            img.alt = p.name;
+            imgDiv.appendChild(img);
+            
+            // Create info section
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'product-info';
+            const catSpan = document.createElement('span');
+            catSpan.className = 'product-cat';
+            catSpan.textContent = p.category;
+            const title = document.createElement('h3');
+            title.className = 'product-title';
+            title.textContent = p.name;
+            const price = document.createElement('div');
+            price.className = 'product-price';
+            price.textContent = p.basePrice + ' PLN';
+            
+            infoDiv.appendChild(catSpan);
+            infoDiv.appendChild(title);
+            infoDiv.appendChild(price);
+            
+            // Create actions
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'product-actions';
+            
+            const editBtn = document.createElement('button');
+            editBtn.className = 'action-btn edit-btn';
+            editBtn.setAttribute('onclick', `openProductEditor(${p.id})`);
+            editBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Edytuj';
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'action-btn delete-product-btn';
+            deleteBtn.setAttribute('onclick', `deleteShopProduct(${p.id})`);
+            deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i> Usuń';
+            
+            actionsDiv.appendChild(editBtn);
+            actionsDiv.appendChild(deleteBtn);
+            
+            card.appendChild(imgDiv);
+            card.appendChild(infoDiv);
+            card.appendChild(actionsDiv);
+            
             productListContainer.appendChild(card);
         });
     }
@@ -258,78 +329,190 @@ document.addEventListener('DOMContentLoaded', function() {
         div.className = 'option-block';
         div.dataset.key = key;
 
-        let choicesHTML = '';
+        // Safely create all elements without innerHTML template literals
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'remove-block-btn';
+        removeBtn.title = 'Usuń całą opcję';
+        removeBtn.onclick = function() { this.closest('.option-block').remove(); };
+        removeBtn.innerHTML = '<i class="fa-solid fa-times"></i>';
+
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'option-header';
+
+        // Key selector
+        const keyDiv = document.createElement('div');
+        const keyLabel = document.createElement('label');
+        keyLabel.className = 'text-xs';
+        keyLabel.textContent = 'Rodzaj Opcji';
+        const keySelect = document.createElement('select');
+        keySelect.className = 'opt-key';
+        
+        Object.entries(OPTION_KEYS).forEach(([k, label]) => {
+            const opt = document.createElement('option');
+            opt.value = k;
+            opt.textContent = label + ' (' + k + ')';
+            if (k === key) opt.selected = true;
+            keySelect.appendChild(opt);
+        });
+        
+        if (!OPTION_KEYS[key] && key.indexOf('new_option') === -1) {
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.textContent = key + ' (Niestandardowe)';
+            opt.selected = true;
+            keySelect.appendChild(opt);
+        }
+        
+        const customOpt = document.createElement('option');
+        customOpt.value = 'custom';
+        customOpt.textContent = 'Inne...';
+        keySelect.appendChild(customOpt);
+        
+        keyDiv.appendChild(keyLabel);
+        keyDiv.appendChild(keySelect);
+
+        // Type selector
+        const typeDiv = document.createElement('div');
+        const typeLabel = document.createElement('label');
+        typeLabel.className = 'text-xs';
+        typeLabel.textContent = 'Typ Pola';
+        const typeSelect = document.createElement('select');
+        typeSelect.className = 'opt-type';
+        typeSelect.onchange = function() { toggleChoicesUI(this); };
+        
+        const selectOpt = document.createElement('option');
+        selectOpt.value = 'select';
+        selectOpt.textContent = 'Lista Rozwijana';
+        if (data.type === 'select') selectOpt.selected = true;
+        typeSelect.appendChild(selectOpt);
+        
+        const checkboxOpt = document.createElement('option');
+        checkboxOpt.value = 'checkbox';
+        checkboxOpt.textContent = 'Pole Wyboru (Tak/Nie)';
+        if (data.type === 'checkbox') checkboxOpt.selected = true;
+        typeSelect.appendChild(checkboxOpt);
+        
+        typeDiv.appendChild(typeLabel);
+        typeDiv.appendChild(typeSelect);
+
+        // Label input
+        const labelDiv = document.createElement('div');
+        const labelLabel = document.createElement('label');
+        labelLabel.className = 'text-xs';
+        labelLabel.textContent = 'Tytuł Wyświetlany';
+        const labelInput = document.createElement('input');
+        labelInput.type = 'text';
+        labelInput.className = 'opt-label';
+        labelInput.value = data.label || '';
+        labelInput.placeholder = 'np. Wybierz Kolor';
+        labelDiv.appendChild(labelLabel);
+        labelDiv.appendChild(labelInput);
+
+        headerDiv.appendChild(keyDiv);
+        headerDiv.appendChild(typeDiv);
+        headerDiv.appendChild(labelDiv);
+
+        // Choices wrapper
+        const choicesWrapper = document.createElement('div');
+        choicesWrapper.className = 'choices-wrapper';
+        if (data.type === 'checkbox') choicesWrapper.classList.add('hidden');
+        
+        const choicesLabel = document.createElement('label');
+        choicesLabel.className = 'text-xs font-bold mb-2 block';
+        choicesLabel.textContent = 'Warianty (Wybory):';
+        
+        const choicesContainer = document.createElement('div');
+        choicesContainer.className = 'choices-container';
+        
         if (data.type === 'select' && data.choices) {
             data.choices.forEach(choice => {
-                choicesHTML += createChoiceRowHTML(choice.label, choice.value, choice.priceMod);
+                choicesContainer.appendChild(createChoiceRow(choice.label, choice.value, choice.priceMod));
             });
-        } else if (data.type === 'checkbox') {
-             choicesHTML = createChoiceRowHTML(data.label, 'true', data.price || 0); 
         }
+        
+        const addChoiceBtn = document.createElement('button');
+        addChoiceBtn.type = 'button';
+        addChoiceBtn.className = 'add-choice-btn';
+        addChoiceBtn.textContent = '+ Dodaj Wariant';
+        addChoiceBtn.onclick = function() { addChoiceUI(this); };
+        
+        choicesWrapper.appendChild(choicesLabel);
+        choicesWrapper.appendChild(choicesContainer);
+        choicesWrapper.appendChild(addChoiceBtn);
 
-        // Generate Select Options for Keys
-        let keyOptions = '';
-        Object.entries(OPTION_KEYS).forEach(([k, label]) => {
-            const selected = k === key ? 'selected' : '';
-            keyOptions += `<option value="${k}" ${selected}>${label} (${k})</option>`;
-        });
-        // Add custom option if key is not in list
-        if (!OPTION_KEYS[key] && key.indexOf('new_option') === -1) {
-             keyOptions += `<option value="${key}" selected>${key} (Niestandardowe)</option>`;
-        }
+        // Checkbox price wrapper
+        const checkboxWrapper = document.createElement('div');
+        checkboxWrapper.className = 'checkbox-price-wrapper';
+        if (data.type !== 'checkbox') checkboxWrapper.classList.add('hidden');
+        
+        const priceLabel = document.createElement('label');
+        priceLabel.className = 'text-xs font-bold';
+        priceLabel.textContent = 'Cena za zaznaczenie (PLN):';
+        
+        const priceInput = document.createElement('input');
+        priceInput.type = 'number';
+        priceInput.className = 'opt-checkbox-price';
+        priceInput.value = data.price || 0;
+        
+        checkboxWrapper.appendChild(priceLabel);
+        checkboxWrapper.appendChild(priceInput);
 
-        div.innerHTML = `
-            <button type="button" class="remove-block-btn" onclick="this.closest('.option-block').remove()" title="Usuń całą opcję">
-                <i class="fa-solid fa-times"></i>
-            </button>
-            <div class="option-header">
-                <div>
-                    <label class="text-xs">Rodzaj Opcji</label>
-                    <select class="opt-key">
-                        ${keyOptions}
-                        <option value="custom">Inne...</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-xs">Typ Pola</label>
-                    <select class="opt-type" onchange="toggleChoicesUI(this)">
-                        <option value="select" ${data.type === 'select' ? 'selected' : ''}>Lista Rozwijana</option>
-                        <option value="checkbox" ${data.type === 'checkbox' ? 'selected' : ''}>Pole Wyboru (Tak/Nie)</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-xs">Tytuł Wyświetlany</label>
-                    <input type="text" class="opt-label" value="${data.label}" placeholder="np. Wybierz Kolor">
-                </div>
-            </div>
-            
-            <div class="choices-wrapper ${data.type === 'checkbox' ? 'hidden' : ''}">
-                <label class="text-xs font-bold mb-2 block">Warianty (Wybory):</label>
-                <div class="choices-container">
-                    ${choicesHTML}
-                </div>
-                <button type="button" class="add-choice-btn" onclick="addChoiceUI(this)">+ Dodaj Wariant</button>
-            </div>
-            
-            <div class="checkbox-price-wrapper ${data.type === 'checkbox' ? '' : 'hidden'}">
-                 <label class="text-xs font-bold">Cena za zaznaczenie (PLN):</label>
-                 <input type="number" class="opt-checkbox-price" value="${data.price || 0}">
-            </div>
-        `;
+        div.appendChild(removeBtn);
+        div.appendChild(headerDiv);
+        div.appendChild(choicesWrapper);
+        div.appendChild(checkboxWrapper);
+        
         return div;
     }
 
-    function createChoiceRowHTML(label, value, price) {
-        return `
-            <div class="choice-row">
-                <div class="choice-input-group">
-                    <label>Wartość systemowa</label>
-                    <input type="text" placeholder="np. 4.0" value="${value}" class="choice-value">
-                </div>
-                <div class="choice-input-group">
-                    <label>Cena +/- (PLN)</label>
-                    <input type="number" placeholder="np. 500" value="${price}" class="choice-price">
-                </div>
+    function createChoiceRow(label, value, price) {
+        const row = document.createElement('div');
+        row.className = 'choice-row';
+        
+        const inputGroup = document.createElement('div');
+        inputGroup.className = 'choice-input-group';
+        
+        const valueLabel = document.createElement('label');
+        valueLabel.textContent = 'Wartość systemowa';
+        const valueInput = document.createElement('input');
+        valueInput.type = 'text';
+        valueInput.placeholder = 'np. 4.0';
+        valueInput.value = value || '';
+        valueInput.className = 'choice-value';
+        
+        const labelLabel = document.createElement('label');
+        labelLabel.textContent = 'Wyświetlana nazwa';
+        const labelInput = document.createElement('input');
+        labelInput.type = 'text';
+        labelInput.placeholder = 'np. 4.0m';
+        labelInput.value = label || '';
+        labelInput.className = 'choice-label';
+        
+        const priceLabel = document.createElement('label');
+        priceLabel.textContent = 'Cena (PLN)';
+        const priceInput = document.createElement('input');
+        priceInput.type = 'number';
+        priceInput.value = price || 0;
+        priceInput.className = 'choice-price';
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'remove-choice-btn';
+        removeBtn.textContent = '✕';
+        removeBtn.onclick = function() { this.closest('.choice-row').remove(); };
+        
+        inputGroup.appendChild(valueLabel);
+        inputGroup.appendChild(valueInput);
+        inputGroup.appendChild(labelLabel);
+        inputGroup.appendChild(labelInput);
+        inputGroup.appendChild(priceLabel);
+        inputGroup.appendChild(priceInput);
+        inputGroup.appendChild(removeBtn);
+        
+        row.appendChild(inputGroup);
+        return row;
+    }
                 <div class="choice-input-group">
                     <label>Nazwa dla klienta</label>
                     <input type="text" placeholder="np. Szerokość 4m" value="${label}" class="choice-label">
@@ -465,4 +648,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial Renders
     renderGallery();
+    } // Close initializePanelFeatures
 });
