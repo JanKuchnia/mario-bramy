@@ -16,7 +16,19 @@ if (!defined('DB_PASSWORD')) define('DB_PASSWORD', defined('ENV_DB_PASSWORD') ? 
 if (!defined('DB_NAME')) define('DB_NAME', defined('ENV_DB_NAME') ? ENV_DB_NAME : 'mario_bramy');
 
 // Create connection
-$db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+try {
+    $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+} catch (Exception $e) {
+    // Log error details for admin
+    error_log('Database Connection Error: ' . $e->getMessage());
+    
+    // Show user-friendly message
+    if (defined('ENV_DB_HOST')) {
+        die("<h1>Site Maintenance</h1><p>We are currently experiencing technical difficulties. Please check back later.</p><!-- Connection failed: Check config/secrets.php -->");
+    } else {
+        die("<h1>Database Connection Failed</h1><p>Could not connect to database. Please check your configuration.</p><p>Error: " . $e->getMessage() . "</p>");
+    }
+}
 
 // Check connection
 if ($db->connect_error) {

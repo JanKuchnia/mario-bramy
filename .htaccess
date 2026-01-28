@@ -1,6 +1,6 @@
-# Prevent directory listing and enable symlinks (required for rewrite)
-Options -Indexes +FollowSymLinks
-DirectoryIndex index.php
+# Prevent directory listing
+Options -Indexes
+# DirectoryIndex index.php # Not needed as we redirect to public/
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
