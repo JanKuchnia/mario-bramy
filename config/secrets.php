@@ -4,6 +4,12 @@
  * WARNING: Do NOT commit secrets.php to Git!
  */
 
+// Database Configuration (Uncomment and fill for Production/Hostinger)
+// define('ENV_DB_HOST', 'mysql.hostinger.com');
+// define('ENV_DB_USER', 'u123456789_mario');
+// define('ENV_DB_PASSWORD', 'YourStrongPassword123!');
+// define('ENV_DB_NAME', 'u123456789_mario_db');
+
 // Google Places API Key
 define('GOOGLE_PLACES_API_KEY', 'AIzaSyDsHnsWdH6qd22LrXyGqW-730yAJNo3ZkI');
 

@@ -149,39 +149,46 @@ sftp://your-host.hostinger.com
 
 ### Krok 2: Wgrywanie Plików
 ```bash
-# Upload wszystko bez setup_database.sql oraz /config/secrets.php
+# Upload zawartość folderu 'mario-bramy' bezpośrednio do 'public_html'
+# UWAGA: Plik setup_database.sql nie jest potrzebny na serwerze (użyj go tylko do importu w phpMyAdmin)
 ```
 
 ### Krok 3: Baza Danych Hostinger
 ```bash
 # W Hostinger > Databases
-# 1. Utwórz bazę
-# 2. Import setup_database.sql
-# 3. Utwórz admina (SQL query powyżej)
+# 1. Utwórz bazę danych (zanotuj nazwę bazy, użytkownika i hasło)
+# 2. Wejdź w phpMyAdmin
+# 3. Importuj plik: setup_database.sql
+# 4. Wykonaj zapytanie SQL, aby dodać admina (patrz sekcja "Szybki Start" w README.md)
 ```
 
-### Krok 4: Aktualizuj Config
+### Krok 4: Konfiguracja (secrets.php)
+1. Zmień nazwę pliku `config/secrets.php` na serwerze, jeśli trzeba, lub po prostu go edytuj.
+2. Odkomentuj i uzupełnij sekcję bazy danych w `config/secrets.php`:
+
 ```php
-// /config/database.php
-$host = 'mysql.hostinger.com';
-$username = 'u12345_mario';  // z panelu Hostinger
-$password = 'xxxx';
-$database = 'u12345_mario_db';
+// config/secrets.php
+define('ENV_DB_HOST', 'mysql.hostinger.com'); // Lub localhost (zależy od hostingu)
+define('ENV_DB_USER', 'u123456789_mario');
+define('ENV_DB_PASSWORD', 'TwojeSilneHaslo');
+define('ENV_DB_NAME', 'u123456789_mario_db');
 ```
+*System automatycznie wykryje te ustawienia i użyje ich zamiast lokalnych.*
 
 ### Krok 5: Cron Job w Hostinger
 ```
 Hostinger > Cron Jobs > Add Cron Job
 
-Ścieżka: /public_html/mario-bramy/cron/sync-reviews-daily.php
+Typ: PHP
+Komenda: include_once('/home/u123456789/domains/twojadomena.pl/public_html/cron/sync-reviews-daily.php');
 Czas: Codziennie o 2:00 AM
-Komenda: /usr/bin/php
 ```
+*Upewnij się, że ścieżka do pliku jest poprawna (możesz ją sprawdzić w File Manager).*
 
 ### Krok 6: SSL Certificate
 ```
 Hostinger > SSL Certificates > Auto Install
-# Wymusi HTTPS dla całej domeny
+# .htaccess automatycznie wymusi HTTPS
 ```
 
 ---

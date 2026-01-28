@@ -1,20 +1,23 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
+    # Force HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
     # Remove www if exists
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-    RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
     
     # Redirect to public if accessing root
+    RewriteCond %{REQUEST_URI} !^/public/
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ public/$1 [L]
     
-    # Pretty URLs for public folder
-    RewriteBase /mario-bramy/public/
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+    # Pretty URLs logic - ensure this matches your routing
+    # For Hostinger root deployment
+    RewriteBase /
 </IfModule>
 
 # Disable directory listing

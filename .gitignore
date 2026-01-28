@@ -6,6 +6,7 @@ gha-creds-*.json
 *.github/workflows/gemini-scheduled-triage.yml
 *.github/workflows/gemini-triage.yml
 # Sensitive configuration files
+config/secrets.php
 
 # Temporary files
 *.tmp

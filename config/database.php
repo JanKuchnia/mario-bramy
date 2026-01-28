@@ -4,11 +4,16 @@
  * Mario Bramy Project
  */
 
-// Database credentials (XAMPP default)
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'mario_bramy');
+// Load secrets if available (for production/custom credentials)
+if (file_exists(__DIR__ . '/secrets.php')) {
+    include_once __DIR__ . '/secrets.php';
+}
+
+// Database credentials (with fallback to XAMPP defaults)
+if (!defined('DB_HOST')) define('DB_HOST', defined('ENV_DB_HOST') ? ENV_DB_HOST : 'localhost');
+if (!defined('DB_USER')) define('DB_USER', defined('ENV_DB_USER') ? ENV_DB_USER : 'root');
+if (!defined('DB_PASSWORD')) define('DB_PASSWORD', defined('ENV_DB_PASSWORD') ? ENV_DB_PASSWORD : '');
+if (!defined('DB_NAME')) define('DB_NAME', defined('ENV_DB_NAME') ? ENV_DB_NAME : 'mario_bramy');
 
 // Create connection
 $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
