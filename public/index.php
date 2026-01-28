@@ -1,4 +1,9 @@
 <?php
+// TEMPORARY DEBUGGING - REMOVE AFTER FIXING
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 /**
  * STRONA 1: Index.php - Strona Główna
  * Contains: Hero slideshow, Services, Why Choose Us, Portfolio Preview, Top 3 Reviews, CTA
