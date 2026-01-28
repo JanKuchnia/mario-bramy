@@ -5,10 +5,10 @@
  */
 
 // Database Configuration (Uncomment and fill for Production/Hostinger)
-// define('ENV_DB_HOST', 'mysql.hostinger.com');
-// define('ENV_DB_USER', 'u123456789_mario');
-// define('ENV_DB_PASSWORD', 'YourStrongPassword123!');
-// define('ENV_DB_NAME', 'u123456789_mario_db');
+define('ENV_DB_HOST', 'localhost'); // Hostinger usually uses 'localhost' or 'mysql.hostinger.com'
+define('ENV_DB_USER', 'u820515051_root');
+define('ENV_DB_PASSWORD', 'AKJM2000akjm!');
+define('ENV_DB_NAME', 'u820515051_DB_NAME');
 
 // Google Places API Key
 define('GOOGLE_PLACES_API_KEY', 'AIzaSyDsHnsWdH6qd22LrXyGqW-730yAJNo3ZkI');
