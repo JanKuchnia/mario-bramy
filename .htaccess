@@ -22,6 +22,9 @@ Options -Indexes
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ public/$1 [L]
+    
+    # Silence favicon 404s
+    RewriteRule ^favicon\.ico$ public/favicon.ico [L]
 </IfModule>
 
 # Protect sensitive files and directories
