@@ -37,11 +37,8 @@ function getDB(): PDO {
             ];
             $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
         } catch (PDOException $e) {
-            if (DEBUG_MODE) {
-                die("Błąd połączenia z bazą danych: " . $e->getMessage());
-            } else {
-                die("Błąd połączenia z bazą danych. Skontaktuj się z administratorem.");
-            }
+            // Re-throw exception to allow caller to handle it (e.g. API returning JSON)
+            throw $e;
         }
     }
     
