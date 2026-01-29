@@ -63,6 +63,7 @@
             </a>
             <a
               href="https://www.facebook.com/p/MARIO-bramy-automatyka-61581453314458/"
+              aria-label="Facebook"
               class="w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-[var(--primary-color)] hover:border-[var(--primary-color)] transition-all duration-300 group"
             >
               <i
@@ -257,6 +258,7 @@
             <div class="flex gap-4">
               <a
                 href="https://www.facebook.com/p/MARIO-bramy-automatyka-61581453314458/"
+                aria-label="Facebook"
                 class="w-10 h-10 bg-[var(--dark-background-color)] border border-[var(--dark-border-color)] rounded-lg flex items-center justify-center hover:bg-[var(--primary-color)] hover:border-[var(--primary-color)] transition-all duration-300 group"
               >
                 <i

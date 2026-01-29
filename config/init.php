@@ -3,6 +3,7 @@
  * Inicjalizacja aplikacji Mario Bramy
  */
 
+
 // Załaduj konfigurację
 require_once __DIR__ . '/config.php';
 

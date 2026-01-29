@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             renderImages(container, data.images);
+            container.dataset.loaded = 'true';
 
         } catch (error) {
             console.error("Error loading gallery:", error);
@@ -129,8 +130,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (targetPanel) {
                 targetPanel.style.display = 'grid';
 
-                // Only load if empty (simple caching mechanism)
-                if (!targetPanel.hasChildNodes() || targetPanel.innerHTML.trim() === '') {
+                // Only load if not already loaded
+                if (!targetPanel.dataset.loaded) {
                     loadCategoryImages(category);
                 }
             }

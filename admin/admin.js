@@ -597,13 +597,43 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
+            // Upload Image if selected
+            const fileInput = document.getElementById('prod-image-file');
+            let imagePath = document.getElementById('prod-image').value;
+
+            if (fileInput && fileInput.files.length > 0) {
+                const formData = new FormData();
+                formData.append('photo', fileInput.files[0]);
+                formData.append('category', 'products');
+                formData.append('alt_text', document.getElementById('prod-name').value);
+
+                try {
+                    const uploadResponse = await fetch('../api/upload.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const uploadData = await uploadResponse.json();
+
+                    if (!uploadData.success) {
+                        throw new Error('Błąd przesyłania zdjęcia: ' + (uploadData.error || 'Nieznany błąd'));
+                    }
+
+                    imagePath = uploadData.path;
+
+                } catch (uploadError) {
+                    showNotification(uploadError.message, 'error');
+                    console.error('Upload error:', uploadError);
+                    return; // Stop saving if upload fails
+                }
+            }
+
             const id = document.getElementById('prod-id').value;
             const productData = {
                 id: id ? parseInt(id) : null,
                 name: document.getElementById('prod-name').value,
                 category: document.getElementById('prod-category').value,
                 base_price: parseInt(document.getElementById('prod-price').value),
-                image: document.getElementById('prod-image').value,
+                image: imagePath,
                 description: document.getElementById('prod-desc').value,
                 options: options
             };

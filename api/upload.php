@@ -37,7 +37,8 @@ $allowedCategories = [
     'bramy-przesuwne-aluminiowe',
     'bramy-dwuskrzydlowe',
     'barierki',
-    'przesla-ogrodzeniowe-aluminiowe'
+    'przesla-ogrodzeniowe-aluminiowe',
+    'products'
 ];
 
 if (!in_array($category, $allowedCategories)) {
@@ -76,56 +77,81 @@ if (!is_dir($categoryPath)) {
 $nextNumber = getNextFileNumber($categoryPath);
 $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-// Konwertuj do JPEG dla ujednolicenia
-$targetExtension = 'jpg';
-$targetFilename = $nextNumber . '.' . $targetExtension;
-$targetPath = $categoryPath . '/' . $targetFilename;
+// Sprawdź czy mamy bibliotekę GD
+if (extension_loaded('gd')) {
+    // Konwertuj do WebP
+    $targetExtension = 'webp';
+    $targetFilename = $nextNumber . '.' . $targetExtension;
+    $targetPath = $categoryPath . '/' . $targetFilename;
 
-// Przetwórz obraz
-$sourceImage = null;
-switch ($mimeType) {
-    case 'image/jpeg':
-        $sourceImage = imagecreatefromjpeg($file['tmp_name']);
-        break;
-    case 'image/png':
-        $sourceImage = imagecreatefrompng($file['tmp_name']);
-        break;
-    case 'image/webp':
-        $sourceImage = imagecreatefromwebp($file['tmp_name']);
-        break;
-    case 'image/gif':
-        $sourceImage = imagecreatefromgif($file['tmp_name']);
-        break;
-}
+    // Przetwórz obraz
+    $sourceImage = null;
+    switch ($mimeType) {
+        case 'image/jpeg':
+            $sourceImage = imagecreatefromjpeg($file['tmp_name']);
+            break;
+        case 'image/png':
+            $sourceImage = imagecreatefrompng($file['tmp_name']);
+            imagepalettetotruecolor($sourceImage); // Ensure true color for palette PNGs
+            imagealphablending($sourceImage, true);
+            break;
+        case 'image/webp':
+            $sourceImage = imagecreatefromwebp($file['tmp_name']);
+            break;
+        case 'image/gif':
+            $sourceImage = imagecreatefromgif($file['tmp_name']);
+            imagepalettetotruecolor($sourceImage);
+            break;
+    }
 
-if (!$sourceImage) {
-    jsonError('Nie można przetworzyć obrazu');
-}
+    if (!$sourceImage) {
+        jsonError('Nie można przetworzyć obrazu');
+    }
 
-// Opcjonalnie: zmniejsz rozmiar jeśli za duży
-$maxWidth = 1920;
-$maxHeight = 1080;
-$width = imagesx($sourceImage);
-$height = imagesy($sourceImage);
+    // Opcjonalnie: zmniejsz rozmiar jeśli za duży
+    $maxWidth = 1920;
+    $maxHeight = 1080;
+    $width = imagesx($sourceImage);
+    $height = imagesy($sourceImage);
 
-if ($width > $maxWidth || $height > $maxHeight) {
-    $ratio = min($maxWidth / $width, $maxHeight / $height);
-    $newWidth = (int)($width * $ratio);
-    $newHeight = (int)($height * $ratio);
-    
-    $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
-    imagecopyresampled($resizedImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+    if ($width > $maxWidth || $height > $maxHeight) {
+        $ratio = min($maxWidth / $width, $maxHeight / $height);
+        $newWidth = (int)($width * $ratio);
+        $newHeight = (int)($height * $ratio);
+        
+        $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+        
+        // Zachowaj przezroczystość przy zmianie rozmiaru
+        imagealphablending($resizedImage, false);
+        imagesavealpha($resizedImage, true);
+        $transparent = imagecolorallocatealpha($resizedImage, 255, 255, 255, 127);
+        imagefilledrectangle($resizedImage, 0, 0, $newWidth, $newHeight, $transparent);
+        
+        imagecopyresampled($resizedImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagedestroy($sourceImage);
+        $sourceImage = $resizedImage;
+    }
+
+    // Zapisz jako WebP
+    imagealphablending($sourceImage, false);
+    imagesavealpha($sourceImage, true);
+
+    if (!imagewebp($sourceImage, $targetPath, 80)) {
+        imagedestroy($sourceImage);
+        jsonError('Nie można zapisać obrazu');
+    }
     imagedestroy($sourceImage);
-    $sourceImage = $resizedImage;
-}
 
-// Zapisz jako JPEG
-if (!imagejpeg($sourceImage, $targetPath, 85)) {
-    imagedestroy($sourceImage);
-    jsonError('Nie można zapisać obrazu');
-}
+} else {
+    // BRAK GD - Zapisz oryginał bez konwersji
+    $targetExtension = $extension;
+    $targetFilename = $nextNumber . '.' . $targetExtension;
+    $targetPath = $categoryPath . '/' . $targetFilename;
 
-imagedestroy($sourceImage);
+    if (!move_uploaded_file($file['tmp_name'], $targetPath)) {
+        jsonError('Nie można zapisać pliku (Brak GD, błąd przenoszenia)');
+    }
+}
 
 // Opcjonalnie: zapisz do bazy danych
 try {

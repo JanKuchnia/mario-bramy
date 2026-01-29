@@ -1,0 +1,30 @@
+[2026-01-29 19:55:25] Upload request started: Array
+(
+)
+
+[2026-01-29 19:55:26] Upload request started: Array
+(
+)
+
+[2026-01-29 19:55:26] Upload request started: Array
+(
+)
+
+[2026-01-29 19:55:27] Upload request started: Array
+(
+)
+
+[2026-01-29 19:55:38] Upload request started: Array
+(
+    [photo] => Array
+        (
+            [name] => Screenshot_20260129-082204.Ustawienia.png
+            [full_path] => Screenshot_20260129-082204.Ustawienia.png
+            [type] => image/png
+            [tmp_name] => /tmp/php87s8rbiphgqj7hRyAkx
+            [error] => 0
+            [size] => 111134
+        )
+
+)
+
