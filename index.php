@@ -130,7 +130,7 @@
           <div
             class="slide"
             style="
-              background-image: url(&quot;assets/portfolio/barierki/1.jpg&quot;);
+              background-image: url(&quot;assets/portfolio/balustrady/1.jpg&quot;);
             "
           ></div>
           <div

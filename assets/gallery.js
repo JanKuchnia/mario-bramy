@@ -58,9 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         container.innerHTML = images.map(img => `
             <div class="gallery-item">
                 <img src="${img.src}" alt="${img.name}" loading="lazy" />
-                <div class="gallery-overlay">
-                    <i class="fa-solid fa-magnifying-glass-plus"></i>
-                </div>
+
             </div>
         `).join('');
 
