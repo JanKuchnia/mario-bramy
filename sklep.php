@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sklep - Mario Bramy</title>
+    <link rel="canonical" href="<?= getCanonicalUrl() ?>" />
     <meta
       name="description"
       content="Sklep internetowy Mario Bramy. Sprawdź naszą ofertę bram, ogrodzeń i automatyki. Zamów online lub telefonicznie."

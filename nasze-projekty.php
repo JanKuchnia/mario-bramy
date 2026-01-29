@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Przykładowe Realizacje - Mario Bramy</title>
+    <link rel="canonical" href="<?= getCanonicalUrl() ?>" />
     <meta
       name="description"
       content="Galeria realizacji nowoczesnych bram i ogrodzeń aluminiowych. Zobacz przykładowe realizacje wykonane dla klientów w Małopolsce i całej Polsce."

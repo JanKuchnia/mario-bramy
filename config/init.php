@@ -223,3 +223,18 @@ function getShopUrl(): string {
     
     return $shopActive ? 'sklep.php' : 'wkrotce.php';
 }
+
+/**
+ * Generuje URL kanoniczny dla obecnej strony
+ */
+function getCanonicalUrl(): string {
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $path = trim($path, '/');
+    
+    // Usuń index.php dla strony głównej
+    if ($path === 'index.php' || $path === '') {
+        return SITE_URL;
+    }
+    
+    return SITE_URL . '/' . $path;
+}

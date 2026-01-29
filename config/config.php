@@ -24,6 +24,11 @@ define('DB_CHARSET', 'utf8mb4');
 //define('DB_PASS', 'MarioBramy2024!Secure');
 // Hasło admina (zahashowane)
 // Obecne hasło: admin
+// URL Strony
+define('SITE_URL', 'https://mariobramy.com');
+
+// Hasło admina (zahashowane)
+// Obecne hasło: admin
 define('ADMIN_PASSWORD_HASH', '$2y$12$JPctmAu31N1ppXzHAFsUhewS/hfAxhEivROGA1nQEueIRfWVeMEDi');
 
 // Ścieżki

@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kontakt - Mario Bramy</title>
+    <link rel="canonical" href="<?= getCanonicalUrl() ?>" />
     <meta
       name="description"
       content="Skontaktuj się z nami w sprawie nowoczesnych bram i ogrodzeń aluminiowych. Oferujemy bezpłatną wycenę. Działamy na terenie Małopolski i całej Polski."

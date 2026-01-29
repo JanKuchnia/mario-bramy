@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mario Bramy</title>
+    <link rel="canonical" href="<?= getCanonicalUrl() ?>" />
     <meta
       name="description"
       content="Nowoczesne bramy i ogrodzenia aluminiowe na wymiar. Projekt, produkcja i montaż na terenie Małopolski i całej Polski. Poznaj nasze realizacje."
