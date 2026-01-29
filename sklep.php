@@ -1,3 +1,4 @@
+<?php require_once "config/init.php"; ?>
 <!doctype html>
 <html lang="pl">
   <head>
@@ -47,7 +48,7 @@
               >Opinie klientów</a
             >
             <a
-              href="sklep.php"
+              href="<?= getShopUrl() ?>"
               class="text-[var(--primary-color)] font-bold transition-colors duration-300"
               >Sklep</a
             >
@@ -82,60 +83,31 @@
     </header>
 
     <main>
-      <!-- Hero Shop Section -->
-      <section class="bg-[var(--dark-background-color)] text-white py-16 lg:py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
-        <div
-          class="absolute top-0 right-0 w-96 h-96 bg-[var(--primary-color)] rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"
-        ></div>
-        
-        <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
-             <div
-              class="inline-block px-4 py-2 bg-[var(--primary-color)] bg-opacity-20 border border-[var(--primary-color)] rounded-full mb-6"
-            >
-              <span class="text-white font-semibold text-sm">Oferta Online</span>
-            </div>
-            <h1 class="text-4xl lg:text-6xl font-bold font-[var(--font-family-heading)] mb-6">
-                Sklep Mario Bramy
-            </h1>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                Wybierz kategorię i zapoznaj się z naszą ofertą produktów. 
-                Możliwość konfiguracji i zamówienia wyceny online.
-            </p>
-        </div>
-      </section>
-
-      <!-- Products Section -->
-      <section class="py-12 lg:py-20 -mt-10 relative z-20">
+      <section
+        class="mt-8 code-section pt-32 lg:pt-20 pb-20 lg:pb-32 bg-white mb-16"
+      >
         <div class="container mx-auto px-4 lg:px-8">
-            
-            <!-- Filters -->
-            <div class="bg-white rounded-xl shadow-xl p-4 mb-10 flex flex-nowrap overflow-x-auto gap-4 justify-start md:justify-center pb-4 scrollbar-hide">
-                <button class="shop-filter-btn active bg-[var(--primary-color)] text-white px-6 py-3 rounded-lg font-bold whitespace-nowrap transition-all shadow-sm hover:shadow-md" data-category="all">
-                    Wszystkie
-                </button>
-                <button class="shop-filter-btn bg-white text-[var(--dark-text-color)] px-6 py-3 rounded-lg font-bold whitespace-nowrap transition-all shadow-sm hover:shadow-md hover:bg-gray-50" data-category="bramy">
-                    <i class="fa-solid fa-door-open mr-2"></i>Bramy
-                </button>
-                <button class="shop-filter-btn bg-white text-[var(--dark-text-color)] px-6 py-3 rounded-lg font-bold whitespace-nowrap transition-all shadow-sm hover:shadow-md hover:bg-gray-50" data-category="ogrodzenia">
-                    <i class="fa-solid fa-bars mr-2"></i>Ogrodzenia
-                </button>
-                <button class="shop-filter-btn bg-white text-[var(--dark-text-color)] px-6 py-3 rounded-lg font-bold whitespace-nowrap transition-all shadow-sm hover:shadow-md hover:bg-gray-50" data-category="balustrady">
-                    <i class="fa-solid fa-stairs mr-2"></i>Balustrady
-                </button>
-                <button class="shop-filter-btn bg-white text-[var(--dark-text-color)] px-6 py-3 rounded-lg font-bold whitespace-nowrap transition-all shadow-sm hover:shadow-md hover:bg-gray-50" data-category="automatyka">
-                    <i class="fa-solid fa-microchip mr-2"></i>Automatyka
-                </button>
-            </div>
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h1
+              class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--dark-text-color)] font-[var(--font-family-heading)] mb-6"
+            >
+              Nasz Sklep i Konfigurator
+            </h1>
+            <p class="text-lg text-[var(--gray-text-color)]">
+              Wybierz produkt, skonfiguruj go według potrzeb i uzyskaj
+              szacunkową wycenę.
+            </p>
+          </div>
 
-            <!-- Products Grid -->
-            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Products loaded dynamically via JS -->
-                 <div class="col-span-full py-12 text-center">
+          <div
+            id="products-grid"
+            class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          >
+            <!-- Products will be loaded here by JavaScript -->
+             <div class="col-span-full py-12 text-center">
                     <i class="fa-solid fa-spinner fa-spin text-4xl text-[var(--primary-color)]"></i>
-                 </div>
-            </div>
-
+             </div>
+          </div>
         </div>
       </section>
     </main>
@@ -207,7 +179,7 @@
               </li>
               <li>
                 <a
-                  href="sklep.php"
+                  href="<?= getShopUrl() ?>"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i

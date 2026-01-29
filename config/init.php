@@ -177,3 +177,18 @@ function getPortfolioImages(string $category = null): array {
     
     return $images;
 }
+
+/**
+ * Pobiera URL sklepu w zależności od ustawień
+ */
+function getShopUrl(): string {
+    $settingsFile = __DIR__ . '/settings.json';
+    $shopActive = false;
+    
+    if (file_exists($settingsFile)) {
+        $settings = json_decode(file_get_contents($settingsFile), true);
+        $shopActive = $settings['shop_active'] ?? false;
+    }
+    
+    return $shopActive ? 'sklep.php' : 'wkrotce.php';
+}

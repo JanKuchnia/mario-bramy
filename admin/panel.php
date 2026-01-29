@@ -122,9 +122,14 @@ requireAdmin();
           <section class="shop-management">
             <div class="flex justify-between items-center mb-6">
               <h2>Zarządzanie Produktami</h2>
-              <button onclick="openProductEditor()" class="add-btn">
-                <i class="fa-solid fa-plus"></i> Dodaj Produkt
-              </button>
+              <div class="flex items-center gap-4">
+                  <button id="shopModeBtn" class="add-btn" style="background-color: #6c757d; min-width: 200px;">
+                      <i class="fa-solid fa-clock"></i> Sklep: Wkrótce
+                  </button>
+                  <button onclick="openProductEditor()" class="add-btn">
+                    <i class="fa-solid fa-plus"></i> Dodaj Produkt
+                  </button>
+              </div>
             </div>
 
             <div id="products-list" class="products-grid">

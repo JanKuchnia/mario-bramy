@@ -224,12 +224,81 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- SHOP MANAGEMENT ---
 
+    // --- Shop Settings ---
+    const shopModeBtn = document.getElementById('shopModeBtn');
+
+    async function loadShopSettings() {
+        if (!shopModeBtn) return;
+
+        try {
+            const response = await fetch('../api/settings.php');
+            const data = await response.json();
+
+            if (data.success) {
+                updateToggleUI(data.shop_active);
+            }
+        } catch (error) {
+            console.error('Settings load error:', error);
+        }
+    }
+
+    async function updateShopSettings(isActive) {
+        // Optimistic UI update
+        updateToggleUI(isActive);
+
+        try {
+            const response = await fetch('../api/settings.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ shop_active: isActive })
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                showNotification(`Tryb sklepu zmieniony na: ${data.shop_active ? 'Aktywny' : 'Wkrótce'}`);
+                // Ensure state is synced
+                if (data.shop_active !== isActive) updateToggleUI(data.shop_active);
+            } else {
+                throw new Error(data.error);
+            }
+        } catch (error) {
+            showNotification('Błąd zmiany ustawień', 'error');
+            console.error(error);
+            // Revert UI on error
+            updateToggleUI(!isActive);
+        }
+    }
+
+    function updateToggleUI(isActive) {
+        if (!shopModeBtn) return;
+
+        // Store state
+        shopModeBtn.dataset.active = isActive;
+
+        if (isActive) {
+            shopModeBtn.innerHTML = '<i class="fa-solid fa-store"></i> Sklep: Aktywny';
+            shopModeBtn.style.backgroundColor = '#10b981'; // Green
+        } else {
+            shopModeBtn.innerHTML = '<i class="fa-solid fa-clock"></i> Sklep: Wkrótce';
+            shopModeBtn.style.backgroundColor = '#6c757d'; // Gray
+        }
+    }
+
+    if (shopModeBtn) {
+        shopModeBtn.addEventListener('click', function () {
+            const current = this.dataset.active === 'true';
+            updateShopSettings(!current);
+        });
+    }
+
+
     async function loadProducts() {
         if (!productListContainer) return;
 
         productListContainer.innerHTML = '<p class="loading-text"><i class="fa-solid fa-spinner fa-spin"></i> Ładowanie...</p>';
 
         try {
+            loadShopSettings(); // Load settings when loading products
             const response = await fetch('../api/products.php');
             const data = await response.json();
 

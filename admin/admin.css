@@ -9,7 +9,9 @@
     --font-body: "Work Sans", sans-serif;
 }
 
-*, ::before, ::after {
+*,
+::before,
+::after {
     box-sizing: border-box;
 }
 
@@ -22,7 +24,8 @@ body {
     min-height: 100vh;
 }
 
-.login-container, .panel-container {
+.login-container,
+.panel-container {
     background-color: var(--card-bg);
     padding: 3rem;
     border-radius: 24px;
@@ -37,7 +40,9 @@ body {
     max-width: 1200px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: var(--font-heading);
     font-weight: 700;
 }
@@ -62,7 +67,8 @@ label {
     letter-spacing: 0.1em;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 1rem;
     background-color: #ffffff;
@@ -73,7 +79,8 @@ input, select {
     transition: all 0.3s ease;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 4px rgba(184, 23, 38, 0.1);
@@ -123,8 +130,10 @@ button:hover {
 }
 
 .brand-logo {
-    max-height: 40px;
+    max-height: 50px;
+    max-width: 100%;
     width: auto;
+    object-fit: contain;
 }
 
 .brand-title {
@@ -190,21 +199,23 @@ button:hover {
         grid-template-columns: 1fr 1fr;
         align-items: start;
     }
-    
+
     .form-inputs {
         grid-column: 1;
     }
-    
+
     .preview-card {
         grid-column: 2;
-        grid-row: 1 / span 2; /* Span enough rows so it pushes content down properly or sits beside it */
+        grid-row: 1 / span 2;
+        /* Span enough rows so it pushes content down properly or sits beside it */
         height: 100%;
         min-height: 350px;
     }
-    
+
     #submitBtn {
         grid-column: 1 / span 2;
-        margin-top: 2rem; /* Increased margin for better separation */
+        margin-top: 2rem;
+        /* Increased margin for better separation */
     }
 }
 
@@ -261,7 +272,7 @@ button:hover {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
     padding: 1.25rem 1rem 1rem;
     font-size: 0.8rem;
     color: white;
@@ -292,7 +303,7 @@ button:hover {
     opacity: 0;
     transition: all 0.3s ease;
     z-index: 10;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .gallery-item:hover .delete-btn {
@@ -323,7 +334,8 @@ button:hover {
     font-weight: 700;
 }
 
-.nav-btn:hover, .nav-btn.active {
+.nav-btn:hover,
+.nav-btn.active {
     background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
@@ -350,7 +362,7 @@ button:hover {
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 .product-image {
@@ -456,7 +468,7 @@ button:hover {
 .editor-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
     z-index: 100;
     display: flex;
@@ -473,7 +485,7 @@ button:hover {
     max-width: 600px;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     animation: slideUp 0.3s ease;
 }
 
@@ -500,12 +512,14 @@ button:hover {
 /* Desktop layout for Product Editor */
 @media (min-width: 1024px) {
     .editor-card {
-        max-width: 900px; /* Wider on desktop */
+        max-width: 900px;
+        /* Wider on desktop */
     }
 
     #productForm {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Two columns */
+        grid-template-columns: 1fr 1fr;
+        /* Two columns */
         gap: 1.5rem;
         align-items: start;
     }
@@ -518,25 +532,42 @@ button:hover {
        4: Price -> Col 1
        5: Image -> Col 2
     */
-    #productForm > .form-group:nth-child(2) { grid-column: 1; } /* Name */
-    #productForm > .form-group:nth-child(3) { grid-column: 2; } /* Category */
-    #productForm > .form-group:nth-child(4) { grid-column: 1; } /* Price */
-    #productForm > .form-group:nth-child(5) { grid-column: 2; } /* Image */
+    #productForm>.form-group:nth-child(2) {
+        grid-column: 1;
+    }
+
+    /* Name */
+    #productForm>.form-group:nth-child(3) {
+        grid-column: 2;
+    }
+
+    /* Category */
+    #productForm>.form-group:nth-child(4) {
+        grid-column: 1;
+    }
+
+    /* Price */
+    #productForm>.form-group:nth-child(5) {
+        grid-column: 2;
+    }
+
+    /* Image */
 
     /* Description - Full Width below basic info */
-    #productForm > .form-group:nth-child(6) {
+    #productForm>.form-group:nth-child(6) {
         grid-column: 1 / -1;
     }
 
     /* Options Wrapper Container - Full Width below description */
-    #productForm > .form-group:nth-child(7) {
+    #productForm>.form-group:nth-child(7) {
         grid-column: 1 / -1;
     }
 
     /* Grid for the Options Blocks themselves inside the wrapper */
     #options-wrapper {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 columns for options blocks */
+        grid-template-columns: 1fr 1fr;
+        /* 2 columns for options blocks */
         gap: 1.5rem;
     }
 
@@ -548,8 +579,15 @@ button:hover {
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .editor-header {
@@ -602,7 +640,8 @@ button:hover {
 .option-block {
     background: #f8fafc;
     border: 1px solid var(--border-color);
-    padding: 1.5rem 1rem 1rem 1rem; /* Top padding for absolute close button */
+    padding: 1.5rem 1rem 1rem 1rem;
+    /* Top padding for absolute close button */
     border-radius: 12px;
     margin-bottom: 1rem;
     position: relative;
@@ -617,28 +656,34 @@ button:hover {
     width: 100%;
 }
 
-.option-header > div {
-    min-width: 0; /* Prevents children from pushing the grid apart */
+.option-header>div {
+    min-width: 0;
+    /* Prevents children from pushing the grid apart */
 }
 
 /* Reorder elements: Type & Field Type first, Title below */
-.option-header > div:nth-child(1) { /* Rodzaj Opcji */
+.option-header>div:nth-child(1) {
+    /* Rodzaj Opcji */
     grid-column: 1;
     grid-row: 1;
 }
 
-.option-header > div:nth-child(3) { /* Typ Pola */
+.option-header>div:nth-child(3) {
+    /* Typ Pola */
     grid-column: 2;
     grid-row: 1;
 }
 
-.option-header > div:nth-child(2) { /* Tytuł Wyświetlany */
-    grid-column: 1 / -1; /* Full width */
+.option-header>div:nth-child(2) {
+    /* Tytuł Wyświetlany */
+    grid-column: 1 / -1;
+    /* Full width */
     grid-row: 2;
 }
 
 /* Option Block Inputs Visibility */
-.option-header input, .option-header select {
+.option-header input,
+.option-header select {
     background: white;
     border: 1px solid #cbd5e1;
     color: var(--text-light);
@@ -647,7 +692,8 @@ button:hover {
 
 .opt-label {
     font-weight: 700;
-    border-color: #94a3b8; /* Slightly darker border for the main title */
+    border-color: #94a3b8;
+    /* Slightly darker border for the main title */
 }
 
 /* Enhanced Remove Block Button */
@@ -665,7 +711,7 @@ button:hover {
     justify-content: center;
     border-radius: 50%;
     border: 2px solid #fee2e2;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
     z-index: 10;
 }
@@ -678,7 +724,8 @@ button:hover {
 }
 
 /* Ensure inputs inside header don't overflow */
-.option-header input, .option-header select {
+.option-header input,
+.option-header select {
     width: 100%;
     min-width: 0;
 }
@@ -713,7 +760,8 @@ button:hover {
     margin-bottom: 4px;
     text-transform: uppercase;
     font-weight: 700;
-    white-space: nowrap; /* Prevent label wrapping */
+    white-space: nowrap;
+    /* Prevent label wrapping */
 }
 
 .choice-row input {
@@ -723,24 +771,27 @@ button:hover {
 }
 
 /* Row 1: Name for Client */
-.choice-row > div:nth-child(3) { /* Nazwa dla klienta */
+.choice-row>div:nth-child(3) {
+    /* Nazwa dla klienta */
     grid-column: 1 / span 2;
     grid-row: 1;
 }
 
 /* Row 2: Value and Price */
-.choice-row > div:nth-child(1) { /* Wartość systemowa */
+.choice-row>div:nth-child(1) {
+    /* Wartość systemowa */
     grid-column: 1;
     grid-row: 2;
 }
 
-.choice-row > div:nth-child(2) { /* Cena */
+.choice-row>div:nth-child(2) {
+    /* Cena */
     grid-column: 2;
     grid-row: 2;
 }
 
 /* Button position adjustment */
-.choice-row > button {
+.choice-row>button {
     grid-column: 3;
     grid-row: 1 / span 2;
     align-self: center;
@@ -827,9 +878,16 @@ button:hover {
     .upload-card {
         padding: 1.5rem;
     }
-    
+
     .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 1rem;
     }
+}
+
+.login-logo {
+    display: block;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto 1.5rem auto;
 }

@@ -1,3 +1,4 @@
+<?php require_once "config/init.php"; ?>
 <!doctype html>
 <html lang="pl">
   <head>
@@ -67,7 +68,7 @@
               >Opinie klientów</a
             >
             <a
-              href="sklep.php"
+              href="<?= getShopUrl() ?>"
               class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
               >Sklep</a
             >
@@ -661,7 +662,7 @@
                   class="group relative overflow-hidden rounded-2xl aspect-square"
                 >
                   <img
-                    src="assets/portfolio/barierki/6.jpg"
+                    src="assets/portfolio/bramy-dwuskrzydlowe/5.jpg"
                     alt="Nowoczesna barierka wewnętrzna"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -673,7 +674,7 @@
                   class="group relative overflow-hidden rounded-2xl aspect-square"
                 >
                   <img
-                    src="assets/portfolio/bramy-dwuskrzydlowe/5.jpg"
+                    src="assets/portfolio/bramy-przesuwne-aluminiowe/6.jpg"
                     alt="Solidna brama wjazdowa"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -687,8 +688,8 @@
                   class="group relative overflow-hidden rounded-2xl aspect-square"
                 >
                   <img
-                    src="assets/portfolio/przesla-ogrodzeniowe-aluminiowe/3.jpg"
-                    alt="Nowoczesne ogrodzenie aluminiowe"
+                    src="assets/portfolio/automatyka/1.jpg"
+                    alt="Napęd do bramy"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div
@@ -699,7 +700,7 @@
                   class="group relative overflow-hidden rounded-2xl aspect-square"
                 >
                   <img
-                    src="assets/portfolio/bramy-przesuwne-aluminiowe/6.jpg"
+                    src="assets/portfolio/automatyka/2.jpg"
                     alt="Brama przesuwna"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -1021,7 +1022,7 @@
               </li>
               <li>
                 <a
-                  href="sklep.php"
+                  href="<?= getShopUrl() ?>"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i

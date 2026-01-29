@@ -1,3 +1,4 @@
+<?php require_once "config/init.php"; ?>
 <!doctype html>
 <html lang="pl">
   <head>
@@ -50,7 +51,7 @@
               >Opinie klientów</a
             >
             <a
-              href="sklep.php"
+              href="<?= getShopUrl() ?>"
               class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
               >Sklep</a
             >
@@ -280,7 +281,7 @@
               </li>
               <li>
                 <a
-                  href="sklep.php"
+                  href="<?= getShopUrl() ?>"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i

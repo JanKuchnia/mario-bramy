@@ -4,17 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const globalHeader = document.getElementById('global-header');
 
     const menuItems = [
-        { href: 'nasze-projekty.html', text: 'Przykładowe Realizacje' },
-        { href: 'wkrotce.html', text: 'Sklep' },
-        { href: 'opinie.html', text: 'Opinie klientów' },
-        { href: 'kontakt.html', text: 'Kontakt', isButton: true },
+        { href: 'nasze-projekty.php', text: 'Przykładowe Realizacje' },
+        { href: 'sklep.php', text: 'Sklep' },
+        { href: 'opinie.php', text: 'Opinie klientów' },
+        { href: 'kontakt.php', text: 'Kontakt', isButton: true },
         { href: 'https://www.facebook.com/p/MARIO-bramy-automatyka-61581453314458/', text: 'Facebook', isIcon: true, icon: 'fa-brands fa-facebook-f' }
     ];
 
     if (hamburgerButton && mobileMenu && globalHeader) {
         // Create a container for the links inside the mobile menu
         const navContainer = document.createElement('nav');
-        navContainer.className = 'flex flex-col items-center justify-center h-full space-y-4 pt-16 pb-8'; 
+        navContainer.className = 'flex flex-col items-center justify-center h-full space-y-4 pt-16 pb-8';
 
         menuItems.forEach(item => {
             const a = document.createElement('a');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 a.textContent = item.text;
             }
-            
+
             if (item.isButton) {
                 a.className = 'bg-[var(--primary-color)] text-[var(--primary-button-text-color)] px-6 py-3 rounded hover:bg-[var(--primary-button-hover-bg-color)] transition-all duration-300 font-semibold shadow-lg text-center w-full max-w-xs text-xl';
             } else if (item.isIcon) {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             navContainer.appendChild(a);
         });
-        
+
         // Append nav container to mobile menu
         mobileMenu.appendChild(navContainer);
 
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Set initial icon based on menu state
         if (mobileMenu.classList.contains('hidden')) {
-             hamburgerButton.innerHTML = '<i class="fa-solid fa-bars text-2xl"></i>';
+            hamburgerButton.innerHTML = '<i class="fa-solid fa-bars text-2xl"></i>';
         } else {
             hamburgerButton.innerHTML = '<i class="fa-solid fa-times text-2xl"></i>';
         }
