@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /config/
+Disallow: /html_backup/
+Disallow: /logs/
+Disallow: /install.php
+Disallow: /force_install_data.php
+Disallow: /optimize_images.php
+
+Sitemap: https://mariobramy.com/sitemap.xml
