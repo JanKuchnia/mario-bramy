@@ -44,7 +44,7 @@
       <div class="container mx-auto px-4 lg:px-8">
         <div class="flex items-center justify-between h-32">
           <a
-            href="index.html"
+            href="index.php"
             class="flex-shrink-0 transition-transform hover:scale-105 duration-300"
           >
             <img
@@ -57,22 +57,22 @@
 
           <nav class="hidden lg:flex items-center space-x-8">
             <a
-              href="nasze-projekty.html"
+              href="nasze-projekty.php"
               class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
               >Przykładowe Realizacje</a
             >
             <a
-              href="opinie.html"
+              href="opinie.php"
               class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
               >Opinie klientów</a
             >
             <a
-              href="wkrotce.html"
+              href="sklep.php"
               class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
               >Sklep</a
             >
             <a
-              href="kontakt.html"
+              href="kontakt.php"
               class="bg-[var(--primary-color)] text-[var(--primary-button-text-color)] px-6 py-3 rounded hover:bg-[var(--primary-button-hover-bg-color)] transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105"
             >
               Kontakt
@@ -446,7 +446,7 @@
                 </li>
               </ul>
               <a
-                href="nasze-projekty.html"
+                href="nasze-projekty.php"
                 class="inline-flex items-center gap-2 text-[var(--primary-color)] font-semibold hover:gap-4 transition-all duration-300"
               >
                 Zobacz więcej
@@ -510,7 +510,7 @@
                 </li>
               </ul>
               <a
-                href="nasze-projekty.html"
+                href="nasze-projekty.php"
                 class="inline-flex items-center gap-2 text-[var(--primary-color)] font-semibold hover:gap-4 transition-all duration-300"
               >
                 Zobacz więcej
@@ -932,7 +932,7 @@
                 </p>
               </div>
               <a
-                href="kontakt.html"
+                href="kontakt.php"
                 class="whitespace-nowrap px-8 py-4 bg-[var(--primary-color)] text-[var(--primary-button-text-color)] rounded-lg font-bold hover:bg-[var(--primary-button-hover-bg-color)] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
               >
                 Skontaktuj się
@@ -950,7 +950,7 @@
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
           <div class="space-y-6">
             <div class="inline-block bg-white p-4 rounded-xl shadow-md">
-              <a href="index.html" class="inline-block">
+              <a href="index.php" class="inline-block">
                 <img
                   src="assets/logo.png"
                   alt="Mario Bramy-Automatyka"
@@ -985,7 +985,7 @@
             <ul class="space-y-3">
               <li>
                 <a
-                  href="index.html"
+                  href="index.php"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
@@ -1009,7 +1009,7 @@
               </li>
               <li>
                 <a
-                  href="nasze-projekty.html"
+                  href="nasze-projekty.php"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
@@ -1021,7 +1021,7 @@
               </li>
               <li>
                 <a
-                  href="wkrotce.html"
+                  href="sklep.php"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
@@ -1033,7 +1033,7 @@
               </li>
               <li>
                 <a
-                  href="opinie.html"
+                  href="opinie.php"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
@@ -1045,7 +1045,7 @@
               </li>
               <li>
                 <a
-                  href="kontakt.html"
+                  href="kontakt.php"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i

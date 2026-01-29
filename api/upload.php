@@ -1,0 +1,147 @@
+<?php
+/**
+ * API - Upload zdjęcia do galerii
+ */
+require_once __DIR__ . '/../config/init.php';
+
+// Tylko POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    jsonError('Metoda niedozwolona', 405);
+}
+
+// Wymagaj zalogowania
+if (!isAdminLoggedIn()) {
+    jsonError('Brak autoryzacji', 401);
+}
+
+// Sprawdź czy plik został przesłany
+if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
+    $errorMessages = [
+        UPLOAD_ERR_INI_SIZE => 'Plik przekracza maksymalny rozmiar dozwolony przez serwer',
+        UPLOAD_ERR_FORM_SIZE => 'Plik przekracza maksymalny rozmiar formularza',
+        UPLOAD_ERR_PARTIAL => 'Plik został przesłany tylko częściowo',
+        UPLOAD_ERR_NO_FILE => 'Nie wybrano pliku',
+        UPLOAD_ERR_NO_TMP_DIR => 'Brak folderu tymczasowego',
+        UPLOAD_ERR_CANT_WRITE => 'Nie można zapisać pliku na dysku',
+    ];
+    $errorCode = $_FILES['photo']['error'] ?? UPLOAD_ERR_NO_FILE;
+    jsonError($errorMessages[$errorCode] ?? 'Błąd przesyłania pliku');
+}
+
+$file = $_FILES['photo'];
+$category = $_POST['category'] ?? '';
+$altText = $_POST['alt_text'] ?? '';
+
+// Walidacja kategorii
+$allowedCategories = [
+    'bramy-przesuwne-aluminiowe',
+    'bramy-dwuskrzydlowe',
+    'barierki',
+    'przesla-ogrodzeniowe-aluminiowe'
+];
+
+if (!in_array($category, $allowedCategories)) {
+    jsonError('Nieprawidłowa kategoria');
+}
+
+// Walidacja rozszerzenia
+if (!isAllowedExtension($file['name'])) {
+    jsonError('Niedozwolony format pliku. Dozwolone: ' . implode(', ', ALLOWED_EXTENSIONS));
+}
+
+// Walidacja rozmiaru
+if ($file['size'] > MAX_UPLOAD_SIZE) {
+    jsonError('Plik jest za duży. Maksymalny rozmiar: ' . (MAX_UPLOAD_SIZE / 1024 / 1024) . 'MB');
+}
+
+// Walidacja MIME type
+$finfo = finfo_open(FILEINFO_MIME_TYPE);
+$mimeType = finfo_file($finfo, $file['tmp_name']);
+finfo_close($finfo);
+
+$allowedMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+if (!in_array($mimeType, $allowedMimes)) {
+    jsonError('Plik nie jest prawidłowym obrazem');
+}
+
+// Utwórz folder kategorii jeśli nie istnieje
+$categoryPath = PORTFOLIO_PATH . '/' . $category;
+if (!is_dir($categoryPath)) {
+    if (!mkdir($categoryPath, 0755, true)) {
+        jsonError('Nie można utworzyć folderu kategorii');
+    }
+}
+
+// Wygeneruj nazwę pliku (następny numer)
+$nextNumber = getNextFileNumber($categoryPath);
+$extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+// Konwertuj do JPEG dla ujednolicenia
+$targetExtension = 'jpg';
+$targetFilename = $nextNumber . '.' . $targetExtension;
+$targetPath = $categoryPath . '/' . $targetFilename;
+
+// Przetwórz obraz
+$sourceImage = null;
+switch ($mimeType) {
+    case 'image/jpeg':
+        $sourceImage = imagecreatefromjpeg($file['tmp_name']);
+        break;
+    case 'image/png':
+        $sourceImage = imagecreatefrompng($file['tmp_name']);
+        break;
+    case 'image/webp':
+        $sourceImage = imagecreatefromwebp($file['tmp_name']);
+        break;
+    case 'image/gif':
+        $sourceImage = imagecreatefromgif($file['tmp_name']);
+        break;
+}
+
+if (!$sourceImage) {
+    jsonError('Nie można przetworzyć obrazu');
+}
+
+// Opcjonalnie: zmniejsz rozmiar jeśli za duży
+$maxWidth = 1920;
+$maxHeight = 1080;
+$width = imagesx($sourceImage);
+$height = imagesy($sourceImage);
+
+if ($width > $maxWidth || $height > $maxHeight) {
+    $ratio = min($maxWidth / $width, $maxHeight / $height);
+    $newWidth = (int)($width * $ratio);
+    $newHeight = (int)($height * $ratio);
+    
+    $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+    imagecopyresampled($resizedImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+    imagedestroy($sourceImage);
+    $sourceImage = $resizedImage;
+}
+
+// Zapisz jako JPEG
+if (!imagejpeg($sourceImage, $targetPath, 85)) {
+    imagedestroy($sourceImage);
+    jsonError('Nie można zapisać obrazu');
+}
+
+imagedestroy($sourceImage);
+
+// Opcjonalnie: zapisz do bazy danych
+try {
+    $db = getDB();
+    $stmt = $db->prepare("INSERT INTO gallery_images (filename, category, alt_text) VALUES (?, ?, ?)");
+    $stmt->execute([$targetFilename, $category, $altText]);
+} catch (Exception $e) {
+    // Ignoruj błąd bazy - plik został zapisany
+    if (DEBUG_MODE) {
+        error_log("Gallery DB error: " . $e->getMessage());
+    }
+}
+
+jsonSuccess([
+    'message' => 'Zdjęcie zostało dodane pomyślnie',
+    'filename' => $targetFilename,
+    'path' => 'assets/portfolio/' . $category . '/' . $targetFilename,
+    'category' => $category
+]);

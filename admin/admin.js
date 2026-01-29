@@ -1,38 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- Authentication ---
-    const correctPassword = "password123"; 
-    const loginForm = document.getElementById('loginForm');
-    const panelContainer = document.querySelector('.panel-container');
+/**
+ * Panel Administracyjny Mario Bramy
+ * Wersja PHP z API backend
+ */
 
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
-            if (password === correctPassword) {
-                sessionStorage.setItem('isAdminAuthenticated', 'true');
-                window.location.href = 'panel.html';
-            } else {
-                errorMessage.textContent = "Nieprawidłowe hasło.";
-            }
-        });
-    }
+document.addEventListener('DOMContentLoaded', function () {
 
-    // --- Panel Logic ---
-    if (panelContainer && sessionStorage.getItem('isAdminAuthenticated') !== 'true') {
-        window.location.href = 'index.html';
-    }
-
-    const logoutButton = document.getElementById('logoutButton');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', function() {
-            sessionStorage.removeItem('isAdminAuthenticated');
-            window.location.href = 'index.html';
-        });
-    }
-
-    // --- Gallery Management ---
+    // --- UI References ---
     const uploadForm = document.getElementById('uploadForm');
     const galleryContainer = document.getElementById('gallery-container');
     const photoFileInput = document.getElementById('photoFile');
@@ -40,14 +13,113 @@ document.addEventListener('DOMContentLoaded', function() {
     const previewText = document.getElementById('previewText');
     const categorySelect = document.getElementById('category');
     const targetFilenameDisplay = document.getElementById('targetFilename');
+    const productListContainer = document.getElementById('products-list');
+    const productEditor = document.getElementById('product-editor');
+    const productForm = document.getElementById('productForm');
 
-    // Simulate directory counts (fetched from logic or API in real app)
-    const categoryCounts = {
-        'bramy-przesuwne-aluminiowe': 3,
-        'bramy-dwuskrzydlowe': 4,
-        'barierki': 5,
-        'przesla-ogrodzeniowe-aluminiowe': 2
-    };
+    // --- Gallery Category Counts (loaded from API) ---
+    let categoryCounts = {};
+
+    // --- Shop Products (loaded from API) ---
+    let shopProducts = [];
+
+    // --- Helper Functions ---
+
+    function showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <i class="fa-solid fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+        `;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: ${type === 'success' ? '#10b981' : '#ef4444'};
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // --- Gallery Management ---
+
+    async function loadGallery() {
+        if (!galleryContainer) return;
+
+        galleryContainer.innerHTML = '<p class="loading-text"><i class="fa-solid fa-spinner fa-spin"></i> Ładowanie...</p>';
+
+        try {
+            const response = await fetch('../api/gallery.php');
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(data.error || 'Błąd ładowania galerii');
+            }
+
+            // Count images per category
+            categoryCounts = {};
+            data.images.forEach(img => {
+                categoryCounts[img.category] = (categoryCounts[img.category] || 0) + 1;
+            });
+
+            renderGallery(data.images);
+            updateTargetFilename();
+
+        } catch (error) {
+            galleryContainer.innerHTML = `<p class="error-text"><i class="fa-solid fa-exclamation-triangle"></i> ${error.message}</p>`;
+            console.error('Gallery load error:', error);
+        }
+    }
+
+    function renderGallery(images) {
+        if (!galleryContainer) return;
+
+        if (images.length === 0) {
+            galleryContainer.innerHTML = '<p class="empty-text">Brak zdjęć w galerii. Dodaj pierwsze zdjęcie powyżej.</p>';
+            return;
+        }
+
+        galleryContainer.innerHTML = '';
+        images.forEach(photo => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <div class="delete-btn" onclick="deletePhoto('${photo.category}', '${photo.name}')" title="Usuń zdjęcie">
+                    <i class="fa-solid fa-trash-can"></i>
+                </div>
+                <img src="../${photo.src}" alt="${photo.name}" onerror="this.src='../assets/placeholder.png'">
+                <div class="item-info">
+                    <span class="text-xs text-gray-400">${formatCategoryName(photo.category)}</span><br>
+                    <span class="filename-badge">${photo.name}</span>
+                </div>
+            `;
+            galleryContainer.appendChild(item);
+        });
+    }
+
+    function formatCategoryName(category) {
+        const names = {
+            'bramy-przesuwne-aluminiowe': 'Bramy Przesuwne',
+            'bramy-dwuskrzydlowe': 'Bramy Dwuskrzydłowe',
+            'barierki': 'Balustrady',
+            'przesla-ogrodzeniowe-aluminiowe': 'Przęsła Ogrodzeniowe'
+        };
+        return names[category] || category;
+    }
 
     function updateTargetFilename() {
         if (!categorySelect || !targetFilenameDisplay) return;
@@ -58,16 +130,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (categorySelect) {
         categorySelect.addEventListener('change', updateTargetFilename);
-        updateTargetFilename();
     }
 
     // File Preview
     if (photoFileInput) {
-        photoFileInput.addEventListener('change', function() {
+        photoFileInput.addEventListener('change', function () {
             const file = this.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     imagePreview.src = e.target.result;
                     imagePreview.style.display = 'block';
                     previewText.style.display = 'none';
@@ -77,114 +148,125 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Simulate photos data
-    let photos = [
-        { src: '../assets/portfolio/bramy-przesuwne-aluminiowe/1.jpg', cat: 'bramy-przesuwne-aluminiowe', name: '1.jpg' },
-        { src: '../assets/portfolio/bramy-dwuskrzydlowe/1.jpg', cat: 'bramy-dwuskrzydlowe', name: '1.jpg' },
-        { src: '../assets/portfolio/barierki/1.jpg', cat: 'barierki', name: '1.jpg' },
-        { src: '../assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.jpg', cat: 'przesla-ogrodzeniowe-aluminiowe', name: '1.jpg' }
-    ];
-
-    function renderGallery() {
-        if (!galleryContainer) return;
-        galleryContainer.innerHTML = '';
-        photos.forEach((photo, index) => {
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
-            item.innerHTML = `
-                <div class="delete-btn" onclick="deletePhoto(${index})" title="Usuń zdjęcie">
-                    <i class="fa-solid fa-trash-can"></i>
-                </div>
-                <img src="${photo.src}" alt="${photo.name}">
-                <div class="item-info">
-                    <span class="text-xs text-gray-400">${photo.cat}</span><br>
-                    <span class="filename-badge">${photo.name}</span>
-                </div>
-            `;
-            galleryContainer.appendChild(item);
-        });
-    }
-
-    window.deletePhoto = function(index) {
-        if (confirm("Czy na pewno chcesz trwale usunąć to zdjęcie z realizacji?")) {
-            const removed = photos.splice(index, 1)[0];
-            renderGallery();
-            // W docelowej wersji tutaj nastąpiłoby wywołanie API do usunięcia pliku z serwera
-        }
-    }
-    
+    // Upload Form Submit
     if (uploadForm) {
-        uploadForm.addEventListener('submit', function(e) {
+        uploadForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            const cat = categorySelect.value;
-            const targetName = targetFilenameDisplay.textContent.split('/').pop();
-            
-            if (photoFileInput.files && photoFileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const newPhoto = { 
-                        src: e.target.result, 
-                        cat: cat, 
-                        name: targetName 
-                    };
-                    photos.unshift(newPhoto); // Add to top
-                    categoryCounts[cat]++; // Increment count
-                    renderGallery();
-                    updateTargetFilename();
-                    uploadForm.reset();
-                    imagePreview.style.display = 'none';
-                    previewText.style.display = 'block';
-                    alert(`Sukces! Zdjęcie zostało przygotowane do zapisu jako: ${targetName} w folderze ${cat}. 
 
-(Uwaga: W wersji statycznej plik nie jest fizycznie zapisywany na dysku serwera).`);
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Przesyłanie...';
+
+            const formData = new FormData(this);
+
+            try {
+                const response = await fetch('../api/upload.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (!data.success) {
+                    throw new Error(data.error || 'Błąd przesyłania');
                 }
-                reader.readAsDataURL(photoFileInput.files[0]);
+
+                showNotification(`Zdjęcie ${data.filename} zostało dodane!`);
+
+                // Reset form
+                uploadForm.reset();
+                imagePreview.style.display = 'none';
+                previewText.style.display = 'block';
+
+                // Reload gallery
+                loadGallery();
+
+            } catch (error) {
+                showNotification(error.message, 'error');
+                console.error('Upload error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
             }
         });
     }
 
-    // --- SHOP MANAGEMENT ---
-    
-    // Initialize shop products from the global variable (loaded from shop.js) or empty array
-    let shopProducts = (typeof products !== 'undefined') ? JSON.parse(JSON.stringify(products)) : [];
-    
-    // UI References
-    const productListContainer = document.getElementById('products-list');
-    const productEditor = document.getElementById('product-editor');
-    const productForm = document.getElementById('productForm');
+    // Delete Photo
+    window.deletePhoto = async function (category, filename) {
+        if (!confirm(`Czy na pewno chcesz usunąć zdjęcie ${filename}?`)) {
+            return;
+        }
 
-    // Tab Switching
-    window.switchView = function(viewName) {
-        const views = document.querySelectorAll('.admin-view');
-        const navBtns = document.querySelectorAll('.nav-btn');
-        
-        views.forEach(v => v.style.display = 'none');
-        document.getElementById(`view-${viewName}`).style.display = 'block';
-        
-        navBtns.forEach(btn => btn.classList.remove('active'));
-        // Find button that called this (approximated logic)
-        const activeBtn = Array.from(navBtns).find(btn => btn.innerText.toLowerCase().includes(viewName === 'gallery' ? 'realizacje' : 'sklep'));
-        if (activeBtn) activeBtn.classList.add('active');
-        
-        if (viewName === 'shop') renderShopAdmin();
+        try {
+            const response = await fetch('../api/delete-image.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ category, filename })
+            });
+
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(data.error || 'Błąd usuwania');
+            }
+
+            showNotification('Zdjęcie zostało usunięte');
+            loadGallery();
+
+        } catch (error) {
+            showNotification(error.message, 'error');
+            console.error('Delete error:', error);
+        }
+    };
+
+    // --- SHOP MANAGEMENT ---
+
+    async function loadProducts() {
+        if (!productListContainer) return;
+
+        productListContainer.innerHTML = '<p class="loading-text"><i class="fa-solid fa-spinner fa-spin"></i> Ładowanie...</p>';
+
+        try {
+            const response = await fetch('../api/products.php');
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(data.error || 'Błąd ładowania produktów');
+            }
+
+            shopProducts = data.products;
+            renderShopAdmin();
+
+        } catch (error) {
+            productListContainer.innerHTML = `<p class="error-text"><i class="fa-solid fa-exclamation-triangle"></i> ${error.message}</p>`;
+            console.error('Products load error:', error);
+        }
     }
 
-    // Render Shop List
     function renderShopAdmin() {
         if (!productListContainer) return;
+
+        if (shopProducts.length === 0) {
+            productListContainer.innerHTML = '<p class="empty-text">Brak produktów. Kliknij "Dodaj Produkt" aby rozpocząć.</p>';
+            return;
+        }
+
         productListContainer.innerHTML = '';
-        
+
         shopProducts.forEach(p => {
             const card = document.createElement('div');
             card.className = 'product-card';
             card.innerHTML = `
                 <div class="product-image">
-                    <img src="../${p.image}" alt="${p.name}">
+                    <img src="../${p.image}" alt="${p.name}" onerror="this.src='../assets/placeholder.png'">
                 </div>
                 <div class="product-info">
                     <span class="product-cat">${p.category}</span>
                     <h3 class="product-title">${p.name}</h3>
-                    <div class="product-price">${p.basePrice} PLN</div>
+                    <div class="product-price">${p.base_price || p.basePrice} PLN</div>
                 </div>
                 <div class="product-actions">
                     <button class="action-btn edit-btn" onclick="openProductEditor(${p.id})">
@@ -199,38 +281,72 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Open Editor (Add or Edit)
-    window.openProductEditor = function(id = null) {
+    // Tab Switching
+    window.switchView = function (viewName) {
+        const views = document.querySelectorAll('.admin-view');
+        const navBtns = document.querySelectorAll('.nav-btn');
+
+        views.forEach(v => v.style.display = 'none');
+        document.getElementById(`view-${viewName}`).style.display = 'block';
+
+        navBtns.forEach(btn => btn.classList.remove('active'));
+        const activeBtn = Array.from(navBtns).find(btn =>
+            btn.innerText.toLowerCase().includes(viewName === 'gallery' ? 'realizacje' : 'sklep')
+        );
+        if (activeBtn) activeBtn.classList.add('active');
+
+        if (viewName === 'shop') loadProducts();
+        if (viewName === 'gallery') loadGallery();
+    };
+
+    // Open Product Editor
+    window.openProductEditor = function (id = null) {
         productEditor.classList.remove('hidden');
         const title = document.getElementById('editor-title');
-        
+
         if (id) {
-            // Edit Mode
             const product = shopProducts.find(p => p.id === id);
             if (!product) return;
-            
+
             title.textContent = 'Edytuj Produkt';
             document.getElementById('prod-id').value = product.id;
             document.getElementById('prod-name').value = product.name;
             document.getElementById('prod-category').value = product.category;
-            document.getElementById('prod-price').value = product.basePrice;
+            document.getElementById('prod-price').value = product.base_price || product.basePrice;
             document.getElementById('prod-image').value = product.image;
             document.getElementById('prod-desc').value = product.description;
+
+            // Show image preview
+            const preview = document.getElementById('prod-image-preview');
+            if (product.image) {
+                preview.src = '../' + product.image;
+                preview.style.display = 'block';
+            }
+
             renderOptionsEditor(product.options);
         } else {
-            // Add Mode
             title.textContent = 'Dodaj Nowy Produkt';
             productForm.reset();
             document.getElementById('prod-id').value = '';
+            document.getElementById('prod-image-preview').style.display = 'none';
             renderOptionsEditor({});
         }
-    }
+    };
 
-    window.closeProductEditor = function() {
+    window.closeProductEditor = function () {
         productEditor.classList.add('hidden');
-    }
+    };
 
     // --- Options Editor Logic ---
+
+    const OPTION_KEYS = {
+        'width': 'Szerokość',
+        'height': 'Wysokość',
+        'color': 'Kolor',
+        'automation': 'Automatyka',
+        'montaz': 'Montaż',
+        'akcesoria': 'Akcesoria'
+    };
 
     function renderOptionsEditor(options) {
         const wrapper = document.getElementById('options-wrapper');
@@ -244,15 +360,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    const OPTION_KEYS = {
-        'width': 'Szerokość',
-        'height': 'Wysokość',
-        'color': 'Kolor',
-        'automation': 'Automatyka',
-        'montaz': 'Montaż',
-        'akcesoria': 'Akcesoria'
-    };
-
     function createOptionHTML(key, data) {
         const div = document.createElement('div');
         div.className = 'option-block';
@@ -264,18 +371,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 choicesHTML += createChoiceRowHTML(choice.label, choice.value, choice.priceMod);
             });
         } else if (data.type === 'checkbox') {
-             choicesHTML = createChoiceRowHTML(data.label, 'true', data.price || 0); 
+            choicesHTML = createChoiceRowHTML(data.label, 'true', data.price || 0);
         }
 
-        // Generate Select Options for Keys
         let keyOptions = '';
         Object.entries(OPTION_KEYS).forEach(([k, label]) => {
             const selected = k === key ? 'selected' : '';
             keyOptions += `<option value="${k}" ${selected}>${label} (${k})</option>`;
         });
-        // Add custom option if key is not in list
         if (!OPTION_KEYS[key] && key.indexOf('new_option') === -1) {
-             keyOptions += `<option value="${key}" selected>${key} (Niestandardowe)</option>`;
+            keyOptions += `<option value="${key}" selected>${key} (Niestandardowe)</option>`;
         }
 
         div.innerHTML = `
@@ -312,8 +417,8 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             
             <div class="checkbox-price-wrapper ${data.type === 'checkbox' ? '' : 'hidden'}">
-                 <label class="text-xs font-bold">Cena za zaznaczenie (PLN):</label>
-                 <input type="number" class="opt-checkbox-price" value="${data.price || 0}">
+                <label class="text-xs font-bold">Cena za zaznaczenie (PLN):</label>
+                <input type="number" class="opt-checkbox-price" value="${data.price || 0}">
             </div>
         `;
         return div;
@@ -334,29 +439,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     <label>Nazwa dla klienta</label>
                     <input type="text" placeholder="np. Szerokość 4m" value="${label}" class="choice-label">
                 </div>
-                <button type="button" class="remove-btn" onclick="this.parentElement.remove()" title="Usuń ten wariant"><i class="fa-solid fa-trash"></i></button>
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove()" title="Usuń ten wariant">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
             </div>
         `;
     }
 
-    window.addNewOptionUI = function() {
+    window.addNewOptionUI = function () {
         const wrapper = document.getElementById('options-wrapper');
         const defaultData = { label: 'Nowa Opcja', type: 'select', choices: [] };
         wrapper.appendChild(createOptionHTML('new_option_' + Date.now(), defaultData));
-    }
+    };
 
-    window.addChoiceUI = function(btn) {
+    window.addChoiceUI = function (btn) {
         const container = btn.previousElementSibling;
         const div = document.createElement('div');
         div.innerHTML = createChoiceRowHTML('', '', 0);
         container.appendChild(div.firstElementChild);
-    }
+    };
 
-    window.toggleChoicesUI = function(select) {
+    window.toggleChoicesUI = function (select) {
         const block = select.closest('.option-block');
         const choicesWrapper = block.querySelector('.choices-wrapper');
         const checkboxWrapper = block.querySelector('.checkbox-price-wrapper');
-        
+
         if (select.value === 'select') {
             choicesWrapper.classList.remove('hidden');
             checkboxWrapper.classList.add('hidden');
@@ -364,7 +471,7 @@ document.addEventListener('DOMContentLoaded', function() {
             choicesWrapper.classList.add('hidden');
             checkboxWrapper.classList.remove('hidden');
         }
-    }
+    };
 
     // Product Image File Handler
     const prodImageFile = document.getElementById('prod-image-file');
@@ -372,16 +479,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const prodImagePreview = document.getElementById('prod-image-preview');
 
     if (prodImageFile) {
-        prodImageFile.addEventListener('change', function() {
+        prodImageFile.addEventListener('change', function () {
             const file = this.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     prodImagePreview.src = e.target.result;
                     prodImagePreview.style.display = 'block';
-                    // We set the base64 string to the input, mimicking a 'url' save for this static demo
-                    prodImageInput.value = e.target.result; 
-                }
+                    // For now, we'll need to upload the image separately
+                    // or encode as base64 (not recommended for production)
+                };
                 reader.readAsDataURL(file);
             }
         });
@@ -389,34 +496,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Save Product
     if (productForm) {
-        productForm.addEventListener('submit', function(e) {
+        productForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             // Reconstruct Options Object
             const options = {};
             document.querySelectorAll('.option-block').forEach(block => {
                 const key = block.querySelector('.opt-key').value;
                 const label = block.querySelector('.opt-label').value;
                 const type = block.querySelector('.opt-type').value;
-                
-                if (!key) return; // Skip empty keys
+
+                if (!key) return;
 
                 if (type === 'select') {
                     const choices = [];
                     block.querySelectorAll('.choice-row').forEach(row => {
+                        let value = row.querySelector('.choice-value').value;
+                        if (!isNaN(value) && value.trim() !== '') {
+                            value = parseFloat(value);
+                        }
                         choices.push({
                             label: row.querySelector('.choice-label').value,
-                            value: row.querySelector('.choice-value').value, // Keep as string or cast? logic depends on usage. 
-                            // Shop.js often uses numbers for dimensions. Let's try to parse if number.
+                            value: value,
                             priceMod: parseFloat(row.querySelector('.choice-price').value) || 0
                         });
                     });
-                    
-                    // Auto-cast values
-                    choices.forEach(c => {
-                        if (!isNaN(c.value) && c.value.trim() !== '') c.value = parseFloat(c.value);
-                    });
-
                     options[key] = { label, type, choices };
                 } else {
                     const price = parseFloat(block.querySelector('.opt-checkbox-price').value) || 0;
@@ -425,44 +529,112 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             const id = document.getElementById('prod-id').value;
-            const newProduct = {
-                id: id ? parseInt(id) : (shopProducts.length > 0 ? Math.max(...shopProducts.map(p => p.id)) + 1 : 1),
+            const productData = {
+                id: id ? parseInt(id) : null,
                 name: document.getElementById('prod-name').value,
                 category: document.getElementById('prod-category').value,
-                basePrice: parseInt(document.getElementById('prod-price').value),
+                base_price: parseInt(document.getElementById('prod-price').value),
                 image: document.getElementById('prod-image').value,
                 description: document.getElementById('prod-desc').value,
                 options: options
             };
 
-            if (id) {
-                const index = shopProducts.findIndex(p => p.id == id);
-                shopProducts[index] = newProduct;
-            } else {
-                shopProducts.push(newProduct);
-            }
+            try {
+                const method = id ? 'PUT' : 'POST';
+                const response = await fetch('../api/products.php', {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(productData)
+                });
 
-            renderShopAdmin();
-            closeProductEditor();
+                const data = await response.json();
+
+                if (!data.success) {
+                    throw new Error(data.error || 'Błąd zapisu produktu');
+                }
+
+                showNotification(id ? 'Produkt zaktualizowany!' : 'Produkt dodany!');
+                closeProductEditor();
+                loadProducts();
+
+            } catch (error) {
+                showNotification(error.message, 'error');
+                console.error('Product save error:', error);
+            }
         });
     }
 
     // Delete Product
-    window.deleteShopProduct = function(id) {
-        if (confirm('Czy na pewno chcesz usunąć ten produkt?')) {
-            shopProducts = shopProducts.filter(p => p.id !== id);
-            renderShopAdmin();
+    window.deleteShopProduct = async function (id) {
+        if (!confirm('Czy na pewno chcesz usunąć ten produkt?')) {
+            return;
         }
-    }
 
-    // Apply Changes (Generate Code)
-    window.applyShopChanges = function() {
-        const jsContent = `const products = ${JSON.stringify(shopProducts, null, 4)};`;
-        
-        console.log(jsContent);
-        alert("Zmiany zostały przygotowane!\n\n1. Otwórz konsolę (F12 -> Console).\n2. Skopiuj wygenerowany kod `const products = [...]`.\n3. Wklej go do pliku `assets/shop.js` zastępując starą zawartość.\n\nTo jedyny sposób na zapisanie zmian w tej wersji statycznej.");
-    }
+        try {
+            const response = await fetch('../api/products.php', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id })
+            });
 
-    // Initial Renders
-    renderGallery();
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(data.error || 'Błąd usuwania produktu');
+            }
+
+            showNotification('Produkt został usunięty');
+            loadProducts();
+
+        } catch (error) {
+            showNotification(error.message, 'error');
+            console.error('Product delete error:', error);
+        }
+    };
+
+    // --- Initial Load ---
+    loadGallery();
+
+    // Add CSS for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        .loading-text, .error-text, .empty-text {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-size: 1rem;
+        }
+        .error-text { color: #ef4444; }
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .logout-btn:hover {
+            background: #ef4444;
+            border-color: #ef4444;
+            color: white;
+        }
+    `;
+    document.head.appendChild(style);
 });
