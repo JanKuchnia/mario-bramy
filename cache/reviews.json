@@ -1,0 +1,72 @@
+{
+   "html_attributions" : [],
+   "result" : 
+   {
+      "rating" : 5,
+      "reviews" : 
+      [
+         {
+            "author_name" : "Wioletta Musielak",
+            "author_url" : "https://www.google.com/maps/contrib/105934434075461176500/reviews",
+            "language" : "pl",
+            "original_language" : "pl",
+            "profile_photo_url" : "https://lh3.googleusercontent.com/a/ACg8ocJktyr--sXAt2daY97MFgrKU_iITPa4-_YOhqufeOM4dGD7sQ=s128-c0x00000000-cc-rp-mo",
+            "rating" : 5,
+            "relative_time_description" : "2 tygodnie temu",
+            "text" : "Jestem bardzo zadowolona z wykonania automatyki do bramy. Praca wykonana solidnie, sprawnie i zgodnie z ustaleniami. Pan wszystko dokładnie wyjaśnił, uporządkował miejsce pracy i zadbał o detale. Zdecydowanie polecam.",
+            "time" : 1768068239,
+            "translated" : false
+         },
+         {
+            "author_name" : "Tomasz Ł.",
+            "author_url" : "https://www.google.com/maps/contrib/105249954569031242287/reviews",
+            "language" : "pl",
+            "original_language" : "pl",
+            "profile_photo_url" : "https://lh3.googleusercontent.com/a-/ALV-UjWRlk2Q1Tbob_1Gtrs6rGts7W746bqyxCGnRS7tmOTnjlpqWww=s128-c0x00000000-cc-rp-mo",
+            "rating" : 5,
+            "relative_time_description" : "tydzień temu",
+            "text" : "Profesjonalne wykonanie bramy aluminiowej wraz z furtką, spawy wykończenia na wysokim poziomie.Szybki napęd silnika ,serwis oraz wsparcie firmy Mario z Wiśniowej. Polecam, takie firmy podnoszą prestiż w Małopolsce.",
+            "time" : 1768673213,
+            "translated" : false
+         },
+         {
+            "author_name" : "Elzbieta Urbanik",
+            "author_url" : "https://www.google.com/maps/contrib/107940479460524161749/reviews",
+            "language" : "pl",
+            "original_language" : "pl",
+            "profile_photo_url" : "https://lh3.googleusercontent.com/a/ACg8ocLPfUb1WS_FZah_RxzfjNHmqwRSYGJkfhTI7oOglY8QxxxYXA=s128-c0x00000000-cc-rp-mo",
+            "rating" : 5,
+            "relative_time_description" : "3 tygodnie temu",
+            "text" : "Pełen profesjonalizm polecam !!!",
+            "time" : 1767530341,
+            "translated" : false
+         },
+         {
+            "author_name" : "Szymon",
+            "author_url" : "https://www.google.com/maps/contrib/110958200683553755163/reviews",
+            "language" : "pl",
+            "original_language" : "pl",
+            "profile_photo_url" : "https://lh3.googleusercontent.com/a/ACg8ocIPzKbtt03LfaZ0fXEIXmZx7ABLllNWjo0BDUPf901TZqPAgQ=s128-c0x00000000-cc-rp-mo",
+            "rating" : 5,
+            "relative_time_description" : "2 tygodnie temu",
+            "text" : "Gorąco polecam",
+            "time" : 1768406476,
+            "translated" : false
+         },
+         {
+            "author_name" : "Bogusława Dudek",
+            "author_url" : "https://www.google.com/maps/contrib/105019499064350746984/reviews",
+            "language" : "pl",
+            "original_language" : "pl",
+            "profile_photo_url" : "https://lh3.googleusercontent.com/a-/ALV-UjX6mRaOrrymIrV6xOcItZnbiNxB2HUTfl4_0nEMBapk1OTFmVPt=s128-c0x00000000-cc-rp-mo",
+            "rating" : 5,
+            "relative_time_description" : "tydzień temu",
+            "text" : "Gorąco polecam tą firmę , super wykonanie dokładność i perfekcja👍",
+            "time" : 1768771415,
+            "translated" : false
+         }
+      ],
+      "user_ratings_total" : 6
+   },
+   "status" : "OK"
+}

@@ -31,5 +31,10 @@ define('UPLOADS_PATH', BASE_PATH . '/uploads');
 define('MAX_UPLOAD_SIZE', 10 * 1024 * 1024); // 10MB
 define('ALLOWED_EXTENSIONS', ['jpg', 'jpeg', 'png', 'webp', 'gif']);
 
+// Google API Configuration
+define('GOOGLE_PLACES_API_KEY', 'AIzaSyDsHnsWdH6qd22LrXyGqW-730yAJNo3ZkI'); // Wklej swój klucz API tutaj
+define('GOOGLE_PLACE_ID', 'ChIJH59bR9kTFkcR9zM2DWgdDGo'); // ID dla MARIO bramy-automatyka
+define('CACHE_PATH', BASE_PATH . '/cache/reviews.json');
+
 // Tryb debug (wyłącz na produkcji!)
 define('DEBUG_MODE', true);
