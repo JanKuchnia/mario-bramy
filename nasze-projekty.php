@@ -17,9 +17,12 @@
     <link rel="icon" type="image/png" href="assets/logo.jpg" />
     <link rel="stylesheet" href="assets/base.css" />
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
     <link rel="stylesheet" href="assets/style.css" />
   </head>
   <body class="bg-white">
