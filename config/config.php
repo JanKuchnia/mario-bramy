@@ -5,8 +5,8 @@
  * HOSTINGER - Utwórz bazę w hPanel -> Bazy danych -> MySQL
  * Wpisz poniższe wartości podczas tworzenia:
  * 
- * Nazwa bazy:      mario_bramy
- * Użytkownik:      mario_admin  
+ * Nazwa bazy:      u820515051_mario_bramy
+ * Użytkownik:      u820515051_mario_admin  
  * Hasło:           MarioBramy2024!Secure
  */
 
@@ -19,7 +19,7 @@ define('DB_CHARSET', 'utf8mb4');
 
 // Hasło admina (zahashowane)
 // Obecne hasło: admin
-define('ADMIN_PASSWORD_HASH', '$2y$12$N/L49gLI6Fq82jPYqlN7Wu.oDZXM3tEonars7b6XMbKP/HU3vZHFe');
+define('ADMIN_PASSWORD_HASH', '$2y$12$JPctmAu31N1ppXzHAFsUhewS/hfAxhEivROGA1nQEueIRfWVeMEDi');
 
 // Ścieżki
 define('BASE_PATH', dirname(__DIR__));

@@ -359,7 +359,7 @@
                   class="w-10 h-10 bg-[var(--primary-color)] bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0"
                 >
                   <i
-                    class="fa-solid fa-envelope text-[var(--primary-color)]"
+                    class="fa-solid fa-envelope text-[var(--light-text-color)]"
                     aria-hidden="true"
                   ></i>
                 </div>
