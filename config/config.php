@@ -17,6 +17,11 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
+//dla hostinger
+//define('DB_HOST', '127.0.0.1'); // Hostinger też używa localhost/127.0.0.1
+//define('DB_NAME', 'u820515051_mario_bramy');
+//define('DB_USER', 'u820515051_mario_admin');
+//define('DB_PASS', 'MarioBramy2024!Secure');
 // Hasło admina (zahashowane)
 // Obecne hasło: admin
 define('ADMIN_PASSWORD_HASH', '$2y$12$JPctmAu31N1ppXzHAFsUhewS/hfAxhEivROGA1nQEueIRfWVeMEDi');
