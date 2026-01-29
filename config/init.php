@@ -145,16 +145,21 @@ function getPortfolioImages(string $category = null): array {
     $images = [];
     $portfolioPath = PORTFOLIO_PATH;
     
+    // Deduplikacja: Grupuj pliki po nazwie bazowej (bez rozszerzenia)
+    $groupedImages = [];
+    
     if ($category) {
         $categoryPath = $portfolioPath . '/' . $category;
         if (is_dir($categoryPath)) {
             $files = glob($categoryPath . '/*.{jpg,jpeg,png,webp,gif}', GLOB_BRACE);
             foreach ($files as $file) {
-                $images[] = [
-                    'src' => 'assets/portfolio/' . $category . '/' . basename($file),
-                    'category' => $category,
-                    'name' => basename($file)
-                ];
+                $basename = pathinfo($file, PATHINFO_FILENAME);
+                $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                
+                if (!isset($groupedImages[$basename])) {
+                    $groupedImages[$basename] = [];
+                }
+                $groupedImages[$basename][$ext] = $file;
             }
         }
     } else {
@@ -164,12 +169,40 @@ function getPortfolioImages(string $category = null): array {
             $catName = basename($catDir);
             $files = glob($catDir . '/*.{jpg,jpeg,png,webp,gif}', GLOB_BRACE);
             foreach ($files as $file) {
-                $images[] = [
-                    'src' => 'assets/portfolio/' . $catName . '/' . basename($file),
-                    'category' => $catName,
-                    'name' => basename($file)
-                ];
+                $basename = pathinfo($file, PATHINFO_FILENAME);
+                $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                
+                // Klucz musi zawierać kategorię, żeby uniknąć kolizji nazw między kategoriami
+                $uniqueKey = $catName . '/' . $basename;
+                
+                if (!isset($groupedImages[$uniqueKey])) {
+                    $groupedImages[$uniqueKey] = [];
+                }
+                $groupedImages[$uniqueKey][$ext] = $file;
             }
+        }
+    }
+    
+    // Wybierz najlepszy format dla każdego obrazu (WebP > JPG/PNG)
+    foreach ($groupedImages as $key => $formats) {
+        $fileToUse = null;
+        
+        // Preferuj WebP
+        if (isset($formats['webp'])) {
+            $fileToUse = $formats['webp'];
+        } 
+        // W przeciwnym razie pierwszy dostępny (np. jpg)
+        else {
+            $fileToUse = reset($formats);
+        }
+        
+        if ($fileToUse) {
+            $catName = basename(dirname($fileToUse));
+            $images[] = [
+                'src' => 'assets/portfolio/' . $catName . '/' . basename($fileToUse),
+                'category' => $catName,
+                'name' => basename($fileToUse)
+            ];
         }
     }
     
