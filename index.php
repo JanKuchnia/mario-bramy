@@ -142,42 +142,22 @@
         <div
           class="slideshow-container absolute inset-0 z-0 after:content-[''] after:absolute after:inset-0 after:bg-black/40 after:z-[1]"
         >
-          <div
-            class="slide"
-            style="
-              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/2.webp&quot;);
-            "
-          ></div>
-          <div
-            class="slide"
-            style="
-              background-image: url(&quot;assets/portfolio/bramy-dwuskrzydlowe/4.webp&quot;);
-            "
-          ></div>
-          <div
-            class="slide"
-            style="
-              background-image: url(&quot;assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.webp&quot;);
-            "
-          ></div>
-          <div
-            class="slide"
-            style="
-              background-image: url(&quot;assets/portfolio/balustrady/1.webp&quot;);
-            "
-          ></div>
-          <div
-            class="slide"
-            style="
-              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/4.webp&quot;);
-            "
-          ></div>
-          <div
-            class="slide"
-            style="
-              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/5.webp&quot;);
-            "
-          ></div>
+          <!-- Pierwszy slajd: img z wysokim priorytetem dla LCP -->
+          <div class="slide slide-active">
+            <img
+              src="assets/portfolio/bramy-przesuwne-aluminiowe/2.webp"
+              alt="Nowoczesna brama przesuwna aluminiowa"
+              class="slide-img"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+          <!-- Pozostałe slajdy: lazy-loaded przez JS -->
+          <div class="slide" data-src="assets/portfolio/bramy-dwuskrzydlowe/4.webp"></div>
+          <div class="slide" data-src="assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.webp"></div>
+          <div class="slide" data-src="assets/portfolio/balustrady/1.webp"></div>
+          <div class="slide" data-src="assets/portfolio/bramy-przesuwne-aluminiowe/4.webp"></div>
+          <div class="slide" data-src="assets/portfolio/bramy-przesuwne-aluminiowe/5.webp"></div>
         </div>
 
         <div
@@ -1336,23 +1316,50 @@
         }
       }
 
-      // Simple Slideshow
+      // Optimized Slideshow with lazy loading
       let slideIndex = 0;
-      showSlides();
-
-      function showSlides() {
-        let i;
-        let slides = document.getElementsByClassName("slide");
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.opacity = "0";
+      const slides = document.querySelectorAll('.slide');
+      let slidesLoaded = [true]; // First slide is already loaded
+      
+      // Preload next slide image
+      function preloadSlide(index) {
+        if (index >= slides.length || slidesLoaded[index]) return;
+        const slide = slides[index];
+        const src = slide.dataset.src;
+        if (src) {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'Slajd galerii';
+          img.className = 'slide-img';
+          img.onload = () => {
+            slide.appendChild(img);
+            slidesLoaded[index] = true;
+          };
         }
-        slideIndex++;
-        if (slideIndex > slides.length) {
-          slideIndex = 1;
-        }
-        slides[slideIndex - 1].style.opacity = "1";
-        setTimeout(showSlides, 3000); // Change image every 3 seconds
       }
+      
+      // Preload slide 2 after page load
+      setTimeout(() => preloadSlide(1), 1000);
+      
+      function showSlides() {
+        // Remove active class from current slide
+        slides[slideIndex].classList.remove('slide-active');
+        
+        // Move to next slide
+        slideIndex = (slideIndex + 1) % slides.length;
+        
+        // Add active class to new slide
+        slides[slideIndex].classList.add('slide-active');
+        
+        // Preload next slide
+        const nextIndex = (slideIndex + 1) % slides.length;
+        preloadSlide(nextIndex);
+        
+        setTimeout(showSlides, 3000);
+      }
+      
+      // Start slideshow after 3 seconds (first slide is already visible)
+      setTimeout(showSlides, 3000);
     </script>
   </body>
 </html>
