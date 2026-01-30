@@ -32,6 +32,8 @@
               src="assets/logo.webp"
               alt="Mario Bramy-Automatyka"
               class="h-50 py-2"
+              width="350"
+              height="350"
               data-logo
             />
           </a>
@@ -161,6 +163,8 @@
                   src="assets/logo.webp"
                   alt="Mario Bramy-Automatyka"
                   class="h-36"
+                  width="144"
+                  height="144"
                   data-logo
                 />
               </a>

@@ -15,17 +15,42 @@
       content="Brama, brama przesuwna, brama dwuskrzydłowa, ogrodzenia aluminiowe, automatyka do bram, domofony, Małopolska, Myślenice, Dobczyce, Wiśniowa, cała Polska, Mario Bramy, Mario Automatyka, nowoczesne bramy aluminiowe"
     />
     <link rel="icon" type="image/png" href="assets/logo.jpg" />
+    <!-- Preconnect to CDN for faster resource loading -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <!-- Preload LCP images for faster paint -->
+    <link rel="preload" as="image" href="assets/portfolio/bramy-przesuwne-aluminiowe/2.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="assets/portfolio/balustrady/1.webp" />
     <style><?php readfile("assets/base.css"); ?></style>
-    <!-- Font Awesome - async loading to prevent render blocking -->
+    <!-- Font Awesome - load only used styles (solid + brands) to reduce unused CSS -->
     <link
       rel="preload"
       as="style"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css"
       onload="this.onload=null;this.rel='stylesheet'"
     />
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" />
+    </noscript>
+    <!-- Font-display: swap for Font Awesome fonts to prevent FOUT -->
+    <style>
+      @font-face { font-family: 'Font Awesome 6 Free'; font-display: swap; }
+      @font-face { font-family: 'Font Awesome 6 Brands'; font-display: swap; }
+    </style>
     <style><?php readfile("assets/style.css"); ?></style>
-    <link rel="preload" as="image" href="assets/portfolio/bramy-przesuwne-aluminiowe/2.webp" fetchpriority="high" />
     <style>
       /* Hero Section Responsive Height */
       .hero-section-custom {
@@ -58,6 +83,8 @@
               src="assets/logo.webp"
               alt="Mario Bramy-Automatyka"
               class="h-50 py-2"
+              width="350"
+              height="350"
               data-logo
             />
           </a>
@@ -963,6 +990,8 @@
                   src="assets/logo.webp"
                   alt="Mario Bramy-Automatyka"
                   class="h-36"
+                  width="144"
+                  height="144"
                   data-logo
                 />
               </a>
