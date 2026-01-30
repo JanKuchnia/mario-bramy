@@ -254,7 +254,7 @@
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
-                    src="ikony/brama_podwojna.png"
+                    src="ikony/brama_podwojna.webp"
                     alt="Bramy"
                     class="w-8 h-8 object-contain group-hover:rotate-6 transition-transform"
                   />
@@ -268,7 +268,7 @@
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
-                    src="ikony/automatyka.png"
+                    src="ikony/automatyka.webp"
                     alt="Automatyka"
                     class="w-8 h-8 object-contain group-hover:scale-110 transition-transform"
                   />
@@ -281,7 +281,7 @@
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
-                    src="ikony/balustrada.png"
+                    src="ikony/balustrada.webp"
                     alt="Balustrady"
                     class="w-8 h-8 object-contain group-hover:-translate-y-1 transition-transform"
                   />
@@ -311,7 +311,7 @@
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
-                    src="ikony/brama_podwojna.png"
+                    src="ikony/brama_podwojna.webp"
                     alt="Bramy"
                     class="w-8 h-8 object-contain"
                   />
@@ -326,7 +326,7 @@
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
-                    src="ikony/balustrada.png"
+                    src="ikony/balustrada.webp"
                     alt="Przęsła"
                     class="w-8 h-8 object-contain group-hover:-translate-y-1 transition-transform"
                   />
@@ -356,7 +356,7 @@
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
-                    src="ikony/brama_podwojna.png"
+                    src="ikony/brama_podwojna.webp"
                     alt="Przesuwne"
                     class="w-8 h-8 object-contain"
                   />
@@ -369,7 +369,7 @@
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
-                    src="ikony/brama_podwojna.png"
+                    src="ikony/brama_podwojna.webp"
                     alt="Dwuskrzydłowe"
                     class="w-8 h-8 object-contain"
                   />
@@ -434,7 +434,7 @@
                   class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
                 >
                   <img
-                    src="ikony/brama_podwojna.png"
+                    src="ikony/brama_podwojna.webp"
                     alt="Bramy"
                     class="w-10 h-10 object-contain"
                     style="filter: brightness(0) invert(1)"
@@ -498,7 +498,7 @@
                   class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
                 >
                   <img
-                    src="ikony/balustrada.png"
+                    src="ikony/balustrada.webp"
                     alt="Przęsła"
                     class="w-10 h-10 object-contain"
                     style="filter: brightness(0) invert(1)"
@@ -562,7 +562,7 @@
                   class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
                 >
                   <img
-                    src="ikony/balustrada.png"
+                    src="ikony/balustrada.webp"
                     alt="Balustrady"
                     class="w-10 h-10 object-contain"
                     style="filter: brightness(0) invert(1)"
@@ -625,7 +625,7 @@
                   class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
                 >
                   <img
-                    src="ikony/automatyka.png"
+                    src="ikony/automatyka.webp"
                     alt="Automatyka"
                     class="w-10 h-10 object-contain"
                     style="filter: brightness(0) invert(1)"
