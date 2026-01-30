@@ -49,16 +49,36 @@ function getDB(): PDO {
 
 /**
  * Sprawdza czy użytkownik jest zalogowany jako admin
+ * Automatycznie wylogowuje po 15 minutach nieaktywności
  */
 function isAdminLoggedIn(): bool {
-    return isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
+    if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+        return false;
+    }
+    
+    // Sprawdź timeout sesji (15 minut = 900 sekund)
+    $sessionTimeout = 15 * 60; // 15 minut
+    if (isset($_SESSION['admin_last_activity'])) {
+        if (time() - $_SESSION['admin_last_activity'] > $sessionTimeout) {
+            // Sesja wygasła - wyloguj
+            unset($_SESSION['admin_logged_in']);
+            unset($_SESSION['admin_last_activity']);
+            unset($_SESSION['admin_logged_at']);
+            return false;
+        }
+    }
+    
+    // Odśwież czas ostatniej aktywności
+    $_SESSION['admin_last_activity'] = time();
+    return true;
 }
 
 /**
- * Wymusza zalogowanie admina - przekierowuje jeśli niezalogowany
+ * Wymusza zalogowanie admina - przekierowuje jeśli niezalogowany lub sesja wygasła
  */
 function requireAdmin(): void {
     if (!isAdminLoggedIn()) {
+        $_SESSION['login_error'] = 'Sesja wygasła. Zaloguj się ponownie.';
         header('Location: index.php');
         exit;
     }

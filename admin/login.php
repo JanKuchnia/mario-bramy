@@ -16,6 +16,7 @@ if (password_verify($password, ADMIN_PASSWORD_HASH)) {
     // Zalogowano pomyślnie
     $_SESSION['admin_logged_in'] = true;
     $_SESSION['admin_logged_at'] = time();
+    $_SESSION['admin_last_activity'] = time();
     
     header('Location: panel.php');
     exit;
