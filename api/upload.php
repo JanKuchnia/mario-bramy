@@ -141,6 +141,46 @@ if (extension_loaded('gd')) {
         jsonError('Nie można zapisać obrazu');
     }
     imagedestroy($sourceImage);
+    
+    // Kompresja przez TinyPNG API (opcjonalnie)
+    $tinypngApiKey = '0Zyzzv1z4CYLWP96YTyfQzfpdYZNn0PD';
+    if ($tinypngApiKey && function_exists('curl_init')) {
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => 'https://api.tinify.com/shrink',
+            CURLOPT_USERPWD => 'api:' . $tinypngApiKey,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => file_get_contents($targetPath),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => ['Content-Type: application/octet-stream'],
+            CURLOPT_TIMEOUT => 30,
+        ]);
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        
+        if ($httpCode === 201) {
+            $result = json_decode($response, true);
+            if (isset($result['output']['url'])) {
+                // Pobierz skompresowany plik
+                $ch = curl_init();
+                curl_setopt_array($ch, [
+                    CURLOPT_URL => $result['output']['url'],
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_TIMEOUT => 30,
+                ]);
+                $compressedData = curl_exec($ch);
+                curl_close($ch);
+                
+                if ($compressedData) {
+                    file_put_contents($targetPath, $compressedData);
+                }
+            }
+        }
+        // Jeśli TinyPNG zawiedzie, oryginalny plik WebP pozostaje
+    }
 
 } else {
     // BRAK GD - Zapisz oryginał bez konwersji

@@ -156,7 +156,18 @@ document.addEventListener('DOMContentLoaded', function () {
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Przesyłanie...';
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Czekaj, zdjęcie przesyłane...';
+
+            // Pokaż overlay informacyjny
+            let overlay = document.getElementById('uploadOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'uploadOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;';
+                overlay.innerHTML = '<div style="background:white;padding:40px 60px;border-radius:12px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.3);"><i class="fa-solid fa-spinner fa-spin" style="font-size:48px;color:#B81726;margin-bottom:20px;display:block;"></i><h3 style="margin:0 0 10px;color:#222;">Czekaj, zdjęcie przesyłane</h3><p style="margin:0;color:#666;font-size:14px;">Optymalizacja przez TinyPNG może chwilę potrwać...</p></div>';
+                document.body.appendChild(overlay);
+            }
+            overlay.style.display = 'flex';
 
             const formData = new FormData(this);
 
@@ -172,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     throw new Error(data.error || 'Błąd przesyłania');
                 }
 
-                showNotification(`Zdjęcie ${data.filename} zostało dodane!`);
+                showNotification(`Zdjęcie ${data.filename} zostało dodane i zoptymalizowane!`);
 
                 // Reset form
                 uploadForm.reset();
@@ -188,6 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
+                if (overlay) overlay.style.display = 'none';
             }
         });
     }
