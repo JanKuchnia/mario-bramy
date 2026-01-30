@@ -81,6 +81,7 @@
           <button
             id="hamburger-button"
             class="lg:hidden text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 z-50"
+            aria-label="Menu główne"
           >
             <i class="fa-solid fa-bars text-2xl"></i>
           </button>
