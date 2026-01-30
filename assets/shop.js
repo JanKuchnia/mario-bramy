@@ -60,14 +60,14 @@ function renderShop() {
         // Use backend field names (base_price vs basePrice)
         const basePrice = parseFloat(product.base_price || product.basePrice);
         const currentPrice = calculatePrice(product, basePrice);
-        const image = product.image ? product.image : 'assets/logo.png';
+        const image = product.image ? product.image : 'assets/logo.webp';
 
         return `
         <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
             <div class="h-64 overflow-hidden relative flex-shrink-0">
                 <img src="${image}" alt="${product.name}" 
                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                     onerror="this.src='assets/logo.png'; this.style.objectFit='contain'; this.style.padding='20px';"
+                     onerror="this.src='assets/logo.webp'; this.style.objectFit='contain'; this.style.padding='20px';"
                 >
                 <div class="absolute bottom-4 right-4 bg-[var(--primary-color)] text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
                     od ${formatPrice(basePrice)}

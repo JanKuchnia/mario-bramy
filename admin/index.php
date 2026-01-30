@@ -26,7 +26,7 @@ if (isset($_SESSION['login_error'])) {
 </head>
 <body>
     <div class="login-container">
-        <img src="../assets/logo.png" alt="Mario Bramy" class="login-logo">
+        <img src="../assets/logo.webp" alt="Mario Bramy" class="login-logo">
         <h2>Panel Administracyjny</h2>
         
         <?php if ($error): ?>

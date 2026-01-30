@@ -32,7 +32,7 @@
             class="flex-shrink-0 transition-transform hover:scale-105 duration-300"
           >
             <img
-              src="assets/logo.png"
+              src="assets/logo.webp"
               alt="Mario Bramy-Automatyka"
               class="h-50 py-2"
               data-logo
@@ -130,7 +130,7 @@
             <div class="inline-block bg-white p-4 rounded-xl shadow-md">
               <a href="index.php" class="inline-block">
                 <img
-                  src="assets/logo.png"
+                  src="assets/logo.webp"
                   alt="Mario Bramy-Automatyka"
                   class="h-24"
                   data-logo

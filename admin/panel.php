@@ -23,7 +23,7 @@ requireAdmin();
     <div class="panel-container">
       <header class="panel-header">
         <div class="brand">
-          <img src="../assets/logo.png" alt="Logo" class="brand-logo" />
+          <img src="../assets/logo.webp" alt="Logo" class="brand-logo" />
           <h1 class="brand-title">System Realizacji</h1>
         </div>
         <a href="logout.php" id="logoutButton" class="logout-btn">
