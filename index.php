@@ -1,0 +1,1359 @@
+<?php require_once "config/init.php"; ?>
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mario Bramy</title>
+    <link rel="canonical" href="<?= getCanonicalUrl() ?>" />
+    <meta
+      name="description"
+      content="Nowoczesne bramy i ogrodzenia aluminiowe na wymiar. Projekt, produkcja i montaż na terenie Małopolski i całej Polski. Poznaj nasze realizacje."
+    />
+    <meta
+      name="keywords"
+      content="Brama, brama przesuwna, brama dwuskrzydłowa, ogrodzenia aluminiowe, automatyka do bram, domofony, Małopolska, Myślenice, Dobczyce, Wiśniowa, cała Polska, Mario Bramy, Mario Automatyka, nowoczesne bramy aluminiowe"
+    />
+    <link rel="icon" type="image/png" href="assets/logo.jpg" />
+    <!-- Preconnect to CDN for faster resource loading -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <!-- Preload LCP images for faster paint -->
+    <link rel="preload" as="image" href="assets/portfolio/bramy-przesuwne-aluminiowe/2.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="assets/portfolio/balustrady/1.webp" />
+    <style><?php readfile("assets/base.css"); ?></style>
+    <!-- Font Awesome - load only used styles (solid + brands) to reduce unused CSS -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" />
+    </noscript>
+    <!-- Font-display: swap for Font Awesome fonts to prevent FOUT -->
+    <style>
+      @font-face { font-family: 'Font Awesome 6 Free'; font-display: swap; }
+      @font-face { font-family: 'Font Awesome 6 Brands'; font-display: swap; }
+    </style>
+    <style><?php readfile("assets/style.css"); ?></style>
+    <style>
+      /* Hero Section Responsive Height */
+      .hero-section-custom {
+        height: auto;
+        min-height: 550px; /* Reduced from 100vh to show wider image crop on mobile */
+        padding-bottom: 4rem;
+        padding-top: 3rem;
+      }
+      @media (min-width: 1024px) {
+        .hero-section-custom {
+          height: 100vh;
+          min-height: 100vh;
+          padding-bottom: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <header
+      id="global-header"
+      class="code-section sticky top-0 z-50 bg-white border-b border-gray-200"
+    >
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="flex items-center justify-between h-32">
+          <a
+            href="index.php"
+            class="flex-shrink-0 transition-transform hover:scale-105 duration-300"
+          >
+            <img
+              src="assets/logo.webp"
+              alt="Mario Bramy-Automatyka"
+              class="h-50 py-2"
+              width="350"
+              height="350"
+              data-logo
+            />
+          </a>
+
+          <nav class="hidden lg:flex items-center space-x-8">
+            <a
+              href="nasze-projekty.php"
+              class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
+              >Przykładowe Realizacje</a
+            >
+            <a
+              href="opinie.php"
+              class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
+              >Opinie klientów</a
+            >
+            <a
+              href="<?= getShopUrl() ?>"
+              class="text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 font-medium"
+              >Sklep</a
+            >
+            <a
+              href="kontakt.php"
+              class="bg-[var(--primary-color)] text-[var(--primary-button-text-color)] px-6 py-3 rounded hover:bg-[var(--primary-button-hover-bg-color)] transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105"
+            >
+              Kontakt
+            </a>
+            <a
+              href="https://www.facebook.com/p/MARIO-bramy-automatyka-61581453314458/"
+              aria-label="Facebook"
+              class="w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-[var(--primary-color)] hover:border-[var(--primary-color)] transition-all duration-300 group"
+            >
+              <i
+                class="fa-brands fa-facebook-f text-[var(--dark-text-color)] group-hover:text-white"
+                aria-hidden="true"
+              ></i>
+            </a>
+          </nav>
+          <button
+            id="hamburger-button"
+            class="lg:hidden text-[var(--dark-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 z-50"
+          >
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+        <nav
+          id="mobile-menu"
+          class="hidden lg:hidden fixed inset-0 top-28 bg-[var(--dark-background-color)] bg-opacity-98 backdrop-blur-lg"
+        ></nav>
+      </div>
+    </header>
+    <main>
+      <section
+        class="code-section hero-section-custom relative flex overflow-hidden bg-[var(--dark-background-color)]"
+        id="s6lx8b"
+      >
+        <div
+          class="slideshow-container absolute inset-0 z-0 after:content-[''] after:absolute after:inset-0 after:bg-black/40 after:z-[1]"
+        >
+          <div
+            class="slide"
+            style="
+              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/2.webp&quot;);
+            "
+          ></div>
+          <div
+            class="slide"
+            style="
+              background-image: url(&quot;assets/portfolio/bramy-dwuskrzydlowe/4.webp&quot;);
+            "
+          ></div>
+          <div
+            class="slide"
+            style="
+              background-image: url(&quot;assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.webp&quot;);
+            "
+          ></div>
+          <div
+            class="slide"
+            style="
+              background-image: url(&quot;assets/portfolio/balustrady/1.webp&quot;);
+            "
+          ></div>
+          <div
+            class="slide"
+            style="
+              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/4.webp&quot;);
+            "
+          ></div>
+          <div
+            class="slide"
+            style="
+              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/5.webp&quot;);
+            "
+          ></div>
+        </div>
+
+        <div
+          class="absolute top-20 right-10 w-32 h-32 bg-[var(--primary-color)] rounded-full opacity-10 blur-3xl animate-float"
+          style="animation: float 8s ease-in-out infinite"
+        ></div>
+        <div
+          class="absolute bottom-20 left-10 w-48 h-48 bg-[var(--accent-color)] rounded-full opacity-10 blur-3xl animate-float"
+          style="animation: float 10s ease-in-out infinite 2s"
+        ></div>
+
+        <div class="container mx-auto px-4 lg:px-8 relative z-10 pt-4 sm:pt-0">
+          <div class="grid lg:grid-cols-2 gap-2 lg:gap-12 items-center">
+            <!-- Left Column: Content & CTA -->
+            <div class="space-y-4 text-center lg:text-left order-1 lg:-mt-20">
+              <div class="space-y-4">
+                <h1
+                  class="text-3xl sm:text-5xl lg:text-7xl font-bold font-[var(--font-family-heading)] leading-tight"
+                  style="
+                    color: #cf1928;
+                    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+                  "
+                >
+                  Nowoczesne Bramy <br />i Ogrodzenia Aluminiowe
+                </h1>
+                <p
+                  class="text-lg lg:text-2xl text-white leading-relaxed"
+                  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)"
+                >
+                  Produkcja i montaż nowoczesnych bram i ogrodzeń
+                  aluminiowych.
+                </p>
+              </div>
+
+              <div
+                class="flex flex-row gap-4 sm:gap-6 items-center justify-center lg:justify-start flex-wrap w-full"
+              >
+                <a
+                  href="javascript:void(0)"
+                  class="group relative w-full sm:w-80 px-6 py-3 sm:py-4 bg-[var(--primary-color)] text-[var(--primary-button-text-color)] rounded-lg font-bold text-base sm:text-lg shadow-xl hover:shadow-[var(--primary-color)] hover:scale-105 transition-all duration-300 overflow-hidden flex items-center justify-center gap-2"
+                >
+                  <span class="relative z-10">Szybka Wycena</span>
+                  <i
+                    class="fa-solid fa-arrow-right relative z-10 group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <div
+                    class="absolute inset-0 bg-[var(--primary-button-hover-bg-color)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                  ></div>
+                </a>
+                <a
+                  href="tel:+48668197170"
+                  class="phone-button group w-full sm:w-80 py-3 sm:py-4 px-6 bg-white border-2 border-white text-[var(--dark-text-color)] rounded-lg font-bold text-base sm:text-lg hover:bg-[var(--light-background-color)] transition-all duration-300 flex items-center justify-center gap-2 shadow-xl"
+                >
+                  <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
+                  <div class="text-container">
+                    <span class="default-text">Zadzwoń Teraz</span>
+                    <span class="hover-text">668 197 170</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Column: Hero Buttons -->
+            <div id="hero-buttons-wrapper" class="w-full flex flex-col items-center lg:items-end order-2">
+              <!-- Main Menu (Level 1) -->
+              <div
+                id="hero-main-menu"
+                class="flex flex-col gap-3 w-full items-center lg:items-end transition-all duration-300 transform"
+              >
+                <!-- Bramy wjazdowe i przęsła (Trigger) -->
+                <button
+                  onclick="toggleHeroMenu('sub')"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
+                >
+                  <img
+                    src="ikony/brama_podwojna.png"
+                    alt="Bramy"
+                    class="w-8 h-8 object-contain group-hover:rotate-6 transition-transform"
+                  />
+                  <span class="sm:hidden text-shadow-sm">Bramy i Przęsła</span>
+                  <span class="hidden sm:inline whitespace-nowrap text-shadow-sm">Bramy Wjazdowe i Przęsła</span>
+                </button>
+
+                <!-- Automatyka -->
+                <a
+                  href="nasze-projekty.html?category=automatyka"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
+                >
+                  <img
+                    src="ikony/automatyka.png"
+                    alt="Automatyka"
+                    class="w-8 h-8 object-contain group-hover:scale-110 transition-transform"
+                  />
+                  <span class="whitespace-nowrap text-shadow-sm">Automatyka</span>
+                </a>
+
+                <!-- Balustrady -->
+                <a
+                  href="nasze-projekty.html?category=balustrady"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
+                >
+                  <img
+                    src="ikony/balustrada.png"
+                    alt="Balustrady"
+                    class="w-8 h-8 object-contain group-hover:-translate-y-1 transition-transform"
+                  />
+                  <span class="whitespace-nowrap text-shadow-sm">Balustrady</span>
+                </a>
+              </div>
+
+              <!-- Sub Menu (Level 2: Hidden by default) -->
+              <div
+                id="hero-sub-menu"
+                class="hidden opacity-0 translate-y-4 flex flex-col gap-3 w-full items-center lg:items-end transition-all duration-300 transform"
+              >
+                <!-- Wróć (Back to Main) -->
+                <button
+                  onclick="toggleHeroMenu('main')"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-white/20 transition-all duration-300 shadow-xl flex items-center justify-center gap-4 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-left group-hover:-translate-x-1 transition-transform text-[var(--primary-color)]"
+                  ></i>
+                  <span class="whitespace-nowrap text-shadow-sm">Wróć</span>
+                </button>
+
+                <!-- Bramy Wjazdowe (Trigger for Level 3) -->
+                <button
+                  onclick="toggleHeroMenu('sub-sub')"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
+                >
+                  <img
+                    src="ikony/brama_podwojna.png"
+                    alt="Bramy"
+                    class="w-8 h-8 object-contain"
+                  />
+                  <span class="sm:hidden text-shadow-sm">Bramy Wjazdowe</span>
+                  <span class="hidden sm:inline whitespace-nowrap text-shadow-sm">Bramy Wjazdowe</span>
+                  <i class="fa-solid fa-chevron-right text-sm ml-2 group-hover:translate-x-1 transition-transform text-[var(--primary-color)]"></i>
+                </button>
+
+                <!-- Przęsła -->
+                <a
+                  href="nasze-projekty.html?category=przesla-ogrodzeniowe-aluminiowe"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
+                >
+                  <img
+                    src="ikony/balustrada.png"
+                    alt="Przęsła"
+                    class="w-8 h-8 object-contain group-hover:-translate-y-1 transition-transform"
+                  />
+                  <span class="whitespace-nowrap text-shadow-sm">Przęsła</span>
+                </a>
+              </div>
+
+              <!-- Sub-Sub Menu (Level 3: Hidden by default) -->
+              <div
+                id="hero-sub-sub-menu"
+                class="hidden opacity-0 translate-y-4 flex flex-col gap-3 w-full items-center lg:items-end transition-all duration-300 transform"
+              >
+                <!-- Wróć (Back to Level 2) -->
+                <button
+                  onclick="toggleHeroMenu('back-to-sub')"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-white/20 transition-all duration-300 shadow-xl flex items-center justify-center gap-4 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-left group-hover:-translate-x-1 transition-transform text-[var(--primary-color)]"
+                  ></i>
+                  <span class="whitespace-nowrap text-shadow-sm">Wróć</span>
+                </button>
+
+                <!-- Bramy Przesuwne -->
+                <a
+                  href="nasze-projekty.html?category=bramy-przesuwne-aluminiowe"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
+                >
+                  <img
+                    src="ikony/brama_podwojna.png"
+                    alt="Przesuwne"
+                    class="w-8 h-8 object-contain"
+                  />
+                  <span class="whitespace-nowrap text-shadow-sm">Bramy Przesuwne</span>
+                </a>
+
+                <!-- Bramy Dwuskrzydłowe -->
+                <a
+                  href="nasze-projekty.html?category=bramy-dwuskrzydlowe"
+                  class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
+                >
+                  <img
+                    src="ikony/brama_podwojna.png"
+                    alt="Dwuskrzydłowe"
+                    class="w-8 h-8 object-contain"
+                  />
+                  <span class="whitespace-nowrap text-shadow-sm">Bramy Dwuskrzydłowe</span>
+                </a>
+              </div>
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0">
+          <svg
+            class="w-full h-12 lg:h-24 fill-white"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path d="M0,0 Q300,80 600,40 T1200,0 L1200,120 L0,120 Z"></path>
+          </svg>
+        </div>
+      </section>
+      <section
+        class="code-section pb-20 lg:pb-32 lg:pt-8 bg-white relative overflow-hidden"
+        id="oferta"
+      >
+        <div
+          class="absolute top-0 right-0 w-96 h-96 bg-[var(--light-background-color)] rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"
+        ></div>
+        <div
+          class="absolute bottom-0 left-0 w-96 h-96 bg-[var(--medium-background-color)] rounded-full blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2"
+        ></div>
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <div
+              class="inline-block px-4 py-2 bg-[var(--primary-color)] bg-opacity-10 border border-[var(--primary-color)] rounded-full mb-4"
+            >
+              <span class="text-[var(--light-text-color)] font-semibold text-sm"
+                >Nasze Usługi</span
+              >
+            </div>
+            <h2
+              class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--dark-text-color)] font-[var(--font-family-heading)] mb-6"
+            >
+              Nowoczesne Bramy i Ogrodzenia<br />
+              <span class="text-[var(--primary-color)]">Aluminiowe</span>
+            </h2>
+            <p class="text-lg text-[var(--gray-text-color)]">
+              Specjalizujemy się w produkcji i montażu bram i
+              ogrodzeń aluminiowych.
+            </p>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              class="group relative bg-white rounded-2xl border-2 border-[var(--light-border-color)] p-8 hover:border-[var(--primary-color)] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+            >
+              <div
+                class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--primary-color)] to-transparent opacity-5 rounded-bl-full"
+              ></div>
+              <div class="relative mb-6">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
+                >
+                  <img
+                    src="ikony/brama_podwojna.png"
+                    alt="Bramy"
+                    class="w-10 h-10 object-contain"
+                    style="filter: brightness(0) invert(1)"
+                  />
+                </div>
+              </div>
+              <h3
+                class="text-2xl font-bold text-[var(--dark-text-color)] mb-4 font-[var(--font-family-heading)]"
+              >
+                Bramy
+              </h3>
+              <p class="text-[var(--gray-text-color)] mb-6 leading-relaxed">
+                Produkujemy bramy aluminiowe przesuwne i dwuskrzydłowe na
+                wymiar.
+              </p>
+              <ul class="space-y-3 mb-6">
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Bramy przesuwne aluminiowe</span>
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Bramy dwuskrzydłowe aluminiowe</span>
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Bramy garażowe</span>
+                </li>
+              </ul>
+              <a
+                href="nasze-projekty.php"
+                class="inline-flex items-center gap-2 text-[var(--primary-color)] font-semibold hover:gap-4 transition-all duration-300"
+              >
+                Zobacz więcej
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div
+              class="group relative bg-white rounded-2xl border-2 border-[var(--light-border-color)] p-8 hover:border-[var(--primary-color)] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+            >
+              <div
+                class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--primary-color)] to-transparent opacity-5 rounded-bl-full"
+              ></div>
+              <div class="relative mb-6">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
+                >
+                  <img
+                    src="ikony/balustrada.png"
+                    alt="Przęsła"
+                    class="w-10 h-10 object-contain"
+                    style="filter: brightness(0) invert(1)"
+                  />
+                </div>
+              </div>
+              <h3
+                class="text-2xl font-bold text-[var(--dark-text-color)] mb-4 font-[var(--font-family-heading)]"
+              >
+                Przęsła Aluminiowe
+              </h3>
+              <p class="text-[var(--gray-text-color)] mb-6 leading-relaxed">
+                Nowoczesne i trwałe ogrodzenia aluminiowe, które nie wymagają
+                konserwacji.
+              </p>
+              <ul class="space-y-3 mb-6">
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Ogrodzenia palisadowe</span>
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Ogrodzenia ażurowe</span>
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Furtki</span>
+                </li>
+              </ul>
+              <a
+                href="nasze-projekty.php"
+                class="inline-flex items-center gap-2 text-[var(--primary-color)] font-semibold hover:gap-4 transition-all duration-300"
+              >
+                Zobacz więcej
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div
+              class="group relative bg-white rounded-2xl border-2 border-[var(--light-border-color)] p-8 hover:border-[var(--primary-color)] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+            >
+              <div
+                class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--primary-color)] to-transparent opacity-5 rounded-bl-full"
+              ></div>
+              <div class="relative mb-6">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
+                >
+                  <img
+                    src="ikony/balustrada.png"
+                    alt="Balustrady"
+                    class="w-10 h-10 object-contain"
+                    style="filter: brightness(0) invert(1)"
+                  />
+                </div>
+              </div>
+              <h3
+                class="text-2xl font-bold text-[var(--dark-text-color)] mb-4 font-[var(--font-family-heading)]"
+              >
+                Balustrady
+              </h3>
+              <p class="text-[var(--gray-text-color)] mb-6 leading-relaxed">
+                Eleganckie i bezpieczne balustrady aluminiowe do domu i firmy.
+              </p>
+              <ul class="space-y-3 mb-6">
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Wypełnienie szklane</span>
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Wypełnienie poziome</span>
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Wypełnienie pionowe</span>
+                </li>
+              </ul>
+              <a
+                href="nasze-projekty.html?category=balustrady"
+                class="inline-flex items-center gap-2 text-[var(--primary-color)] font-semibold hover:gap-4 transition-all duration-300"
+              >
+                Zobacz więcej
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div
+              class="group relative bg-white rounded-2xl border-2 border-[var(--light-border-color)] p-8 hover:border-[var(--primary-color)] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+            >
+              <div
+                class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--primary-color)] to-transparent opacity-5 rounded-bl-full"
+              ></div>
+              <div class="relative mb-6">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-500 shadow-lg"
+                >
+                  <img
+                    src="ikony/automatyka.png"
+                    alt="Automatyka"
+                    class="w-10 h-10 object-contain"
+                    style="filter: brightness(0) invert(1)"
+                  />
+                </div>
+              </div>
+              <h3
+                class="text-2xl font-bold text-[var(--dark-text-color)] mb-4 font-[var(--font-family-heading)]"
+              >
+                Automatyka
+              </h3>
+              <p class="text-[var(--gray-text-color)] mb-6 leading-relaxed">
+                Sprzedaż i montaż napędów do bram i systemów smart home.
+              </p>
+              <ul class="space-y-3 mb-6">
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Napędy do bram</span>
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Wideodomofony</span>
+                </li>
+                <li
+                  class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                >
+                  <i
+                    class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm">Sterowanie smartfonem</span>
+                </li>
+              </ul>
+              <a
+                href="nasze-projekty.html?category=automatyka"
+                class="inline-flex items-center gap-2 text-[var(--primary-color)] font-semibold hover:gap-4 transition-all duration-300"
+              >
+                Zobacz więcej
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="code-section pt-32 py-20 lg:pb-32 l g:pt-0 bg-white relative overflow-hidden"
+        id="o-nas"
+      >
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-4">
+                <div
+                  class="group relative overflow-hidden rounded-2xl aspect-square"
+                >
+                  <img
+                    src="assets/portfolio/bramy-dwuskrzydlowe/5.webp"
+                    alt="Nowoczesna barierka wewnętrzna"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-500"
+                  ></div>
+                </div>
+                <div
+                  class="group relative overflow-hidden rounded-2xl aspect-square"
+                >
+                  <img
+                    src="assets/portfolio/bramy-przesuwne-aluminiowe/6.webp"
+                    alt="Solidna brama wjazdowa"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-500"
+                  ></div>
+                </div>
+              </div>
+              <div class="space-y-4 mt-8">
+                <div
+                  class="group relative overflow-hidden rounded-2xl aspect-square"
+                >
+                  <img
+                    src="assets/portfolio/automatyka/1.webp"
+                    alt="Napęd do bramy"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-500"
+                  ></div>
+                </div>
+                <div
+                  class="group relative overflow-hidden rounded-2xl aspect-square"
+                >
+                  <img
+                    src="assets/portfolio/automatyka/2.webp"
+                    alt="Brama przesuwna"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-500"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-8">
+              <div class="space-y-4">
+                <div
+                  class="inline-block px-4 py-2 bg-[var(--primary-color)] bg-opacity-10 border border-[var(--primary-color)] rounded-full"
+                >
+                  <span
+                    class="text-[var(--light-text-color)] font-semibold text-sm"
+                    >Dlaczego My?</span
+                  >
+                </div>
+                <h2
+                  class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--dark-text-color)] font-[var(--font-family-heading)] leading-tight"
+                >
+                  Jakość, Doświadczenie <br />i Innowacyjność<br />
+                  <span class="text-[var(--primary-color)]"
+                    >W Produkcji:
+                    <ul class="space-y-3 mt-6 text-3xl">
+                      <li
+                        class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                      >
+                        <i
+                          class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                          aria-hidden="true"
+                        ></i>
+                        <span class="text-sm">Bram Aluminiowych</span>
+                      </li>
+                      <li
+                        class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                      >
+                        <i
+                          class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                          aria-hidden="true"
+                        ></i>
+                        <span class="text-sm">Ogrodzeń Aluminiowych</span>
+                      </li>
+                      <li
+                        class="flex items-center gap-3 text-[var(--dark-text-color)]"
+                      >
+                        <i
+                          class="fa-solid fa-check-circle text-[var(--primary-color)]"
+                          aria-hidden="true"
+                        ></i>
+                        <span class="text-sm">Balustrad Aluminiowych</span>
+                      </li>
+                    </ul>
+                  </span>
+                </h2>
+                <p
+                  class="text-lg text-[var(--gray-text-color)] leading-relaxed"
+                >
+                  Jesteśmy wiodącym producentem nowoczesnych bram i ogrodzeń
+                  aluminiowych. Nasza pasja to tworzenie produktów, które łączą
+                  w sobie innowacyjną technologię, estetykę i najwyższy poziom
+                  bezpieczeństwa. Zaufaj naszemu doświadczeniu.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="code-section py-10 lg:py-20 bg-white relative overflow-hidden"
+        id="ssxmgld"
+      >
+        <div
+          class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-[var(--light-background-color)] to-transparent opacity-30"
+        ></div>
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <div
+              class="inline-block px-4 py-2 bg-[var(--primary-color)] bg-opacity-10 border border-[var(--primary-color)] rounded-full mb-4"
+            >
+              <span class="text-[var(--light-text-color)] font-semibold text-sm"
+                >Jak to Działa?</span
+              >
+            </div>
+            <h2
+              class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--dark-text-color)] font-[var(--font-family-heading)] mb-6"
+            >
+              Prosty Proces<br />
+              <span class="text-[var(--primary-color)]"
+                >Od Kontaktu Do Realizacji</span
+              >
+            </h2>
+            <p class="text-lg text-[var(--gray-text-color)]">
+              W zaledwie kilku krokach Twoja posesja może być wyposażona w
+              nowoczesną bramę i ogrodzenie aluminiowe. Zajmujemy się wszystkim
+              – od wyceny po montaż.
+            </p>
+          </div>
+
+          <div class="relative">
+            <div
+              class="hidden lg:block absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-[var(--primary-color)] via-[var(--accent-color)] to-[var(--primary-color)] opacity-20"
+            ></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+              <div class="relative group">
+                <div class="text-center">
+                  <div
+                    class="inline-flex w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-full items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10"
+                  >
+                    <span class="text-white font-bold text-3xl">1</span>
+                  </div>
+
+                  <div
+                    class="w-16 h-16 bg-[var(--light-background-color)] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-[var(--primary-color)] transition-all duration-300"
+                  >
+                    <i
+                      class="fa-solid fa-phone text-[var(--primary-color)] text-2xl group-hover:text-white transition-colors duration-300"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                  <h3
+                    class="text-xl font-bold text-[var(--dark-text-color)] mb-3 font-[var(--font-family-heading)]"
+                  >
+                    Kontakt
+                  </h3>
+                  <p class="text-[var(--gray-text-color)] leading-relaxed">
+                    Zadzwoń lub wyślij maila. Opowiesz nam o swoim pomyśle i
+                    potrzebach.
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative group">
+                <div class="text-center">
+                  <div
+                    class="inline-flex w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-full items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10"
+                  >
+                    <span class="text-white font-bold text-3xl">2</span>
+                  </div>
+
+                  <div
+                    class="w-16 h-16 bg-[var(--light-background-color)] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-[var(--primary-color)] transition-all duration-300"
+                  >
+                    <i
+                      class="fa-solid fa-ruler-combined text-[var(--primary-color)] text-2xl group-hover:text-white transition-colors duration-300"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                  <h3
+                    class="text-xl font-bold text-[var(--dark-text-color)] mb-3 font-[var(--font-family-heading)]"
+                  >
+                    Wycena
+                  </h3>
+                  <p class="text-[var(--gray-text-color)] leading-relaxed">
+                    Przedstawimy szczegółową wycenę.
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative group">
+                <div class="text-center">
+                  <div
+                    class="inline-flex w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-full items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10"
+                  >
+                    <span class="text-white font-bold text-3xl">3</span>
+                  </div>
+
+                  <div
+                    class="w-16 h-16 bg-[var(--light-background-color)] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-[var(--primary-color)] transition-all duration-300"
+                  >
+                    <i
+                      class="fa-solid fa-wrench text-[var(--primary-color)] text-2xl group-hover:text-white transition-colors duration-300"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                  <h3
+                    class="text-xl font-bold text-[var(--dark-text-color)] mb-3 font-[var(--font-family-heading)]"
+                  >
+                    Produkcja i Montaż
+                  </h3>
+                  <p class="text-[var(--gray-text-color)] leading-relaxed">
+                    Wyprodukujemy Twoją bramę i umówimy termin montażu.
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative group">
+                <div class="text-center">
+                  <div
+                    class="inline-flex w-20 h-20 bg-gradient-to-br from-[var(--primary-color)] to-[var(--accent-color)] rounded-full items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10"
+                  >
+                    <span class="text-white font-bold text-3xl">4</span>
+                  </div>
+
+                  <div
+                    class="w-16 h-16 bg-[var(--light-background-color)] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-[var(--primary-color)] transition-all duration-300"
+                  >
+                    <i
+                      class="fa-solid fa-circle-check text-[var(--primary-color)] text-2xl group-hover:text-white transition-colors duration-300"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                  <h3
+                    class="text-xl font-bold text-[var(--dark-text-color)] mb-3 font-[var(--font-family-heading)]"
+                  >
+                    Gotowe!
+                  </h3>
+                  <p class="text-[var(--gray-text-color)] leading-relaxed">
+                    Ciesz się nowoczesną, stylową i trwałą bramą aluminiową
+                    przez długie lata.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-16 text-center">
+            <div
+              class="inline-flex flex-col sm:flex-row gap-4 items-center bg-gradient-to-r bg-[var(--dark-background-color)] to-[var(--medium-background-color)] rounded-2xl p-8 border-2 border-[var(--primary-color)] border-opacity-20"
+            >
+              <div class="text-left">
+                <h3
+                  class="text-2xl font-bold text-[var(--light-text-color)] mb-2"
+                >
+                  Nie znalazłeś tego, czego szukasz?
+                </h3>
+                <p class="text-[var(--light-text-color)]">
+                  Skontaktuj się z nami – dobierzemy rozwiązanie idealnie dla
+                  Ciebie.
+                </p>
+              </div>
+              <a
+                href="kontakt.php"
+                class="whitespace-nowrap px-8 py-4 bg-[var(--primary-color)] text-[var(--primary-button-text-color)] rounded-lg font-bold hover:bg-[var(--primary-button-hover-bg-color)] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+              >
+                Skontaktuj się
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer
+      id="global-footer"
+      class="code-section mt-20 bg-[var(--dark-background-color)] text-[var(--light-text-color)] border-t border-[var(--dark-border-color)]"
+    >
+      <div class="container mx-auto px-4 lg:px-8 py-16">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div class="space-y-6">
+            <div class="inline-block bg-white p-4 rounded-xl shadow-md">
+              <a href="index.php" class="inline-block">
+                <img
+                  src="assets/logo.webp"
+                  alt="Mario Bramy-Automatyka"
+                  class="h-36"
+                  width="144"
+                  height="144"
+                  data-logo
+                />
+              </a>
+            </div>
+            <p class="text-[var(--gray-text-color)] leading-relaxed">
+              Nowoczesne bramy i ogrodzenia aluminiowe. Produkcja, montaż i
+              serwis.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="https://www.facebook.com/p/MARIO-bramy-automatyka-61581453314458/"
+                aria-label="Facebook"
+                class="w-10 h-10 bg-[var(--dark-background-color)] border border-[var(--dark-border-color)] rounded-lg flex items-center justify-center hover:bg-[var(--primary-color)] hover:border-[var(--primary-color)] transition-all duration-300 group"
+              >
+                <i
+                  class="fa-brands fa-facebook-f text-[var(--light-text-color)] group-hover:text-white"
+                  aria-hidden="true"
+                ></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4
+              class="text-[var(--light-text-color)] font-bold text-lg mb-6 font-[var(--font-family-heading)]"
+            >
+              Szybkie Linki
+            </h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="index.php"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Strona główna</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="index.html#oferta"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Oferta</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="nasze-projekty.php"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Przykładowe Realizacje</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="<?= getShopUrl() ?>"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Sklep</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="opinie.php"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Opinie klientów</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="kontakt.php"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Kontakt</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4
+              class="text-[var(--light-text-color)] font-bold text-lg mb-6 font-[var(--font-family-heading)]"
+            >
+              Przykładowe Realizacje
+            </h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="nasze-projekty.html?category=bramy-przesuwne-aluminiowe"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Bramy Przesuwne</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="nasze-projekty.html?category=bramy-dwuskrzydlowe"
+                  class="text-[var(--gray-text-color)] hover:text(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Bramy Dwuskrzydłowe</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="nasze-projekty.html?category=przesla-ogrodzeniowe-aluminiowe"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Ogrodzenia i Przęsła</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="nasze-projekty.html?category=barierki"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Balustrady i Barierki</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="nasze-projekty.html?category=automatyka"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <i
+                    class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
+                    aria-hidden="true"
+                  ></i>
+                  <span>Automatyka do bram</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4
+              class="text-[var(--light-text-color)] font-bold text-lg mb-6 font-[var(--font-family-heading)]"
+            >
+              Kontakt
+            </h4>
+            <ul class="space-y-6">
+              <li class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 bg-[var(--primary-color)] bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <i
+                    class="fa-solid fa-location-dot text-[var(--light-text-color)]"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div>
+                  <div
+                    class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1"
+                  >
+                    Adres
+                  </div>
+                  <div
+                    class="text-[var(--light-text-color)] font-medium leading-relaxed"
+                  >
+                    Wiśniowa 782<br />
+                    32-412 Wiśniowa
+                  </div>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 bg-[var(--primary-color)] bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <i
+                    class="fa-solid fa-phone text-[var(--light-text-color)]"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div>
+                  <div
+                    class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1"
+                  >
+                    Telefon
+                  </div>
+                  <a
+                    href="tel:+48668197170"
+                    class="text-[var(--light-text-color)] font-medium hover:text-[var(--primary-color)] transition-colors duration-300"
+                    >+48 668 197 170</a
+                  >
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-10 h-10 bg-[var(--primary-color)] bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <i
+                    class="fa-solid fa-envelope text-[var(--light-text-color)]"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div>
+                  <div
+                    class="text-[var(--gray-text-color)] text-xs uppercase tracking-wider mb-1"
+                  >
+                    Email
+                  </div>
+                  <a
+                    href="mailto:mario.bramy@gmail.com"
+                    class="text-[var(--light-text-color)] font-medium hover:text-[var(--primary-color)] transition-colors duration-300"
+                    >mario.bramy@gmail.com</a
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-[var(--dark-border-color)]">
+        <div class="container mx-auto px-4 lg:px-8 py-6">
+          <div
+            class="flex flex-col md:flex-row justify-between items-center gap-4"
+          >
+            <p
+              class="text-[var(--gray-text-color)] text-sm text-center md:text-left"
+            >
+              © 2025 Mario Bramy-Automatyka. Wszelkie prawa zastrzeżone.
+            </p>
+            <div class="flex gap-6">
+              <a
+                href="#"
+                class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 text-sm"
+                >Polityka Prywatności</a
+              >
+              <a
+                href="#"
+                class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 text-sm"
+                >Regulamin</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="assets/mobile_menu.js"></script>
+    <script>
+      function toggleHeroMenu(target) {
+        const mainMenu = document.getElementById("hero-main-menu");
+        const subMenu = document.getElementById("hero-sub-menu");
+        const subSubMenu = document.getElementById("hero-sub-sub-menu");
+
+        if (target === "sub") {
+          // Main -> Sub
+          mainMenu.classList.add(
+            "opacity-0",
+            "-translate-y-4",
+            "pointer-events-none",
+          );
+          setTimeout(() => {
+            mainMenu.classList.add("hidden");
+            subMenu.classList.remove("hidden");
+            setTimeout(() => {
+              subMenu.classList.remove("opacity-0", "translate-y-4");
+            }, 50);
+          }, 300);
+        } else if (target === "main") {
+          // Sub -> Main
+          subMenu.classList.add(
+            "opacity-0",
+            "translate-y-4",
+            "pointer-events-none",
+          );
+          setTimeout(() => {
+            subMenu.classList.add("hidden");
+            mainMenu.classList.remove("hidden", "pointer-events-none");
+            setTimeout(() => {
+              mainMenu.classList.remove("opacity-0", "-translate-y-4");
+            }, 50);
+          }, 300);
+        } else if (target === "sub-sub") {
+          // Sub -> Sub-Sub
+          subMenu.classList.add(
+            "opacity-0",
+            "-translate-y-4",
+            "pointer-events-none",
+          );
+          setTimeout(() => {
+            subMenu.classList.add("hidden");
+            subSubMenu.classList.remove("hidden");
+            setTimeout(() => {
+              subSubMenu.classList.remove("opacity-0", "translate-y-4");
+            }, 50);
+          }, 300);
+        } else if (target === "back-to-sub") {
+          // Sub-Sub -> Sub
+          subSubMenu.classList.add(
+            "opacity-0",
+            "translate-y-4",
+            "pointer-events-none",
+          );
+          setTimeout(() => {
+            subSubMenu.classList.add("hidden");
+            subMenu.classList.remove("hidden", "pointer-events-none");
+            setTimeout(() => {
+              subMenu.classList.remove("opacity-0", "-translate-y-4");
+            }, 50);
+          }, 300);
+        }
+      }
+
+      // Simple Slideshow
+      let slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("slide");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.opacity = "0";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1;
+        }
+        slides[slideIndex - 1].style.opacity = "1";
+        setTimeout(showSlides, 3000); // Change image every 3 seconds
+      }
+    </script>
+  </body>
+</html>
