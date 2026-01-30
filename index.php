@@ -143,13 +143,13 @@
           <div
             class="slide"
             style="
-              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/4.jpeg&quot;);
+              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/4.webp&quot;);
             "
           ></div>
           <div
             class="slide"
             style="
-              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/5.jpeg&quot;);
+              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/5.webp&quot;);
             "
           ></div>
         </div>
