@@ -39,9 +39,7 @@
             <img
               src="assets/logo.webp"
               alt="Mario Bramy-Automatyka"
-              class="h-50 py-2"
-              width="350"
-              height="350"
+              class="py-2"
               data-logo
             />
           </a>
