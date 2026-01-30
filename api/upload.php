@@ -143,7 +143,7 @@ if (extension_loaded('gd')) {
     imagedestroy($sourceImage);
     
     // Kompresja przez TinyPNG API (opcjonalnie)
-    $tinypngApiKey = '0Zyzzv1z4CYLWP96YTyfQzfpdYZNn0PD';
+    $tinypngApiKey = defined('TINYPNG_API_KEY') ? TINYPNG_API_KEY : '';
     if ($tinypngApiKey && function_exists('curl_init')) {
         $ch = curl_init();
         curl_setopt_array($ch, [
@@ -158,25 +158,40 @@ if (extension_loaded('gd')) {
         
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
         curl_close($ch);
         
         if ($httpCode === 201) {
             $result = json_decode($response, true);
             if (isset($result['output']['url'])) {
-                // Pobierz skompresowany plik
-                $ch = curl_init();
-                curl_setopt_array($ch, [
+                // Pobierz skompresowany plik z walidacją
+                $chDownload = curl_init();
+                curl_setopt_array($chDownload, [
                     CURLOPT_URL => $result['output']['url'],
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_TIMEOUT => 30,
                 ]);
-                $compressedData = curl_exec($ch);
-                curl_close($ch);
+                $compressedData = curl_exec($chDownload);
+                $downloadHttpCode = curl_getinfo($chDownload, CURLINFO_HTTP_CODE);
+                $downloadError = curl_error($chDownload);
+                $downloadErrno = curl_errno($chDownload);
+                curl_close($chDownload);
                 
-                if ($compressedData) {
+                // Tylko zapisz jeśli pobieranie się powiodło
+                if ($compressedData !== false && $downloadHttpCode === 200 && $downloadErrno === 0 && strlen($compressedData) > 0) {
                     file_put_contents($targetPath, $compressedData);
+                } else {
+                    // Log błędu (oryginalny plik WebP pozostaje)
+                    if (DEBUG_MODE) {
+                        error_log("TinyPNG download failed: HTTP $downloadHttpCode, Error: $downloadError");
+                    }
                 }
+            }
+        } else {
+            // Log błędu kompresji
+            if (DEBUG_MODE) {
+                error_log("TinyPNG compression failed: HTTP $httpCode, Error: $curlError");
             }
         }
         // Jeśli TinyPNG zawiedzie, oryginalny plik WebP pozostaje
