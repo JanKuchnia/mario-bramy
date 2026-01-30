@@ -141,7 +141,7 @@ function getNextFileNumber(string $directory): int {
 /**
  * Skanuje folder portfolio i zwraca listę zdjęć
  */
-function getPortfolioImages(string $category = null): array {
+function getPortfolioImages(?string $category = null): array {
     $images = [];
     $portfolioPath = PORTFOLIO_PATH;
     

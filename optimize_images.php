@@ -26,6 +26,8 @@ $stats = [
     'scanned' => 0,
     'converted' => 0,
     'skipped' => 0,
+    'deleted' => 0,
+    'existing_webp' => 0,
     'errors' => 0,
     'saved_space' => 0
 ];
@@ -51,12 +53,21 @@ function scanAndConvert($dir) {
             // Przetwarzaj tylko obrazy, pomijaj już istniejące WebP
             if (in_array($ext, ['jpg', 'jpeg', 'png'])) {
                 $stats['scanned']++;
-                
+            } elseif ($ext === 'webp') {
+                // Licz istniejące pliki WebP
+                $stats['existing_webp']++;
+            }
+            
+            if (in_array($ext, ['jpg', 'jpeg', 'png'])) {
                 // Sprawdź czy wersja WebP już istnieje
                 $webpPath = $dir . '/' . pathinfo($path, PATHINFO_FILENAME) . '.webp';
                 
                 if (file_exists($webpPath)) {
-                    // echo "Pominięto (WebP istnieje): " . basename($path) . "<br>";
+                    // WebP już istnieje - usuń oryginalny plik
+                    if (@unlink($path)) {
+                        echo "Usunięto (WebP istnieje): " . str_replace(PORTFOLIO_PATH, '', $path) . "<br>";
+                        $stats['deleted']++;
+                    }
                     $stats['skipped']++;
                     continue;
                 }
@@ -70,7 +81,13 @@ function scanAndConvert($dir) {
                     $stats['saved_space'] += ($diff > 0 ? $diff : 0);
                     $stats['converted']++;
                     
-                    echo "<span style='color: green;'>OK</span> (Oszczędność: " . formatBytes($diff) . ")<br>";
+                    // Usuń oryginalny plik po pomyślnej konwersji
+                    if (@unlink($path)) {
+                        $stats['deleted']++;
+                        echo "<span style='color: green;'>OK + usunięto oryginał</span> (Oszczędność: " . formatBytes($diff) . ")<br>";
+                    } else {
+                        echo "<span style='color: green;'>OK</span> <span style='color: orange;'>(nie udało się usunąć oryginału)</span><br>";
+                    }
                 } else {
                     $stats['errors']++;
                     echo "<span style='color: red;'>BŁĄD</span><br>";
@@ -130,9 +147,11 @@ echo "</div>";
 
 echo "<h2>Podsumowanie</h2>";
 echo "<ul>";
-echo "<li>Przeskanowano plików: <strong>{$stats['scanned']}</strong></li>";
+echo "<li>Przeskanowano plików JPG/PNG: <strong>{$stats['scanned']}</strong></li>";
+echo "<li>Istniejące pliki WebP: <strong style='color: blue;'>{$stats['existing_webp']}</strong></li>";
 echo "<li>Skonwertowano: <strong style='color: green;'>{$stats['converted']}</strong></li>";
 echo "<li>Pominięto (już były): <strong>{$stats['skipped']}</strong></li>";
+echo "<li>Usunięto oryginałów: <strong style='color: orange;'>{$stats['deleted']}</strong></li>";
 echo "<li>Błędy: <strong style='color: red;'>{$stats['errors']}</strong></li>";
 echo "<li>Zaoszczędzone miejsce: <strong>" . formatBytes($stats['saved_space']) . "</strong></li>";
 echo "</ul>";

@@ -25,7 +25,7 @@
     />
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
     <style><?php readfile("assets/style.css"); ?></style>
-    <link rel="preload" as="image" href="assets/portfolio/bramy-przesuwne-aluminiowe/2.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="assets/portfolio/bramy-przesuwne-aluminiowe/2.webp" fetchpriority="high" />
     <style>
       /* Hero Section Responsive Height */
       .hero-section-custom {
@@ -119,25 +119,25 @@
           <div
             class="slide"
             style="
-              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/2.jpg&quot;);
+              background-image: url(&quot;assets/portfolio/bramy-przesuwne-aluminiowe/2.webp&quot;);
             "
           ></div>
           <div
             class="slide"
             style="
-              background-image: url(&quot;assets/portfolio/bramy-dwuskrzydlowe/4.jpg&quot;);
+              background-image: url(&quot;assets/portfolio/bramy-dwuskrzydlowe/4.webp&quot;);
             "
           ></div>
           <div
             class="slide"
             style="
-              background-image: url(&quot;assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.jpg&quot;);
+              background-image: url(&quot;assets/portfolio/przesla-ogrodzeniowe-aluminiowe/1.webp&quot;);
             "
           ></div>
           <div
             class="slide"
             style="
-              background-image: url(&quot;assets/portfolio/balustrady/1.jpg&quot;);
+              background-image: url(&quot;assets/portfolio/balustrady/1.webp&quot;);
             "
           ></div>
           <div
@@ -669,7 +669,7 @@
                   class="group relative overflow-hidden rounded-2xl aspect-square"
                 >
                   <img
-                    src="assets/portfolio/bramy-dwuskrzydlowe/5.jpg"
+                    src="assets/portfolio/bramy-dwuskrzydlowe/5.webp"
                     alt="Nowoczesna barierka wewnętrzna"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -681,7 +681,7 @@
                   class="group relative overflow-hidden rounded-2xl aspect-square"
                 >
                   <img
-                    src="assets/portfolio/bramy-przesuwne-aluminiowe/6.jpg"
+                    src="assets/portfolio/bramy-przesuwne-aluminiowe/6.webp"
                     alt="Solidna brama wjazdowa"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -695,7 +695,7 @@
                   class="group relative overflow-hidden rounded-2xl aspect-square"
                 >
                   <img
-                    src="assets/portfolio/automatyka/1.jpg"
+                    src="assets/portfolio/automatyka/1.webp"
                     alt="Napęd do bramy"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -707,7 +707,7 @@
                   class="group relative overflow-hidden rounded-2xl aspect-square"
                 >
                   <img
-                    src="assets/portfolio/automatyka/2.jpg"
+                    src="assets/portfolio/automatyka/2.webp"
                     alt="Brama przesuwna"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
