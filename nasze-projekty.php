@@ -15,7 +15,7 @@
       content="projekty, realizacje, galeria, brama przesuwna, brama dwuskrzydłowa, ogrodzenie aluminiowe, balustrady, przęsła, Mario Bramy"
     />
     <link rel="icon" type="image/png" href="assets/logo.jpg" />
-    <link rel="stylesheet" href="assets/base.css" />
+    <style><?php readfile("assets/base.css"); ?></style>
     <link
       rel="preload"
       as="style"
@@ -23,7 +23,7 @@
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
-    <link rel="stylesheet" href="assets/style.css" />
+    <style><?php readfile("assets/style.css"); ?></style>
   </head>
   <body class="bg-white">
     <header

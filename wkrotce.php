@@ -10,12 +10,15 @@
       content="Sklep internetowy Mario Bramy wkrótce dostępny. Nowoczesne bramy i ogrodzenia aluminiowe."
     />
     <link rel="icon" type="image/png" href="assets/logo.jpg" />
-    <link rel="stylesheet" href="assets/base.css" />
+    <style><?php readfile("assets/base.css"); ?></style>
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
-    <link rel="stylesheet" href="assets/style.css" />
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
+    <style><?php readfile("assets/style.css"); ?></style>
   </head>
   <body class="bg-white flex flex-col min-h-screen">
     <header
