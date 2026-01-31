@@ -1014,7 +1014,7 @@
               </li>
               <li>
                 <a
-                  href="index.html#oferta"
+                  href="index.php#oferta"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
