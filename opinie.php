@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Opinie Klientów - Mario Bramy</title>
     <link rel="canonical" href="<?= getCanonicalUrl() ?>" />
-    <link rel="icon" type="image/png" href="assets/icon.png" />
+    <link rel="icon" type="image/png" href="assets/icon.ico" />
     <style><?php readfile("assets/base.css"); ?></style>
     <link
       rel="preload"

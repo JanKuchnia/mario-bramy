@@ -14,7 +14,7 @@
       name="keywords"
       content="projekty, realizacje, galeria, brama przesuwna, brama dwuskrzydłowa, ogrodzenie aluminiowe, balustrady, przęsła, Mario Bramy"
     />
-    <link rel="icon" type="image/png" href="assets/icon.png" />
+    <link rel="icon" type="image/png" href="assets/icon.ico" />
     <style><?php readfile("assets/base.css"); ?></style>
     <link
       rel="preload"
