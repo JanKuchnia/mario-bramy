@@ -367,7 +367,7 @@
             <ul class="space-y-3">
               <li>
                 <a
-                  href="nasze-projekty.html?category=bramy-przesuwne-aluminiowe"
+                  href="nasze-projekty.php?category=bramy-przesuwne-aluminiowe"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
@@ -379,7 +379,7 @@
               </li>
               <li>
                 <a
-                  href="nasze-projekty.html?category=bramy-dwuskrzydlowe"
+                  href="nasze-projekty.php?category=bramy-dwuskrzydlowe"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
@@ -391,7 +391,7 @@
               </li>
               <li>
                 <a
-                  href="nasze-projekty.html?category=przesla-ogrodzeniowe-aluminiowe"
+                  href="nasze-projekty.php?category=przesla-ogrodzeniowe-aluminiowe"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
@@ -403,7 +403,7 @@
               </li>
               <li>
                 <a
-                  href="nasze-projekty.html?category=balustrady"
+                  href="nasze-projekty.php?category=balustrady"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
@@ -415,7 +415,7 @@
               </li>
               <li>
                 <a
-                  href="nasze-projekty.html?category=automatyka"
+                  href="nasze-projekty.php?category=automatyka"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
