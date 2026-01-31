@@ -14,7 +14,7 @@
       name="keywords"
       content="kontakt, telefon, e-mail, adres, wycena, Mario Bramy, Małopolska, Myślenice, Dobczyce, Wiśniowa"
     />
-    <link rel="icon" type="image/png" href="assets/logo.jpg" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
     <style><?php readfile("assets/base.css"); ?></style>
     <link
       rel="preload"

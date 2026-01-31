@@ -14,7 +14,7 @@
       name="keywords"
       content="Brama, brama przesuwna, brama dwuskrzydłowa, ogrodzenia aluminiowe, automatyka do bram, domofony, Małopolska, Myślenice, Dobczyce, Wiśniowa, cała Polska, Mario Bramy, Mario Automatyka, nowoczesne bramy aluminiowe"
     />
-    <link rel="icon" type="image/png" href="assets/logo.jpg" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
     <!-- Preconnect to CDN for faster resource loading -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <!-- Preload LCP images for faster paint -->
