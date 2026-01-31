@@ -10,7 +10,7 @@
       name="description"
       content="Sklep internetowy Mario Bramy. Sprawdź naszą ofertę bram, ogrodzeń i automatyki. Zamów online lub telefonicznie."
     />
-    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="icon" type="image/png" href="assets/icon.png" />
     <style><?php readfile("assets/base.css"); ?></style>
     <link
       rel="preload"
