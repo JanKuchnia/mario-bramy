@@ -244,7 +244,7 @@
 
                 <!-- Automatyka -->
                 <a
-                  href="nasze-projekty.html?category=automatyka"
+                  href="nasze-projekty.php?category=automatyka"
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
@@ -257,7 +257,7 @@
 
                 <!-- Balustrady -->
                 <a
-                  href="nasze-projekty.html?category=balustrady"
+                  href="nasze-projekty.php?category=balustrady"
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
@@ -302,7 +302,7 @@
 
                 <!-- Przęsła -->
                 <a
-                  href="nasze-projekty.html?category=przesla-ogrodzeniowe-aluminiowe"
+                  href="nasze-projekty.php?category=przesla-ogrodzeniowe-aluminiowe"
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
@@ -332,7 +332,7 @@
 
                 <!-- Bramy Przesuwne -->
                 <a
-                  href="nasze-projekty.html?category=bramy-przesuwne-aluminiowe"
+                  href="nasze-projekty.php?category=bramy-przesuwne-aluminiowe"
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
@@ -345,7 +345,7 @@
 
                 <!-- Bramy Dwuskrzydłowe -->
                 <a
-                  href="nasze-projekty.html?category=bramy-dwuskrzydlowe"
+                  href="nasze-projekty.php?category=bramy-dwuskrzydlowe"
                   class="w-full sm:w-80 h-auto sm:h-20 py-3 px-6 bg-black/60 sm:bg-black/70 backdrop-blur-sm border border-white/20 rounded-xl text-white font-bold text-lg sm:text-xl text-center hover:bg-[#cf1928] transition-all duration-300 shadow-xl hover:scale-105 flex items-center justify-center gap-4 group"
                 >
                   <img
@@ -587,7 +587,7 @@
                 </li>
               </ul>
               <a
-                href="nasze-projekty.html?category=balustrady"
+                href="nasze-projekty.php?category=balustrady"
                 class="inline-flex items-center gap-2 text-[var(--primary-color)] font-semibold hover:gap-4 transition-all duration-300"
               >
                 Zobacz więcej
@@ -650,7 +650,7 @@
                 </li>
               </ul>
               <a
-                href="nasze-projekty.html?category=automatyka"
+                href="nasze-projekty.php?category=automatyka"
                 class="inline-flex items-center gap-2 text-[var(--primary-color)] font-semibold hover:gap-4 transition-all duration-300"
               >
                 Zobacz więcej
