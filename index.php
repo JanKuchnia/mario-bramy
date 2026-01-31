@@ -1097,7 +1097,7 @@
               <li>
                 <a
                   href="nasze-projekty.php?category=bramy-dwuskrzydlowe"
-                  class="text-[var(--gray-text-color)] hover:text(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
+                  class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
                     class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
@@ -1120,14 +1120,14 @@
               </li>
               <li>
                 <a
-                  href="nasze-projekty.php?category=barierki"
+                  href="nasze-projekty.php?category=balustrady"
                   class="text-[var(--gray-text-color)] hover:text-[var(--primary-color)] transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <i
                     class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform duration-300"
                     aria-hidden="true"
                   ></i>
-                  <span>Balustrady i Barierki</span>
+                  <span>Balustrady</span>
                 </a>
               </li>
               <li>
